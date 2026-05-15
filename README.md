@@ -12,6 +12,14 @@ AI agent skills — self-contained instruction sets and tools that extend what t
 | **yt-transcript** | YouTube transcript extraction via `youtube-transcript-api` |
 | **forgejo** | Raise Pull Requests against Forgejo repos — auto-detects forgejo remotes, requires `fj` CLI |
 
+## Agents
+
+| Agent | Description |
+|---|---|
+| **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, outputs at most five issues |
+
 ## Structure
 
-Each skill lives in its own directory with a `SKILL.md` that the agent loads automatically. Skills may also include additional source files, scripts, or documentation as needed.
+**Skills** live in `skills/<name>/SKILL.md` — self-contained instruction sets that the agent loads on-demand. Each may include additional source files, scripts, or documentation.
+
+**Agents** live in `agents/<name>/agent.md` — persona definitions with YAML frontmatter specifying permissions and workflow instructions. Each includes a `README.md` with usage guidance.
