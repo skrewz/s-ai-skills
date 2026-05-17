@@ -44,6 +44,7 @@ fj pr create \
 
 ## Tips
 
+- Use `git` for most repository things; `fj` only for non-git Forgejo operations
 - Use `fj pr create --help` for full flag list and options.
 - For draft WIP PRs, add `--draft`.
 - If the repo URL is a full HTTPS/SSH URL, extract `owner/repo` from it:
