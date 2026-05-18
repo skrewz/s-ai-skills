@@ -1,9 +1,5 @@
 ---
 description: Critical pull request reviewer
-mode: subagent
-permission:
-  bash: allow
-  edit: deny
 ---
 
 # PR Reviewer

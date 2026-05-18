@@ -1,9 +1,5 @@
 ---
 description: Analyzes a repository to identify value-adding directions and actionable issues.
-mode: subagent
-permission:
-  bash: allow
-  edit: deny
 ---
 
 # Repo Ideation
