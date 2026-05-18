@@ -1,6 +1,6 @@
 # s-ai-skills
 
-AI agent skills — self-contained instruction sets and tools that extend what the agent can do.
+AI agent skills and agent definitions — self-contained instruction sets and personas that extend what the agent can do.
 
 ## Skills
 
@@ -17,6 +17,7 @@ AI agent skills — self-contained instruction sets and tools that extend what t
 | Agent | Description |
 |---|---|
 | **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, outputs at most five issues |
+| **repo-ideation** | Analyses repositories for value-adding directions, surveys existing issues/PRs to avoid duplication, produces structured issues or comments |
 
 ## Structure
 
