@@ -10,7 +10,6 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 | **screen-use** | Linux screen interaction — screenshots (`grim`/`scrot`) and input simulation (`ydotool`) |
 | **web-search-and-retrieval** | Go CLI for DuckDuckGo web search and HTML-to-markdown URL fetching |
 | **yt-transcript** | YouTube transcript extraction via `youtube-transcript-api` |
-| **forgejo** | Raise Pull Requests against Forgejo repos — auto-detects forgejo remotes, requires `fj` CLI |
 
 ## Prompt Templates
 
