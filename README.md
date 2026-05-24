@@ -15,8 +15,17 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 
 | Template | Description |
 |---|---|
+| **pr-revisitor** | Revisits a pull request — checks ownership, answers reviewer questions, pushes fix commits, addresses CI failures, reports back with a summary |
+| **issue-implementer** | Considers an issue and attempts to start a pull request for it. |
 | **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, outputs at most five issues |
 | **repo-ideation** | Analyses repositories for value-adding directions, surveys existing issues/PRs to avoid duplication, produces structured issues or comments |
+
+Note how these connect (at least, are intended to connect):
+
+1. The `repo-ideation` prompt template spins up (and ideally curates) issues in repos.
+2. The `issue-implementer` turns those into PRs.
+3. The `pr-reviewer` acts as a counter-force to such implementation.
+4. And in a cycle, `pr-revisitor` adjusts to the `pr-reviewer` outputs.
 
 ## Structure
 
