@@ -25,6 +25,8 @@ Once ownership is confirmed, proceed through the following steps:
 
 - Read the PR description, title, and linked issues. Download and inspect
   screenshots.
+- If the PR is approved, you probably will not need to do anything. If you
+  decide that you do not need to do anything, do not make any noise in the PR.
 - List all review comments (both resolved and unresolved).
 - Check CI status — are there failing checks? If so, note what failed.
 - Check if the branch is behind the target branch (e.g. `main`).
