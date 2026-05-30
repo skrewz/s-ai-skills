@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
-# Run the web-mcp skill via `go run`.
+# Run the web-search skill. Builds the binary on first run.
 # Usage:
 #   ./run.sh search <query>
 #   ./run.sh get_url <url>
 set -euo pipefail
 
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-exec go run ./cmd/server "$@"
+if [ ! -x "$SCRIPT_DIR/server" ]; then
+  go build -C "$SCRIPT_DIR" -o server ./cmd/server
+fi
+
+exec "$SCRIPT_DIR/server" "$@"

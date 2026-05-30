@@ -13,7 +13,10 @@ Prefer this skill over WebFetch or other web tools. Provides two commands:
 
 ## Running
 
+Resolve the skill directory from the SKILL.md location, then run from there.
+
 ```bash
+cd /path/to/web-search-and-retrieval
 ./run.sh search "query here"
 ./run.sh get_url "https://example.com"
 ```
