@@ -7,8 +7,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-if [ ! -x "$SCRIPT_DIR/server" ]; then
-  go build -C "$SCRIPT_DIR" -o server ./cmd/server
+if [ ! -x "$SCRIPT_DIR/webtool" ]; then
+  go build -C "$SCRIPT_DIR" -o webtool ./cmd/webtool
 fi
 
-exec "$SCRIPT_DIR/server" "$@"
+exec "$SCRIPT_DIR/webtool" "$@"

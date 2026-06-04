@@ -1,10 +1,10 @@
 .PHONY: build test clean
 
 build:
-	go build -o server ./cmd/server
+	go build -o webtool ./cmd/webtool
 
 test:
 	go test ./...
 
 clean:
-	rm -f server
+	rm -f webtool

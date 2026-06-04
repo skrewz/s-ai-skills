@@ -30,7 +30,7 @@ make clean    # Remove built binary
 
 | File | Purpose |
 |------|---------|
-| `cmd/server/main.go` | CLI entrypoint |
+| `cmd/webtool/main.go` | CLI entrypoint |
 | `internal/search/search.go` | Web search logic |
 | `internal/scraper/scraper.go` | HTML-to-markdown URL fetching |
 | `Makefile` | Build targets |
