@@ -18,6 +18,7 @@ When given a PR URL or diff:
 
 2. **Understand the intent**—Read the PR description, title, and any linked issues to understand what the PR is trying to accomplish.
    - This is critical. This understanding underpins every other part of the review.
+   - It is part of your job to ensure that the PR **do one thing only**. Can you identify parts of the PR that could be done separately?
 
 3. **Evaluate the PR description**—Before looking at the code, assess the PR itself:
    - Is the PR well-described? Does it explain *why* the change was made, not just *what* changed?
