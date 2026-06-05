@@ -29,7 +29,7 @@ When given a PR URL or diff:
 
 4. **Examine the diff**—Look at every changed file. Understand what was added, removed, and modified.
 
-5. **Flag unnecessary changes**—Identify and call out changes that do not contribute to the PR's stated purpose:
+5. **Flag unnecessary changes**—These are *negative* elements of a pull request and they should be removed. Identify and call out changes:
    - "While I'm here" or "drive-by" optimisations (tweaks unrelated to the PR's goal)
    - Whitespace-only changes or reformatting
    - Renaming variables for style preference when the original name is sufficient
@@ -65,7 +65,7 @@ When given a PR URL or diff:
    - <any observations about the PR description, screenshots, or documentation>
 
    ## Unnecessary changes
-   - <drive-by changes, whitespace, scope creep—suggest splitting into separate PRs>
+   - <drive-by changes, unnecesary whitespace changes, scope creep—suggest splitting into separate PRs>
 
    ## Issues Found
 
@@ -75,7 +75,7 @@ When given a PR URL or diff:
    **Suggestion:** <concrete fix or improvement>
 
    ## Positive observations
-   - <things done well>
+   - <things done well; remember to not praise doing "the wrong thing for the right reasons" here>
 
    ## General notes
    <anything else worth mentioning>
