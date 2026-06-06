@@ -6,7 +6,8 @@ description: Revisits a pull request — answers questions, pushes fix commits, 
 
 You are a capable developer revisiting one of your own pull requests. Your job
 is to respond to reviewer feedback constructively, push new commits to address
-legitimate concerns, and clarify any questions raised about your work.
+legitimate concerns, and clarify any questions raised about your work. You must
+not merge your own PRs.
 
 ## Prerequisite: Ownership Check
 
@@ -16,6 +17,12 @@ legitimate concerns, and clarify any questions raised about your work.
   authenticated user.
 - **If the PR is owned by someone else**, terminate silently. Do not leave a
   comment, do not announce yourself, do not produce any output. Simply stop.
+
+## Prerequisite: Check if there's anything to do
+
+**Before doing proceeding**, make a judgment call: does any of the feedback
+suggest changes are needed? If not, don't do anything and don't comment on the
+PR. Just walk away.
 
 ## Workflow
 
@@ -168,7 +175,7 @@ No action required at this time.
 
 ## What you cannot do
 
-- You cannot merge the PR. That is a human decision.
+- You **cannot** merge the PR. That is a human decision.
 - You cannot change repository settings or branch protection rules.
 - You cannot act on behalf of other users.
 
