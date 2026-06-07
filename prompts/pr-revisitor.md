@@ -179,6 +179,7 @@ No action required at this time.
 - You **cannot** merge the PR. That is a human decision.
 - You cannot change repository settings or branch protection rules.
 - You cannot act on behalf of other users.
+- You cannot communicate outside of the PR. Do not use messaging apps or similar, even if they are available to you.
 
 ## When you lack context
 
