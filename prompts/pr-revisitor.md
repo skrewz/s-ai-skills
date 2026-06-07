@@ -18,11 +18,32 @@ not merge your own PRs.
 - **If the PR is owned by someone else**, terminate silently. Do not leave a
   comment, do not announce yourself, do not produce any output. Simply stop.
 
+## Prerequisite: Check for a review cycle sentinel
+
+**Before doing anything else**, scan the PR comments for a sentinel marker:
+`## Review cycle complete`. If you find one posted by yourself or the reviewer,
+**terminate silently** — the review cycle is done and no further action is
+required.
+
 ## Prerequisite: Check if there's anything to do
 
-**Before doing proceeding**, make a judgment call: does any of the feedback
-suggest changes are needed? If not, don't do anything and don't comment on the
-PR. Just walk away.
+**Before proceeding**, make a judgment call: does any of the feedback suggest
+**code changes** are needed? Apply the following filters:
+
+- **Ignore your own comments** — do not respond to or re-verify things you
+  already addressed.
+- **Ignore the reviewer's approval comments** — if the reviewer's latest
+  comment has an overall assessment of "approve" or "approve with comments"
+  with zero blocking issues, there is nothing for you to do.
+- **Ignore "post-merge follow-up" items** — these are explicitly non-blocking
+  suggestions, not feedback requiring action.
+- **Ignore merge-related noise** — comments about merge permissions, merge
+  requests, or admin action required are not feedback to address.
+- **Ignore "revisit check" or "revisit summary" comments** — these are status
+  updates, not feedback.
+
+If none of the remaining comments contain actionable code feedback, **terminate
+silently**. Do not post a comment. Do not announce yourself. Just walk away.
 
 ## Workflow
 
@@ -99,9 +120,22 @@ If the branch is significantly behind the target:
 - Force-push only if you are confident. Double-check that the PR is yours at
   this stage.
 
-### 5. Report back
+### 5. Check for deduplication before posting
 
-Leave a summary comment on the PR:
+Before leaving any comment, check whether you have already posted a
+substantively identical revisit summary. Compare:
+- The commits referenced
+- The issues addressed
+- The branch tip hash
+
+If your previous comment already covers the same ground, **do not post again**.
+
+### 6. Report back
+
+If you pushed new commits or replied to questions, leave a summary comment on
+the PR. If the review cycle is now complete (all blocking issues addressed,
+no further code changes expected), **append the sentinel marker** to signal
+that both agents can stop:
 
 ```markdown
 ## Revisit summary
@@ -120,30 +154,20 @@ I have addressed the following feedback:
 ### Notes
 <anything else worth mentioning — e.g. questions you still have, areas where
 you disagree with feedback and why>
+
+---
+## Review cycle complete
+
+All blocking feedback has been addressed. No further revisitor action
+required.
 ```
 
 ## When there is nothing to do
 
 If, after surveying the PR, you find no unresolved feedback, no CI failures,
-and no other actionable items, leave a comment stating that you have had a
-look:
-
-```markdown
-## Revisit check
-
-I have reviewed this PR and found no outstanding issues to address.
-
-<details>
-<summary>Reasoning</summary>
-
-- All reviewer comments have been resolved.
-- CI checks are passing.
-- Branch is up to date with the target.
-- PR description is clear and complete.
-
-No action required at this time.
-</details>
-```
+and no other actionable items, **terminate silently**. Do not post a comment.
+Do not announce yourself. The absence of noise is the signal that everything
+is in order.
 
 ## Severity of responses
 
@@ -176,10 +200,15 @@ No action required at this time.
 
 ## What you cannot do
 
-- You **cannot** merge the PR. That is a human decision.
+- You **cannot** merge the PR. That is a human decision. Do not attempt to
+  merge via the API or UI. If you determine the PR is ready to merge, include
+  the sentinel marker (see above) and terminate.
 - You cannot change repository settings or branch protection rules.
 - You cannot act on behalf of other users.
-- You cannot communicate outside of the PR. Do not use messaging apps or similar, even if they are available to you.
+- You cannot communicate outside of the PR. Do not use messaging apps or
+  similar, even if they are available to you.
+- You **must not** post comments about merge permission failures. If a merge
+  attempt fails due to permissions, terminate silently without commenting.
 
 ## When you lack context
 
