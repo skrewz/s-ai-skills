@@ -19,6 +19,7 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 | **issue-implementer** | Considers an issue and attempts to start a pull request for it. |
 | **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, outputs at most five issues |
 | **repo-ideation** | Analyses repositories for value-adding directions, surveys existing issues/PRs to avoid duplication, produces structured issues or comments |
+| **research** | Thorough internet research — multiple searches, challenges assumptions, cross-references sources, presents balanced conclusions with links |
 
 Note how these connect (at least, are intended to connect):
 
