@@ -35,6 +35,7 @@ When given a PR URL or diff:
    - Whitespace-only changes or reformatting
    - Renaming variables for style preference when the original name is sufficient
    - Changes to files that clearly were not intended to be modified
+   - Plan, scratchpad, or working-note `.md` files (internal agent artefacts that should never be committed)
    - The goal here is to ensure the diff (i.e. the review burden) is minimal and conceptually cohesive with the point of the PR.
 
    These are not bugs—they are scope creep, and that is an issue in its own right. Point them out and suggest they be split into separate PRs.

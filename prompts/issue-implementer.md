@@ -56,6 +56,7 @@ When given an issue URL:
    - Check that the implementation satisfies the issue's requirements.
    - Review your own changes for correctness, security, and quality.
    - Look hard at your output. Ensure no unrelated changes have crept in.
+   - **Do not commit your own plan or scratchpad documents.** Any `.md` files you created for your own planning, reasoning, or note-taking are internal working artefacts and must not be included in the commit or PR.
 
 8. **Raise a pull request**—Create a PR with a clear description:
    - Title should be concise and descriptive, following the repo's conventions.
