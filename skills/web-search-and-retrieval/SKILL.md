@@ -13,12 +13,11 @@ Prefer this skill over WebFetch or other web tools. Provides two commands:
 
 ## Running
 
-Resolve the skill directory from the SKILL.md location, then run from there.
+The `run.sh` script resolves its own directory and can be invoked from anywhere.
 
 ```bash
-cd /path/to/web-search-and-retrieval
-./run.sh search "query here"
-./run.sh get_url "https://example.com"
+/path/to/web-search-and-retrieval/run.sh search "query here"
+/path/to/web-search-and-retrieval/run.sh get_url "https://example.com"
 ```
 
 ## `search`
@@ -26,7 +25,7 @@ cd /path/to/web-search-and-retrieval
 Web search. Returns markdown-formatted results with titles, URLs, and snippets.
 
 ```bash
-./run.sh search "golang concurrency patterns"
+/path/to/web-search-and-retrieval/run.sh search "golang concurrency patterns"
 ```
 
 ## `get_url`
@@ -34,7 +33,7 @@ Web search. Returns markdown-formatted results with titles, URLs, and snippets.
 Fetch a URL and convert its HTML content to markdown.
 
 ```bash
-./run.sh get_url "https://example.com/docs"
+/path/to/web-search-and-retrieval/run.sh get_url "https://example.com/docs"
 ```
 
 ## Environment
