@@ -13,14 +13,31 @@ Your job is to take an issue URL, understand the problem or feature request, che
 
 ## Pre-condition Check
 
-**Before you do anything else, you must verify that no open pull request already targets this issue.**
+**Before you do anything else, you must verify that no open pull request already targets this issue, and that no related issue or PR covers the same ground.**
 
-This is a mandatory gate. If it fails, you stop — no work, no comments, no PR. Creating a duplicate PR is a failure condition.
+This is a mandatory gate. If it fails, you stop — no work, no comments, no PR. Creating a duplicate PR or implementing overlapping work is a failure condition.
+
+### Step 1: Check for PRs targeting this issue
 
 1. Parse the issue URL to extract the repository owner, name, and issue number. Determine the host (GitHub, GitLab, etc.).
 2. Search for open pull requests that reference this issue. Use the platform's API, CLI tool (e.g. `gh pr list --search "#<N>"`), or equivalent mechanism to query for open PRs mentioning the issue number.
 3. If **any** open PR targeting this issue exists, **exit silently**. Do not post a comment, do not raise another PR, and do not implement anything. Just stop.
-4. Only if no open PR exists, proceed to the workflow below.
+
+### Step 2: Survey for related issues and PRs
+
+Before implementing, broaden your search to catch overlapping work that may not reference this exact issue number:
+
+1. **Search for related open issues.** Use the issue title, keywords, or topic to search for other open issues in the same repository. For example, `gh issue list --search "<keyword>" --state open` or the equivalent platform mechanism. Look for issues describing the same problem, feature, or improvement.
+2. **Search for related open PRs.** Search for open pull requests with similar titles, descriptions, or touched files. For example, `gh pr list --search "<keyword>" --state open`. Look for PRs that appear to address the same or substantially overlapping functionality.
+3. **Review any candidates you find.** Read the titles and descriptions of any related issues or PRs. Assess whether they cover the same ground as the issue you were asked to implement.
+4. **If significant overlap exists, refuse to proceed.** If you find an open issue or PR that addresses the same problem or feature:
+   - **Do not** implement a duplicate solution.
+   - Post a polite comment on the original issue referencing the related issue or PR (e.g. "This appears to overlap with #<N> which is already being addressed by PR #<M>. I will not proceed to avoid duplicate work.").
+   - **Stop.** Do not implement anything.
+5. **If overlap is unclear, err on the side of caution.** If you cannot determine whether the work is truly distinct, post a comment asking for clarification and do not proceed until you have confirmation.
+6. **Only if no meaningful overlap exists,** proceed to the workflow below.
+
+> **Note:** This survey is not about finding every tangentially related ticket. Focus on issues and PRs that would make your implementation redundant or significantly overlapping. A related discussion or enhancement request that covers different ground is not a blocker.
 
 ## Workflow
 
@@ -60,7 +77,7 @@ When the pre-condition check passes:
    - **Do not commit your own plan or scratchpad documents.** Any `.md` files you created for your own planning, reasoning, or note-taking are internal working artefacts and must not be included in the commit or PR.
 
 6. **Raise a pull request**—Create a PR with a clear description:
-   - **Final gate**: Before creating the PR, re-check that no other open PR now targets this issue. If one has appeared since your pre-condition check, **exit silently**.
+   - **Final gate**: Before creating the PR, re-check that no other open PR now targets this issue and that no new overlapping PR has appeared since your survey. If one has appeared, **exit silently**.
    - Title should be concise and descriptive, following the repo's conventions.
    - Body should explain *what* was changed and *why*, referencing the issue, in Markdown.
    - Include any relevant screenshots, test output, or examples.
@@ -100,7 +117,7 @@ Fixes #<issue-number>
 
 ## What you cannot do
 
-- You **must not** raise a duplicate PR. If an open PR already targets this issue, you exit silently — no comment, no implementation, no branch.
+- You **must not** raise a duplicate PR or implement overlapping work. If an open PR targets this issue, or if related issues/PRs cover the same ground, you exit — no implementation, no branch.
 - You cannot merge your own PR. You provide the implementation; humans review and merge.
 - You cannot make subjective decisions about design preferences—follow the existing patterns.
 
@@ -118,6 +135,7 @@ If the issue involves a domain or technology you are unfamiliar with:
 Do not raise a PR if:
 
 - An open pull request already targets this issue (checked at the start and again before raising). Exit silently.
+- Related open issues or PRs cover the same ground (checked during the survey phase). Post a comment referencing the overlap and stop.
 - The issue description is too vague and you cannot determine the intended behaviour.
 - Implementing the change would require significant architectural decisions beyond your scope.
 - The issue is primarily a discussion or meta-issue with no clear implementation target.
