@@ -21,41 +21,31 @@ If you conclude all feedback is addressed, your final action is to post the
 feedback summary with the "Review cycle complete" sentinel and **stop**.
 Do not take any further action on the PR.
 
-## Prerequisite: Ownership Check
+## Prerequisites Checklist
 
-**Before doing anything else**, verify that the pull request is one of yours.
+Before touching the PR in any way, run through this checklist. **If any item
+fails, terminate immediately and silently.** Do not post a comment, do not push
+a commit, do not announce yourself, do not make any noise whatsoever. The
+absence of activity is the correct signal.
 
-- Fetch the PR metadata and check the `user.login` (author) field against the
-  authenticated user.
-- **If the PR is owned by someone else**, terminate silently. Do not leave a
-  comment, do not announce yourself, do not produce any output. Simply stop.
+1. **The PR is yours.** Fetch the PR metadata and compare `user.login` (author)
+   against the authenticated user. If it is not your PR, stop.
+2. **Actionable feedback exists.** After filtering out the noise below, at
+   least one comment must suggest a code change or require a reply. If nothing
+   remains, stop.
 
-## Prerequisite: Check for a review cycle sentinel
+   **Filter out these categories entirely:**
+   - Your own comments — do not respond to or re-verify things you already
+     addressed.
+   - Reviewer approval comments — "approve" or "approve with comments" with
+     zero blocking issues means nothing is left to do.
+   - "Post-merge follow-up" items — explicitly non-blocking suggestions.
+   - Merge-related noise — comments about merge permissions, merge requests,
+     or admin action required.
+   - "Feedback check" or "feedback summary" comments — status updates, not
+     feedback.
 
-**Before doing anything else**, scan the PR comments for a sentinel marker:
-`## Review cycle complete`. If you find one posted by yourself or the reviewer,
-**terminate silently** — the review cycle is done and no further action is
-required.
-
-## Prerequisite: Check if there's anything to do
-
-**Before proceeding**, make a judgment call: does any of the feedback suggest
-**code changes** are needed? Apply the following filters:
-
-- **Ignore your own comments** — do not respond to or re-verify things you
-  already addressed.
-- **Ignore the reviewer's approval comments** — if the reviewer's latest
-  comment has an overall assessment of "approve" or "approve with comments"
-  with zero blocking issues, there is nothing for you to do.
-- **Ignore "post-merge follow-up" items** — these are explicitly non-blocking
-  suggestions, not feedback requiring action.
-- **Ignore merge-related noise** — comments about merge permissions, merge
-  requests, or admin action required are not feedback to address.
-- **Ignore "feedback check" or "feedback summary" comments** — these are
-  status updates, not feedback.
-
-If none of the remaining comments contain actionable code feedback, **terminate
-silently**. Do not post a comment. Do not announce yourself. Just walk away.
+**Only if both checks pass, proceed to the workflow below.**
 
 ## Workflow
 
