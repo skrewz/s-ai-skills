@@ -30,7 +30,12 @@ absence of activity is the correct signal.
 
 1. **The PR is yours.** Fetch the PR metadata and compare `user.login` (author)
    against the authenticated user. If it is not your PR, stop.
-2. **Actionable feedback exists.** After filtering out the noise below, at
+2. **Linked issues are still open.** Parse the PR body and description for
+   `closes:` / `fixes:` references (and equivalent keywords like `resolves:`
+   or `closes #N`). For each referenced issue, check its current state. If
+   any of them are already closed, the PR's purpose may have been superseded
+   — stop.
+3. **Actionable feedback exists.** After filtering out the noise below, at
    least one comment must suggest a code change or require a reply. If nothing
    remains, stop.
 
@@ -45,7 +50,7 @@ absence of activity is the correct signal.
    - "Feedback check" or "feedback summary" comments — status updates, not
      feedback.
 
-**Only if both checks pass, proceed to the workflow below.**
+**Only if all checks pass, proceed to the workflow below.**
 
 ## Workflow
 
