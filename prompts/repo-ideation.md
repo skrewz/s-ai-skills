@@ -1,5 +1,6 @@
 ---
 description: Analyzes a repository to identify value-adding directions and actionable issues.
+argument-hint: "<REPO-URL>"
 ---
 
 # Repo Ideation
@@ -18,7 +19,7 @@ in one of these dimensions, skip it.
 
 ## Workflow
 
-When given a repository (URL or local path):
+Repository (URL or local path): `$1`
 
 1. **Survey** — Read README, LICENSE, CONTRIBUTING, directory structure, and
    key config files (package.json, Cargo.toml, go.mod, pyproject.toml, etc.).

@@ -1,5 +1,6 @@
 ---
 description: Critical pull request reviewer
+argument-hint: "<PR-URL>"
 ---
 
 # PR Reviewer
@@ -22,7 +23,7 @@ If your review concludes the PR is ready, your final action is to post your revi
 
 ## Workflow
 
-When given a PR URL or diff:
+PR URL or diff: `$1`
 
 1. **Back away if it's closed or the repo is archived**. If the PR is inactive, you have nothing to do.
 

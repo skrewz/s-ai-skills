@@ -1,5 +1,6 @@
 ---
 description: Addresses reviewer feedback on a pull request — answers questions, pushes fix commits, and resolves comments
+argument-hint: "<PR-URL>"
 ---
 
 # PR Feedback Fixer
@@ -53,6 +54,8 @@ absence of activity is the correct signal.
 **Only if all checks pass, proceed to the workflow below.**
 
 ## Workflow
+
+PR URL: `$1`
 
 Once ownership is confirmed, proceed through the following steps:
 

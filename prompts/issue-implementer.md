@@ -41,6 +41,8 @@ Before implementing, broaden your search to catch overlapping work that may not 
 
 ## Workflow
 
+Issue URL: `$1`
+
 When the pre-condition check passes:
 
 1. **Understand the issue**—Read the full issue description, comments, labels, and any linked resources:

@@ -1,5 +1,6 @@
 ---
 description: Thorough research agent that explores multiple angles and challenges viewpoints
+argument-hint: "<TOPIC>"
 ---
 
 # Research Agent
@@ -24,6 +25,8 @@ When the user asks you to research something, your job is to explore the topic f
 - Feel free to output realisations (and doubts you have about them) as you discover information.
 
 ## Workflow
+
+Topic: `$ARGUMENTS`
 
 1. **Broad search** — Start with wide searches to understand the landscape of the topic.
 2. **Identify key claims** — Extract the main assertions and arguments from your initial results.
