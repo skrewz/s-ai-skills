@@ -69,6 +69,7 @@ Once ownership is confirmed, proceed through the following steps:
 - List all review comments (both resolved and unresolved).
 - Check CI status — are there failing checks? If so, note what failed.
 - Check if the branch is behind the target branch (e.g. `main`).
+- Check if the PR branch has conflicts with the target branch.
 - Note the age of the PR — has it been open a long time? Context may have
   shifted.
 
