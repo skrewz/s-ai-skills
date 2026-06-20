@@ -24,40 +24,81 @@ Repository (URL or local path): `$1`
 1. **Survey** — Read README, LICENSE, CONTRIBUTING, directory structure, and
    key config files (package.json, Cargo.toml, go.mod, pyproject.toml, etc.).
    Identify language(s), framework(s), and stated purpose.
-2. **Survey issues/PRs** — List open/closed issues and open PRs. Note recurring
-   themes, stale issues, and recently resolved problems.
+2. **Survey issues/PRs** — List open/closed issues and open PRs. Build a
+   dedup index: for each existing issue, note its title, area, and the
+   specific file(s) and concern(s) it addresses. This index is your primary
+   defence against duplication.
 3. **Analyse the codebase** — Look for architecture issues, dependency health,
    test gaps, documentation quality, CI/CD, error handling, performance
    bottlenecks, and security posture.
-4. **Identify value-adding directions** — Features, testability, architectural
-   improvements, dev-ex enhancements, automation opportunities, integrations.
-5. **Check for duplication** — Before raising a new issue, compare against
-   existing open and recently closed issues. If an equivalent exists, comment
-   on it instead. If partially addressed, suggest an extension. Only raise new
-   issues for genuinely novel findings.
-6. **Generate output** — Produce new issues or comments on existing issues.
+4. **Brainstorm candidates** — List every finding as a bare candidate (one
+   line each). Do not write full issues yet. You may generate many candidates
+   at this stage.
+5. **Deduplicate — existing issues** — For each candidate, check your dedup
+   index from step 2. If an existing open issue already covers this concern
+   (same file, same root cause), mark the candidate as a comment on that
+   issue. If an existing PR already addresses it, discard the candidate.
+6. **Deduplicate — cross-candidate** — Compare remaining candidates against
+   each other. Merge overlapping ideas into one issue. Split multi-concern
+   candidates into separate issues (see "Single-concern rule").
+7. **Select and refine** — From the deduplicated set, keep your strongest
+   3–5 issues. Discard the rest. Write the full issue body for each.
+8. **Self-review** — For each issue, verify every check in the checklist
+   below. Revise or discard any that fail.
+9. **Generate output** — Produce the final issues or comments.
+
+### Self-review checklist
+
+For each issue, answer yes to all five:
+
+- [ ] **Single concern** — Can this be resolved by a single PR? If not, split it.
+- [ ] **No duplicate** — Does no existing open issue or PR cover this exact concern?
+- [ ] **Specific title** — Would a developer know what to do from the title alone?
+- [ ] **Priority justified** — Is "high" reserved for security/correctness/blockers?
+- [ ] **Concrete solution** — Does the proposed solution name specific files and changes?
+
+## Single-concern rule
+
+Each issue must address **one and only one** concern. A concern is a single
+root cause with a single fix. If you find multiple related problems, raise
+separate issues and cross-reference them with the "Related issues" field.
+
+Test: "Can this be resolved by a single PR?" If the answer is no, split it.
+
+| ✅ Single concern | ❌ Multiple concerns |
+|---|---|
+| "HTML-escape `mainline` in `tatl/rendering/guielms.py`" | "Fix XSS in tatl: escape mainline, escape list names, audit all interpolations" |
+| "Add STARTTLS to SMTP in `tatl/api/add`" | "Add STARTTLS to SMTP and fix From address typo" |
+| "Lower Radicale logging from debug to info" | "Radicale: debug logging and proxy-only auth risks" |
+
+When you find a pattern (e.g. three files with the same class of bug), raise
+**one issue per file**. Optionally raise a separate architecture issue for the
+systemic problem, with references to the per-file issues.
 
 ## New issue format
 
 ```markdown
-<issue title: concise, action-oriented title>
+<issue title: concise, action-oriented title — name the specific change>
 
 **Type:** `<enhancement|technical-debt|architecture|security|documentation|chore>`
-**Priority:** `<high|medium|low>`
-**Area:** `<component or subsystem>`
+**Priority:** `<high|medium|low>` (default to **medium**)
+**Area:** `<single component or subsystem — e.g. "tatl/rendering", not "tatl and dashboards">`
 
 ## Problem/opportunity
-<clear description of the current state and why it is a problem or could be
-better. Be specific.>
+<describe the single root cause. Name the specific file(s) and line(s).
+Show the problematic code. Explain why it is a problem.>
 
 ## Proposed solution
-<concrete steps or approach. Include code examples where helpful.>
+<concrete steps. Name the specific change. Include code examples where helpful.>
 
 ## Value added
-<explain how this adds value — user, developer, operational, or community.>
+<which value dimension: user, developer, operational, or community.>
 
 ## Impact
-<what happens if done vs. not done. Who benefits?>
+<what happens if done vs. not done.>
+
+## Related issues
+<cross-references, if any. e.g. "See also #N (same class of bug in another file)">
 
 ## References
 - `path/to/relevant/file:line`
@@ -109,12 +150,19 @@ addressed separately>
 - **Be concrete.** Every issue needs a clear problem and solution. Avoid vague
   suggestions like "improve testing."
 - **Be realistic.** Match suggestions to the project's actual size and scope.
-- **Prioritise ruthlessly.** If everything is high priority, nothing is.
-- **Look for patterns.** Three instances suggest a systemic issue.
+- **Prioritise ruthlessly.** Default to **medium**. Use **high** only for
+  security, correctness, or blockers. Use **low** for exploratory suggestions.
+- **Look for patterns, but don't bundle them.** Three files with the same
+  class of bug means three issues (one per file), not one issue covering
+  all three. If the pattern itself suggests a systemic fix, that is a
+  separate architecture issue.
 - **Consider developer experience.** How easy is it for a new contributor to
   get started?
 - **Don't invent problems.** If the repo is well-organised, say so.
-- **Be idempotent.** Produce stable, non-redundant output over time.
-- **Limit output.** Produce 3–10 issues or comments. Quality over quantity.
+- **Dedup is your first duty.** Running this prompt multiple times on the
+  same repo must not produce duplicate issues. Step 2's dedup index is your
+  tool for this — use it rigorously.
+- **Limit output.** Produce 3–5 issues or comments. Quality over quantity.
+  If you have fewer than 3 genuine findings, produce fewer.
 - **Think outside the box.** Your role is to relate what exists to what could
   be.
