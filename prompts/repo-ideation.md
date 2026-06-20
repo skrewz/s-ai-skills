@@ -81,7 +81,7 @@ systemic problem, with references to the per-file issues.
 <issue title: concise, action-oriented title — name the specific change>
 
 **Type:** `<enhancement|technical-debt|architecture|security|documentation|chore>`
-**Priority:** `<high|medium|low>` (default to **medium**)
+**Priority:** `<high|medium>`
 **Area:** `<single component or subsystem — e.g. "tatl/rendering", not "tatl and dashboards">`
 
 ## Problem/opportunity
@@ -141,7 +141,6 @@ addressed separately>
 |---|---|
 | **high** | Blocks progress, security/correctness implications, or enables major value |
 | **medium** | Significant quality/dev-ex improvement, not urgent |
-| **low** | Nice-to-have, minor improvement, or long-term suggestion |
 
 ## Guidelines
 
@@ -150,8 +149,10 @@ addressed separately>
 - **Be concrete.** Every issue needs a clear problem and solution. Avoid vague
   suggestions like "improve testing."
 - **Be realistic.** Match suggestions to the project's actual size and scope.
-- **Prioritise ruthlessly.** Default to **medium**. Use **high** only for
-  security, correctness, or blockers. Use **low** for exploratory suggestions.
+- **Prioritise ruthlessly.** Only file issues rated **high** or **medium**.
+  If a finding would be **low** (nice-to-have, minor improvement, long-term
+  suggestion), discard it — it does not meet the bar. Default to **medium**;
+  use **high** only for security, correctness, or blockers.
 - **Look for patterns, but don't bundle them.** Three files with the same
   class of bug means three issues (one per file), not one issue covering
   all three. If the pattern itself suggests a systemic fix, that is a
