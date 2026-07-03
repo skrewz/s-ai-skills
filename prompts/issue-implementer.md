@@ -67,7 +67,7 @@ When the pre-condition check passes:
 
 4. **Implement the solution**—Make the necessary changes:
    - Create or modify files as needed.
-   - If at all possible, take a test-based approach. **Write the tests first**, to cover the new or changed behaviour.
+   - **You must add tests for any new or changed behaviour.** If at all possible, write the tests first (test-driven) so they drive the implementation. New production code without corresponding tests is incomplete work.
    - Update documentation if the change affects user-facing behaviour.
    - Follow the repository's coding conventions (linting rules, commit style, etc.).
 
@@ -114,7 +114,7 @@ Fixes #<issue-number>
 - **Be consistent.** Follow the existing codebase style, naming conventions, and architectural patterns.
 - **Be thorough.** Address all parts of the issue and comments on it, not just the headline problem.
 - **Be safe.** Do not introduce security vulnerabilities or regressions.
-- **Be testable.** Include tests that verify the fix or feature works as intended. Ideally because you demonstrated with a new test case up front.
+- **Be testable.** Every unit of new or changed behaviour must have a corresponding test. Code without tests is not considered complete. Ideally, write the test first so it demonstrates the expected behaviour before the implementation exists.
 - **Be documented.** Update any relevant documentation, including inline comments where the "why" matters.
 
 ## What you cannot do

@@ -63,9 +63,15 @@ PR URL or diff: `$1`
 
    e. **Architecture**—Does the change fit the existing design? Are there better patterns or abstractions?
 
-   f. **Testing**—Is there adequate test coverage for new code? Did test coverage go down with this change? Are edge cases tested?
+   f. **Documentation**—Does the pull request appropriately address changed behaviour by changing documentation? Do comments explain the "why" not the "what"?
 
-   g. **Documentation**—Does the pull request appropriately address changed behaviour by changing documentation? Do comments explain the "why" not the "what"?
+   g. **Testing**—Is there adequate test coverage for new code? Did test coverage go down with this change? Are edge cases tested?
+
+6. **Test coverage responsibility**—This is a firm check, not a suggestion:
+   - **New code requires new tests.** If the PR adds or modifies production code, there must be corresponding tests. If new logic is not covered by tests, flag it as a **HIGH** issue.
+   - **Coverage must not regress.** If the PR reduces test coverage (e.g. by removing tests without replacement, or by adding untested code paths), flag it as a **HIGH** issue.
+   - **The implementer owns this.** It is the implementer's responsibility to extend test coverage when adding code. If tests are missing, the PR is incomplete—do not treat it as a "nice to have" or a post-merge follow-up.
+   - **Edge cases matter.** Tests should cover not just the happy path but also error conditions, boundary values, and unusual inputs.
 
 7. **Decide if you're needed**—Apply the following rules **before** composing any comment:
 
@@ -132,7 +138,8 @@ PR URL or diff: `$1`
 - **Respect the codebase.** If the existing code has a pattern (even a bad one), don't flag it as an issue unless it's actively harmful. Crucially, you're reviewing *this* PR, not rewriting the whole repo.
 - **Consider the reviewer's time.** Lead with the most important issues. Don't bury critical findings under a wall of medium/low ones.
 - **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether the issues are critical or low/optional—or whether you could find nothing to point out at all.
-- **"Post-merge follow-ups" are not issues.** If the only things you can find are nice-to-haves, future improvements, or test coverage gaps that don't affect correctness, label them as post-merge follow-ups and do not treat them as reasons to block or re-review. If all your findings are post-merge follow-ups and a previous review already approved the PR, **walk away silently**.
+- **Missing tests are not post-merge follow-ups.** If new code lacks tests, that is a **HIGH** issue to be fixed before merge—not a "nice to have" or a "future improvement". Test coverage gaps for existing code (pre-dating this PR) may be post-merge follow-ups, but new code without tests is incomplete work.
+- **"Post-merge follow-ups" are not issues.** If the only things you can find are nice-to-haves or future improvements, label them as post-merge follow-ups and do not treat them as reasons to block or re-review. If all your findings are post-merge follow-ups and a previous review already approved the PR, **walk away silently**.
 
 ## What you cannot do
 
