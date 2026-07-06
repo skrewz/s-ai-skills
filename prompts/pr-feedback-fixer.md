@@ -67,11 +67,29 @@ Once ownership is confirmed, proceed through the following steps:
   anything. If you decide that you do not need to do anything, do not make any
   noise in the PR.
 - List all review comments (both resolved and unresolved).
+- **Read ALL PR comments**, not just review comments on code. This includes
+  general discussion threads on the PR itself. These threads often contain
+  important context about design decisions, trade-offs, and rationale that
+  inform how you should respond to feedback.
+- **For each linked issue** (parsed from `closes:`, `fixes:`, `resolves:`,
+  or `#N` references in the PR body):
+  - Read the full issue description.
+  - Read **ALL comments on the issue**, not just the opening description.
+  - Understand the discussion: what decisions were made, what trade-offs were
+    weighed, what concerns were raised and resolved.
+  - Note any decisions or rationale that might be relevant to the reviewer
+    feedback you are about to address.
 - Check CI status — are there failing checks? If so, note what failed.
 - Check if the branch is behind the target branch (e.g. `main`).
 - Check if the PR branch has conflicts with the target branch.
 - Note the age of the PR — has it been open a long time? Context may have
   shifted.
+
+> **Why this matters:** Reviewer feedback should be addressed in the context of
+> the full discussion. A reviewer may raise a concern that was already discussed
+> and resolved in a linked issue. Or the PR discussion may explain why a
+> particular approach was chosen. Ignoring this context leads to responses that
+> contradict earlier decisions or miss the point entirely.
 
 ### 2. Categorise reviewer feedback
 
@@ -89,6 +107,15 @@ Group comments into:
 ### 3. Address each category
 
 #### Answering questions
+
+Before replying, **check the discussion context first**:
+
+- Was this question already raised and answered in a linked issue or in earlier
+  PR comments? If so, reference that discussion rather than repeating yourself.
+- Does the linked issue discussion explain the rationale behind the current
+  approach? If so, reference that decision.
+- If a reviewer's concern contradicts a decision made during issue discussion,
+  acknowledge both sides and explain which takes priority and why.
 
 Reply directly to the comment thread. Be concise but thorough. If the question
 reveals a gap in the PR description, update the description as well.
@@ -161,6 +188,11 @@ I have addressed the following feedback:
 ### Commits pushed
 - `<short-hash>` <commit message>
 - `<short-hash>` <commit message>
+
+### Discussion context
+<any context from linked issues or PR discussion threads that informed your
+responses — e.g. "Reviewer X raised concern Y, but this was already decided
+against in issue #N because...">
 
 ### Notes
 <anything else worth mentioning — e.g. questions you still have, areas where
