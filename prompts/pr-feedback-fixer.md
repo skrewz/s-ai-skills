@@ -84,6 +84,9 @@ Once ownership is confirmed, proceed through the following steps:
 - Check if the PR branch has conflicts with the target branch.
 - Note the age of the PR — has it been open a long time? Context may have
   shifted.
+- **Check the PR description for accuracy.** Does the title and body still
+  reflect what the PR actually does? Does it accurately summarise the linked
+  issue(s) it closes? Note any gaps — these will need fixing later.
 
 > **Why this matters:** Reviewer feedback should be addressed in the context of
 > the full discussion. A reviewer may raise a concern that was already discussed
@@ -144,10 +147,32 @@ For each actionable issue:
 
 #### Updating the PR description
 
-If reviewer feedback reveals that the PR description is unclear or incomplete:
+The PR description is a living document. It must always accurately reflect
+what the PR does, why it does it, and how it relates to any linked issue.
 
-- Add missing context (why the change was made, what problem it solves).
-- Include screenshots for UI changes if none were provided.
+- **On every pass**, reconcile the description with the current state of the
+  PR. Do not wait for explicit feedback to fix a stale description.
+- **Title:** Does it still accurately summarise the change? If the scope
+  shifted in response to feedback, update it.
+- **Summary:** Does the body explain *why* the change was made and *what*
+  problem it solves? If feedback revealed a gap, fill it.
+- **Linked issues:** Re-read the linked issue(s). Does the PR description
+  faithfully represent the issue's intent? If the PR evolved beyond (or
+  diverged from) the original issue, update the description to clarify the
+  scope.
+- **Screenshots:** If the PR involves UI changes, ensure screenshots are
+  present and up to date. If feedback prompted a visual change, replace old
+  screenshots with new ones.
+- **Scope changes:** If reviewer feedback caused the PR's scope to change
+  (e.g. a feature was split out, a design was revised), update the
+  description to reflect the new direction.
+- **Commit accuracy:** After pushing fix commits, verify the description
+  still matches what the PR delivers. If commits added or removed
+  functionality, update accordingly.
+
+> **Rule of thumb:** The PR description should be readable and accurate
+> even by someone who has not read the code or the linked issues. If it
+> is not, fix it.
 
 #### Rebased or updated branch
 
@@ -157,6 +182,24 @@ If the branch is significantly behind the target:
 - Resolve any conflicts carefully, preserving your changes.
 - Force-push only if you are confident. Double-check that the PR is yours at
   this stage.
+
+### 4. Reconcile the PR description
+
+Before reporting back, review and update the PR description to ensure it
+remains in sync with the current state of the PR.
+
+- Compare the description against the actual diff. Does it accurately
+  describe what was changed?
+- Compare the description against the linked issue(s). Does it faithfully
+  represent the issue's intent and any decisions made in the issue
+  discussion?
+- If you pushed commits that altered the scope or direction of the PR,
+  update the description to reflect the new state.
+- If the title no longer matches the content, update it.
+- If screenshots are stale or missing, update them.
+
+This is not optional. The description is the first thing a reviewer reads.
+If it is inaccurate, it wastes everyone's time.
 
 ### 5. Check for deduplication before posting
 
