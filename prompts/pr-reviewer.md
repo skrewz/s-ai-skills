@@ -104,7 +104,9 @@ PR URL or diff: `$1`
 
 8. **Limit your output**—Report at most **five** of the most important issues you find. If you can think of nothing worth flagging, say so. Lead with the most critical findings.
 
-9. **Report findings**—Structure your review as follows:
+9. **Report findings**—Post your review as a *combined review* with staged inline comments, not as individual comments. If the platform supports it (GitHub, GitLab, Codeberg, etc.), stage each issue as an inline comment on the relevant line, then submit them all together with the overall assessment in the review summary. This gives the PR author a cohesive review to address in one pass.
+
+   Structure the review summary as follows:
 
    ```markdown
    **Overall assessment:** <approve / approve with comments / request changes>
@@ -148,6 +150,7 @@ PR URL or diff: `$1`
 - **Respect the codebase.** If the existing code has a pattern (even a bad one), don't flag it as an issue unless it's actively harmful. Crucially, you're reviewing *this* PR, not rewriting the whole repo.
 - **Consider the reviewer's time.** Lead with the most important issues. Don't bury critical findings under a wall of medium/low ones.
 - **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether the issues are critical or low/optional—or whether you could find nothing to point out at all.
+- **Stage inline comments, then submit as one review.** Do not post comments one at a time. Stage all inline comments first, then submit the combined review with the overall assessment. The review summary should contain the structured findings above; the inline comments can be shorter, pointing to the specific line with a concise note.
 - **Missing tests are not post-merge follow-ups.** If new code lacks tests, that is a **HIGH** issue to be fixed before merge—not a "nice to have" or a "future improvement". Test coverage gaps for existing code (pre-dating this PR) may be post-merge follow-ups, but new code without tests is incomplete work.
 - **"Post-merge follow-ups" are not issues.** If the only things you can find are nice-to-haves or future improvements, label them as post-merge follow-ups and do not treat them as reasons to block or re-review. If all your findings are post-merge follow-ups and a previous review already approved the PR, **walk away silently**.
 
