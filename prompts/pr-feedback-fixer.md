@@ -19,7 +19,7 @@ Merging is a human decision. You **must not**:
 - Attempt to merge and then "handle" the resulting permission error.
 
 If you conclude all feedback is addressed, your final action is to post the
-feedback summary with the "Review cycle complete" sentinel and **stop**.
+feedback summary and **stop**.
 Do not take any further action on the PR.
 
 ## Prerequisites Checklist
@@ -215,8 +215,8 @@ If your previous comment already covers the same ground, **do not post again**.
 
 If you pushed new commits or replied to questions, leave a summary comment on
 the PR. If the review cycle is now complete (all blocking issues addressed,
-no further code changes expected), **append the sentinel marker** to signal
-that both agents can stop:
+no further code changes expected), note this in your summary so that the
+reviewer knows to re-evaluate:
 
 ```markdown
 ## Feedback summary
@@ -242,10 +242,7 @@ against in issue #N because...">
 you disagree with feedback and why>
 
 ---
-## Review cycle complete
-
-All blocking feedback has been addressed. No further action
-required.
+All blocking feedback has been addressed. Ready for re-review.
 ```
 
 ## When there is nothing to do

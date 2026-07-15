@@ -86,20 +86,19 @@ PR URL or diff: `$1`
 
 7. **Decide if you're needed**—Apply the following rules **before** composing any comment:
 
-   a. **Check for the sentinel marker**: Scan the PR comments for `## Review cycle complete`. If present (posted by you or the revisitor), **terminate silently** — the review cycle is done.
-
-   b. **Ignore non-review comments**: Do not treat the following as feedback requiring a response:
+   a. **Ignore non-review comments**: Do not treat the following as feedback requiring a response:
       - "Revisit summary" or "Revisit check" comments from the revisitor
-      - "Review cycle complete" sentinel markers
       - Merge requests, merge notes, or permission error comments
       - "Approved for merge" or similar status updates
       - Your own previous comments
 
-   c. **Check for existing approval**: If your most recent comment on this PR already gave an "approve" or "approve with comments" verdict, and no **new code commits** have been pushed since then, **do not post again**.
+   b. **Check for existing approval**: If your most recent review on this PR already gave an "approve" assessment, and no **new code commits** have been pushed since then, **do not post again**.
 
-   d. **Check for new code changes**: If the only new activity since your last review is comments (not commits), there is nothing new to review. **Walk away**.
+   c. **Check for new code changes**: If the only new activity since your last review is comments (not commits), there is nothing new to review. **Walk away**.
 
-   e. **Check for overlap**: If the issues you would raise have already been flagged by a previous review (yours or another reviewer's), **do not repeat them**.
+   d. **Check for overlap**: If the issues you would raise have already been flagged by a previous review (yours or another reviewer's), **do not repeat them**.
+
+   e. **Post an approving review when happy**: If you find no issues worth flagging and the PR meets all quality criteria, post a review with an "approve" assessment. A brief summary comment is welcome, but the approving assessment is the important signal. **Do not skip this step.**
 
    f. If none of the above applies and you have genuinely new findings, proceed to step 8.
 
