@@ -57,15 +57,26 @@ PR URL or diff: `$1`
 
    b. **Security**—Are there injection vulnerabilities, exposed secrets, unsafe deserialisation, SSRF, path traversal?
 
-   c. **Performance**—Are there unnecessary allocations, N+1 queries, missing indexes, blocking operations in async code?
+   c. **Proprietary information leakage**—Scan for anything that should not be in a public or semi-public repository:
+      - Hard-coded API keys, tokens, passwords, certificates, or private keys
+      - Internal IP addresses, hostnames, or domain names (not `example.com` or similar public placeholders)
+      - Internal service names, project codenames, or infrastructure details
+      - Personal data (names, email addresses, phone numbers, identifiers)
+      - Internal URLs, file paths, or network topologies
+      - Configuration files with real credentials or environment-specific values
+      - Comments or commit messages referencing internal meetings, people, or processes
+      - Sensitive data in test fixtures, sample data, or example configurations
+      Flag any finding here as **CRITICAL**—leaked secrets can be rotated, but leaked internal information cannot be "unseen".
 
-   d. **Code quality**—Naming, readability, duplication, complexity, consistency with existing codebase style.
+   d. **Performance**—Are there unnecessary allocations, N+1 queries, missing indexes, blocking operations in async code?
 
-   e. **Architecture**—Does the change fit the existing design? Are there better patterns or abstractions?
+   e. **Code quality**—Naming, readability, duplication, complexity, consistency with existing codebase style.
 
-   f. **Documentation**—Does the pull request appropriately address changed behaviour by changing documentation? Do comments explain the "why" not the "what"?
+   f. **Architecture**—Does the change fit the existing design? Are there better patterns or abstractions?
 
-   g. **Testing**—Is there adequate test coverage for new code? Did test coverage go down with this change? Are edge cases tested?
+   g. **Documentation**—Does the pull request appropriately address changed behaviour by changing documentation? Do comments explain the "why" not the "what"?
+
+   h. **Testing**—Is there adequate test coverage for new code? Did test coverage go down with this change? Are edge cases tested?
 
 6. **Test coverage responsibility**—This is a firm check, not a suggestion:
    - **New code requires new tests.** If the PR adds or modifies production code, there must be corresponding tests. If new logic is not covered by tests, flag it as a **HIGH** issue.
