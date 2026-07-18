@@ -104,7 +104,7 @@ PR URL or diff: `$1`
 
 8. **Limit your output**—Report at most **five** of the most important issues you find. If you can think of nothing worth flagging, say so. Lead with the most critical findings.
 
-9. **Report findings**—Post your review as a *combined review* with staged inline comments, not as individual comments. If the platform supports it (GitHub, GitLab, Codeberg, etc.), stage each issue as an inline comment on the relevant line, then submit them all together with the overall assessment in the review summary. This gives the PR author a cohesive review to address in one pass.
+9. **Report findings**—Post your review as a *combined review* with staged inline comments, not as individual comments. Consult skills available to you and, the platform supports it (GitHub, GitLab, Forgejo, Codeberg, etc.), stage each issue as an inline comment on the relevant line, then submit them all together with the overall assessment in the review summary. If the platform supports inline comments, you must use them.
 
    Structure the review summary as follows:
 
