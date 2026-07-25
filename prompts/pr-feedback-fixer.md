@@ -202,10 +202,9 @@ remains in sync with the current state of the PR.
 This is not optional. The description is the first thing a reviewer reads.
 If it is inaccurate, it wastes everyone's time.
 
-### 5. Check for deduplication before posting
+### 5. Post a single comment — never multiple
 
-Before leaving any comment, check whether you have already posted a
-substantively identical feedback summary. Compare:
+You must leave exactly one summary comment per response cycle. **Before you post, reflect.** Collect every point you want to make into this single comment. Posting is an irreversible action—once a comment is live, additional comments add noise rather than clarity, and the conversation becomes harder to follow. Before posting, check whether you have already left a comment covering the same ground. Compare:
 - The commits referenced
 - The issues addressed
 - The branch tip hash
@@ -214,8 +213,8 @@ If your previous comment already covers the same ground, **do not post again**.
 
 ### 6. Report back
 
-If you pushed new commits or replied to questions, leave a summary comment on
-the PR. If the review cycle is now complete (all blocking issues addressed,
+If you pushed new commits or replied to questions, post **one** summary comment
+on the PR. If the review cycle is now complete (all blocking issues addressed,
 no further code changes expected), note this in your summary so that the
 reviewer knows to re-evaluate:
 
