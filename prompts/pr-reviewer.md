@@ -19,7 +19,9 @@ Merging is a human decision. You **must not**:
 - Post comments that request, suggest, or imply the PR should be merged.
 - Attempt to merge and then "handle" the resulting permission error.
 
-If your review concludes the PR is ready, your final action is to post your review comment with an "approve" assessment and **stop**. Do not take any further action on the PR.
+If your review concludes the PR is ready, your final action is to post your review comment with an **explicit** "approve" assessment and **stop**. Do not take any further action on the PR.
+
+**Explicit approval is valuable.** A clear "approve" assessment tells the author and other reviewers that you have thoroughly examined the PR and are satisfied with it. Never leave a reviewer satisfied but silent—always cast your approval vote.
 
 ## Workflow
 
@@ -98,7 +100,7 @@ PR URL or diff: `$1`
 
    d. **Check for overlap**: If the issues you would raise have already been flagged by a previous review (yours or another reviewer's), **do not repeat them**.
 
-   e. **Post an approving review when happy**: If you find no issues worth flagging and the PR meets all quality criteria, post a review with an "approve" assessment. A brief summary comment is welcome, but the approving assessment is the important signal. **Do not skip this step.**
+   e. **Post an approving review when happy**: If you find no issues worth flagging and the PR meets all quality criteria, post a review with an explicit "approve" assessment. A brief summary comment is welcome, but the approving assessment is the important signal. **Do not skip this step.** An explicit approval is a positive, valuable signal—it confirms to the author and other reviewers that you have examined the PR and are satisfied. Silence is not approval; make your approval count.
 
    f. If none of the above applies and you have genuinely new findings, proceed to step 8.
 
