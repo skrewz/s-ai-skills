@@ -19,25 +19,22 @@ This is a mandatory gate. If it fails, you stop — no work, no comments, no PR.
 
 ### Step 1: Check for PRs targeting this issue
 
-1. Parse the issue URL to extract the repository owner, name, and issue number. Determine the host (GitHub, GitLab, etc.).
-2. Search for open pull requests that reference this issue. Use the platform's API, CLI tool (e.g. `gh pr list --search "#<N>"`), or equivalent mechanism to query for open PRs mentioning the issue number.
-3. If **any** open PR targeting this issue exists, **exit silently**. Do not post a comment, do not raise another PR, and do not implement anything. Just stop.
+1. Parse the issue URL to extract the repository owner, name, and issue number.
+2. Search for open pull requests that reference this issue (e.g. `gh pr list --search "#<N>"`).
+3. If **any** open PR targeting this issue exists, **exit silently**. No comment, no PR, no work. Just stop.
 
 ### Step 2: Survey for related issues and PRs
 
 Before implementing, broaden your search to catch overlapping work that may not reference this exact issue number:
 
-1. **Search for related open issues.** Use the issue title, keywords, or topic to search for other open issues in the same repository. For example, `gh issue list --search "<keyword>" --state open` or the equivalent platform mechanism. Look for issues describing the same problem, feature, or improvement.
-2. **Search for related open PRs.** Search for open pull requests with similar titles, descriptions, or touched files. For example, `gh pr list --search "<keyword>" --state open`. Look for PRs that appear to address the same or substantially overlapping functionality.
-3. **Review any candidates you find.** Read the titles and descriptions of any related issues or PRs. Assess whether they cover the same ground as the issue you were asked to implement.
-4. **If significant overlap exists, refuse to proceed.** If you find an open issue or PR that addresses the same problem or feature:
-   - **Do not** implement a duplicate solution.
-   - Post a polite comment on the original issue referencing the related issue or PR (e.g. "This appears to overlap with #<N> which is already being addressed by PR #<M>. I will not proceed to avoid duplicate work.").
-   - **Stop.** Do not implement anything.
-5. **If overlap is unclear, err on the side of caution.** If you cannot determine whether the work is truly distinct, post a comment asking for clarification and do not proceed until you have confirmation.
-6. **Only if no meaningful overlap exists,** proceed to the workflow below.
+1. **Search for related open issues** using the issue title, keywords, or topic (e.g. `gh issue list --search "<keyword>" --state open`).
+2. **Search for related open PRs** with similar titles, descriptions, or touched files (e.g. `gh pr list --search "<keyword>" --state open`).
+3. **Review any candidates** — read titles and descriptions to assess overlap.
+4. **If significant overlap exists**, do not proceed. Post a polite comment referencing the related issue/PR (e.g. "This appears to overlap with #<N>, already addressed by PR #<M>.") and stop.
+5. **If overlap is unclear**, err on the side of caution: post a comment asking for clarification and wait for confirmation.
+6. **Only if no meaningful overlap exists**, proceed to the workflow below.
 
-> **Note:** This survey is not about finding every tangentially related ticket. Focus on issues and PRs that would make your implementation redundant or significantly overlapping. A related discussion or enhancement request that covers different ground is not a blocker.
+> **Note:** This survey targets issues and PRs that would make your implementation redundant. Tangentially related discussions are not blockers.
 
 ## Workflow
 
@@ -75,6 +72,7 @@ When the pre-condition check passes:
    - Run relevant tests to ensure nothing is broken.
    - Check that the implementation satisfies the issue's requirements.
    - Review your own changes for correctness, security, and quality.
+   - **Visual accuracy:** If the change involves UI or visual elements, capture fresh screenshots that accurately reflect the current implementation. Do not reuse stale screenshots from the issue description or previous iterations unless they still accurately depict the current state. Also check any screenshots already embedded in the issue description — if they no longer match the implemented behaviour, they should be replaced.
    - Look hard at your output. Ensure no unrelated changes have crept in.
    - **Do not commit your own plan or scratchpad documents.** Any `.md` files you created for your own planning, reasoning, or note-taking are internal working artefacts and must not be included in the commit or PR.
 
@@ -82,7 +80,7 @@ When the pre-condition check passes:
    - **Final gate**: Before creating the PR, re-check that no other open PR now targets this issue and that no new overlapping PR has appeared since your survey. If one has appeared, **exit silently**.
    - Title should be concise and descriptive, following the repo's conventions.
    - Body should explain *what* was changed and *why*, referencing the issue, in Markdown.
-   - Include any relevant screenshots, test output, or examples.
+   - Include any relevant screenshots, test output, or examples. **Screenshots must be fresh and accurately reflect the final implementation — never reuse outdated visuals.** If the issue description contained screenshots, assess whether they still apply and replace or supplement them as needed.
    - **Importantly**, use `Fixes #<N>` or `Closes #<N>` in the body to link the issue.
 
 ## PR Description Template
@@ -116,6 +114,7 @@ Fixes #<issue-number>
 - **Be safe.** Do not introduce security vulnerabilities or regressions.
 - **Be testable.** Every unit of new or changed behaviour must have a corresponding test. Code without tests is not considered complete. Ideally, write the test first so it demonstrates the expected behaviour before the implementation exists.
 - **Be documented.** Update any relevant documentation, including inline comments where the "why" matters.
+- **Be visually accurate.** If the PR involves visual changes, include fresh, accurate screenshots. Stale visuals mislead reviewers and should be regenerated before the PR is raised.
 
 ## What you cannot do
 

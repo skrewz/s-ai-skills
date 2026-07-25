@@ -61,8 +61,7 @@ Once ownership is confirmed, proceed through the following steps:
 
 ### 1. Survey the PR state
 
-- Read the PR description, title, and linked issues. Download and inspect
-  screenshots.
+- Read the PR description, title, and linked issues. **Download and inspect all screenshots** — both those attached to the PR and any already embedded in the PR description. If the PR involves UI changes, verify that every screenshot is present, fresh, and accurately depicts the current implementation; stale visuals from the issue or an earlier iteration should be flagged or replaced.
 - If the PR is approved, closed or smilar, you probably will not need to do
   anything. If you decide that you do not need to do anything, do not make any
   noise in the PR.
@@ -161,8 +160,10 @@ what the PR does, why it does it, and how it relates to any linked issue.
   diverged from) the original issue, update the description to clarify the
   scope.
 - **Screenshots:** If the PR involves UI changes, ensure screenshots are
-  present and up to date. If feedback prompted a visual change, replace old
-  screenshots with new ones.
+  present, fresh, and accurate. Regenerate any that are stale, irrelevant,
+  or no longer reflect the current implementation — this includes screenshots
+  already embedded in the PR description, not just attachments. Do not wait
+  for explicit feedback to do so.
 - **Scope changes:** If reviewer feedback caused the PR's scope to change
   (e.g. a feature was split out, a design was revised), update the
   description to reflect the new direction.
@@ -196,7 +197,7 @@ remains in sync with the current state of the PR.
 - If you pushed commits that altered the scope or direction of the PR,
   update the description to reflect the new state.
 - If the title no longer matches the content, update it.
-- If screenshots are stale or missing, update them.
+- If screenshots are stale or missing, regenerate them before reporting back.
 
 This is not optional. The description is the first thing a reviewer reads.
 If it is inaccurate, it wastes everyone's time.
@@ -266,20 +267,12 @@ is in order.
 
 ## Guidelines
 
-- **Be responsive.** Every unresolved comment should receive either a fix or a
-  reply.
-- **Be minimal.** Fix only what was asked. Do not use this opportunity for
-  unrelated cleanup.
-- **Be respectful.** If you disagree with feedback, explain your reasoning
-  politely. Do not be defensive.
-- **Be traceable.** Reference commit hashes and comment threads so reviewers
-  can follow your changes.
-- **Be honest.** If you are unsure about something, say so and ask for
-  clarification.
-- **Consider timing.** If the PR is stale, verify that the change still makes
-  sense before investing effort.
-- **Do not over-engineer.** A simple fix is better than an elegant one that
-  introduces new complexity.
+- **Be responsive and minimal.** Every unresolved comment gets a fix or a reply; fix only what was asked, no drive-by cleanup.
+- **Be respectful.** If you disagree, explain your reasoning politely and without defensiveness.
+- **Be traceable.** Reference commit hashes and comment threads so reviewers can follow your changes.
+- **Be honest.** If you are unsure, say so and ask for clarification.
+- **Be visually accurate.** If the PR involves visual changes, ensure screenshots are fresh and accurate before reporting back — stale visuals waste reviewers' time.
+- **Be pragmatic.** A simple fix beats an elegant one; verify stale PRs still make sense before investing effort.
 
 ## What you cannot do
 
