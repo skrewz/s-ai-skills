@@ -24,28 +24,76 @@ Repository (URL or local path): `$1`
 1. **Survey** — Read README, LICENSE, CONTRIBUTING, directory structure, and
    key config files (package.json, Cargo.toml, go.mod, pyproject.toml, etc.).
    Identify language(s), framework(s), and stated purpose.
+
 2. **Survey issues/PRs** — List open/closed issues and open PRs. Build a
-   dedup index: for each existing issue, note its title, area, and the
-   specific file(s) and concern(s) it addresses. This index is your primary
-   defence against duplication.
+   **dedup index** (a table, see format below) of every open issue and PR.
+   This index is your primary defence against duplication.
+
 3. **Analyse the codebase** — Look for architecture issues, dependency health,
    test gaps, documentation quality, CI/CD, error handling, performance
    bottlenecks, and security posture.
-4. **Brainstorm candidates** — List every finding as a bare candidate (one
-   line each). Do not write full issues yet. You may generate many candidates
-   at this stage.
-5. **Deduplicate — existing issues** — For each candidate, check your dedup
-   index from step 2. If an existing open issue already covers this concern
-   (same file, same root cause), mark the candidate as a comment on that
-   issue. If an existing PR already addresses it, discard the candidate.
-6. **Deduplicate — cross-candidate** — Compare remaining candidates against
-   each other. Merge overlapping ideas into one issue. Split multi-concern
-   candidates into separate issues (see "Single-concern rule").
-7. **Select and refine** — From the deduplicated set, keep your strongest
-   3–5 issues. Discard the rest. Write the full issue body for each.
-8. **Self-review** — For each issue, verify every check in the checklist
+
+4. **Categorise findings into a matrix** — Before writing any issues, organise
+   every finding into the **Findings Matrix** (format below). Each row is a
+   raw finding. This forces you to see all findings at once, making overlaps
+   obvious.
+
+5. **Deduplicate — existing issues** — For each row in the matrix, check
+   against your dedup index from step 2. If an existing open issue or PR
+   already covers this concern (same area, same root cause), mark that row
+   as `status: comment` with the issue number. If an existing PR addresses
+   it, mark as `status: discard`.
+
+6. **Deduplicate — cross-candidate** — Scan the matrix for rows that share
+   the same `area`, `type`, or `root-cause`. Merge overlapping rows into one
+   (keep the strongest). Split multi-concern rows into separate rows (see
+   "Single-concern rule"). Mark discarded rows as `status: merged` or
+   `status: split`.
+
+7. **Select and refine** — From rows marked `status: issue`, keep your
+   strongest 3–5. Mark the rest as `status: discard`. Write the full issue
+   body for each remaining row.
+
+8. **Cross-issue overlap check** — Before finalising, compare every pair of
+   remaining issues. For each pair, explicitly state why they are distinct.
+   If two issues touch the same file but address different root causes, that
+   is acceptable (cross-reference them). If they share the same root cause,
+   merge them.
+
+9. **Self-review** — For each issue, verify every check in the checklist
    below. Revise or discard any that fail.
-9. **Generate output** — Produce the final issues or comments.
+
+10. **Generate output** — Produce the final issues or comments.
+
+### Dedup Index Format (Step 2)
+
+```markdown
+| # | Title | Area | Root cause / concern | Files | Status |
+|---|---|---|---|---|---|
+| 42 | Fix XSS in rendering | tatl/rendering | Unescaped user input in HTML | `guielms.py` | open issue |
+| 17 | Add caching layer | tatl/api | Repeated DB queries | `api/add.py` | open PR |
+```
+
+### Findings Matrix Format (Steps 4–6)
+
+```markdown
+| # | Area | Type | Root cause | File(s) | Value dim | Status | Note |
+|---|---|---|---|---|---|---|---|
+| A | tatl/rendering | security | Unescaped `mainline` in HTML output | `guielms.py:142` | operational | issue | |
+| B | tatl/rendering | security | Unescaped list names in HTML output | `guielms.py:203` | operational | issue | |
+| C | tatl/rendering | security | Unescaped user input across rendering | `guielms.py` | operational | discard | Superset of A+B; split into per-file issues |
+| D | tatl/api | security | No STARTTLS on SMTP | `api/add.py:87` | operational | issue | |
+| E | tatl/api | chore | From address typo | `api/add.py:92` | developer | issue | |
+| F | dashboards | documentation | Missing setup guide | `README.md` | community | comment | See issue #23 |
+| G | tatl/rendering | security | Same XSS as issue #42 | `guielms.py:142` | operational | discard | Dup of existing issue #42 |
+```
+
+**Rules for the matrix:**
+- Each row must have exactly one `area` and one `root-cause`.
+- `status` must be one of: `issue`, `comment`, `discard`, `merged`, `split`.
+- Two rows with the same `area` AND the same `root-cause` are duplicates — merge them.
+- Two rows with the same `area` but different `root-cause` are distinct — keep both, cross-reference.
+- A row marked `discard` must include a `note` explaining why.
 
 ### Self-review checklist
 
@@ -56,6 +104,7 @@ For each issue, answer yes to all five:
 - [ ] **Specific title** — Would a developer know what to do from the title alone?
 - [ ] **Priority justified** — Is "high" reserved for security/correctness/blockers?
 - [ ] **Concrete solution** — Does the proposed solution name specific files and changes?
+- [ ] **Distinct from siblings** — Does this issue address a different root cause from every other issue you are producing? If not, merge or split.
 
 ## Single-concern rule
 
@@ -160,9 +209,13 @@ addressed separately>
 - **Consider developer experience.** How easy is it for a new contributor to
   get started?
 - **Don't invent problems.** If the repo is well-organised, say so.
-- **Dedup is your first duty.** Running this prompt multiple times on the
-  same repo must not produce duplicate issues. Step 2's dedup index is your
-  tool for this — use it rigorously.
+- **The matrix is your dedup tool.** Steps 4–6 force you to lay out every
+  finding in a table where overlaps are visually obvious. Do not skip this.
+  Two rows with the same `area` and `root-cause` column are duplicates by
+  definition — merge them before you ever write a full issue.
+- **Area ownership prevents drift.** Each issue claims one `area`. If two
+  issues claim the same area, they must have different root causes. This
+  constraint makes duplication structurally visible.
 - **Limit output.** Produce 3–5 issues or comments. Quality over quantity.
   If you have fewer than 3 genuine findings, produce fewer.
 - **Think outside the box.** Your role is to relate what exists to what could

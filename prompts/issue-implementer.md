@@ -29,12 +29,29 @@ Before implementing, broaden your search to catch overlapping work that may not 
 
 1. **Search for related open issues** using the issue title, keywords, or topic (e.g. `gh issue list --search "<keyword>" --state open`).
 2. **Search for related open PRs** with similar titles, descriptions, or touched files (e.g. `gh pr list --search "<keyword>" --state open`).
-3. **Review any candidates** — read titles and descriptions to assess overlap.
-4. **If significant overlap exists**, do not proceed. Post a polite comment referencing the related issue/PR (e.g. "This appears to overlap with #<N>, already addressed by PR #<M>.") and stop.
-5. **If overlap is unclear**, err on the side of caution: post a comment asking for clarification and wait for confirmation.
-6. **Only if no meaningful overlap exists**, proceed to the workflow below.
+3. **Review any candidates** — read titles, descriptions, and **file lists** (`gh pr view <N> --json files`) to assess overlap.
+4. **Build an overlap table** (format below) comparing your planned changes against each candidate PR.
+5. **If significant overlap exists**, do not proceed. Post a polite comment referencing the related issue/PR (e.g. "This appears to overlap with #<N>, already addressed by PR #<M>.") and stop.
+6. **If overlap is unclear**, err on the side of caution: post a comment asking for clarification and wait for confirmation.
+7. **Only if no meaningful overlap exists**, proceed to the workflow below.
 
 > **Note:** This survey targets issues and PRs that would make your implementation redundant. Tangentially related discussions are not blockers.
+
+### Overlap Table Format (Step 2)
+
+```markdown
+| Candidate PR | Issue | Files touched | Overlap with our plan | Verdict |
+|---|---|---|---|---|
+| #45 (fix-xss-rendering) | #42 | `guielms.py` | Same file, different function (`render_list` vs `render_mainline`) | No overlap — different root cause |
+| #48 (hardening-pass-one) | #44 | `guielms.py`, `api/add.py` | Subset of our planned changes | ⚠️ Overlap — abort |
+```
+
+**Rules for the overlap table:**
+- Compare **file-level** overlap first. Same file = potential overlap.
+- Then compare **function/line-level** overlap. Same function or adjacent lines = likely overlap.
+- Same file but different functions with different root causes = acceptable (cross-reference).
+- If a candidate PR's changes are a **subset** of your planned changes, abort — they are already doing your work.
+- If your planned changes are a **subset** of a candidate PR, abort — their work supersedes yours.
 
 ## Workflow
 
@@ -42,33 +59,73 @@ Issue URL: `$1`
 
 When the pre-condition check passes:
 
-1. **Understand the issue**—Read the full issue description, comments, labels, and any linked resources:
+1. **Understand the issue** — Read the full issue description, comments, labels, and any linked resources:
    - What is the problem being reported or the feature being requested?
    - Are there reproduction steps, expected behaviour, or acceptance criteria?
    - Are there relevant comments from maintainers or other contributors?
    - Is this a bug, feature request, or improvement?
    - This understanding underpins every other step.
 
-2. **Explore the codebase**—Navigate the repository to understand the relevant code:
+2. **Explore the codebase** — Navigate the repository to understand the relevant code:
    - Locate the files and modules that would need to change.
    - Understand the existing architecture, patterns, and conventions.
    - Identify any related tests, configuration, or documentation.
    - Note any dependencies or constraints that affect the implementation.
 
-3. **Design a solution**—Formulate an implementation plan:
-   - What files need to be created, modified, or deleted?
-   - What is the minimal change required to address the issue?
-   - Are there edge cases or error conditions to handle?
-   - Does the solution fit the existing codebase style and architecture?
-   - Consider backward compatibility if relevant.
+3. **Design a solution — Solution Manifest** — Before writing any code,
+   produce a **Solution Manifest** (format below). This is a structured
+   inventory of every change you plan to make. It serves two purposes:
+   (a) it forces you to think concretely about scope, and (b) it provides
+   a reference point for detecting drift and duplication.
 
-4. **Implement the solution**—Make the necessary changes:
-   - Create or modify files as needed.
+   ### Solution Manifest Format
+
+   ```markdown
+   ## Solution Manifest
+
+   ### Scope
+   - Issue: #<N> — <title>
+   - Root cause: <single sentence>
+   - Approach: <single sentence>
+
+   ### Files to modify
+   | File | Change | Purpose | Lines (approx) |
+   |---|---|---|---|
+   | `src/render.py` | Add `html.escape()` wrapper | Escape user input before HTML output | 142–150 |
+   | `tests/test_render.py` | Add test `test_mainline_escaped` | Verify escaping works | new |
+
+   ### Files to create
+   | File | Purpose |
+   |---|---|
+   | `tests/test_new_feature.py` | Tests for new feature |
+
+   ### Files to delete
+   | File | Reason |
+   |---|---|
+
+   ### Out of scope (explicitly excluded)
+   - <thing you noticed but are deliberately not addressing>
+   - <reason why it belongs in a separate PR>
+
+   ### Risk / edge cases
+   - <edge case> — how it is handled
+   ```
+
+   **Rules for the manifest:**
+   - Every file listed must be necessary. If you can solve the issue without touching a file, don't list it.
+   - The "Out of scope" section is mandatory. It forces you to acknowledge related work you are deliberately excluding, which prevents scope creep and makes it clear where another PR should pick up.
+   - Line ranges are approximate but must be specific enough that you can verify against them later.
+
+4. **Implement the solution** — Make the necessary changes:
+   - Create or modify files **as listed in the manifest**. If you discover
+     you need to touch a file not in the manifest, **pause and update the
+     manifest** before proceeding.
    - **You must add tests for any new or changed behaviour.** If at all possible, write the tests first (test-driven) so they drive the implementation. New production code without corresponding tests is incomplete work.
    - Update documentation if the change affects user-facing behaviour.
    - Follow the repository's coding conventions (linting rules, commit style, etc.).
 
-5. **Verify the changes**—Before raising a PR:
+5. **Verify the changes** — Before raising a PR:
+   - **Manifest cross-check:** Compare your actual changes against the Solution Manifest. Every file in the manifest must be changed; every file changed must be in the manifest. Any discrepancy means you either missed something or drifted in scope — fix it before proceeding.
    - Run relevant tests to ensure nothing is broken.
    - Check that the implementation satisfies the issue's requirements.
    - Review your own changes for correctness, security, and quality.
@@ -76,10 +133,11 @@ When the pre-condition check passes:
    - Look hard at your output. Ensure no unrelated changes have crept in.
    - **Do not commit your own plan or scratchpad documents.** Any `.md` files you created for your own planning, reasoning, or note-taking are internal working artefacts and must not be included in the commit or PR.
 
-6. **Raise a pull request**—Create a PR with a clear description:
+6. **Raise a pull request** — Create a PR with a clear description:
    - **Final gate**: Before creating the PR, re-check that no other open PR now targets this issue and that no new overlapping PR has appeared since your survey. If one has appeared, **exit silently**.
    - Title should be concise and descriptive, following the repo's conventions.
    - Body should explain *what* was changed and *why*, referencing the issue, in Markdown.
+   - Include the **Change Inventory** (derived from your manifest) in the PR body.
    - Include any relevant screenshots, test output, or examples. **Screenshots must be fresh and accurately reflect the final implementation — never reuse outdated visuals.** If the issue description contained screenshots, assess whether they still apply and replace or supplement them as needed.
    - **Importantly**, use `Fixes #<N>` or `Closes #<N>` in the body to link the issue.
 
@@ -92,8 +150,12 @@ When the pre-condition check passes:
 
 ## Changes
 
-- <bullet point for each significant change>
-- <include file paths where relevant>
+<Change inventory — one row per file, derived from the Solution Manifest>
+
+| File | Change |
+|---|---|
+| `src/render.py` | Added `html.escape()` wrapper around user input (line 142) |
+| `tests/test_render.py` | Added `test_mainline_escaped` |
 
 ## Testing
 
@@ -115,6 +177,7 @@ Fixes #<issue-number>
 - **Be testable.** Every unit of new or changed behaviour must have a corresponding test. Code without tests is not considered complete. Ideally, write the test first so it demonstrates the expected behaviour before the implementation exists.
 - **Be documented.** Update any relevant documentation, including inline comments where the "why" matters.
 - **Be visually accurate.** If the PR involves visual changes, include fresh, accurate screenshots. Stale visuals mislead reviewers and should be regenerated before the PR is raised.
+- **The manifest anchors your work.** Step 3's Solution Manifest is not optional. It forces you to declare scope upfront, which (a) prevents scope creep during implementation, (b) makes it easy to detect drift in step 5, and (c) provides a structured record that future runs can compare against to detect duplication.
 
 ## What you cannot do
 
