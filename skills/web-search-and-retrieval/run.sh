@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
-# Run the web-search skill. Builds the binary on first run.
+# Run the web-search skill. Builds the Go binary on first run.
 # If the skill directory is not writable, builds into /tmp instead.
 # Usage:
 #   ./run.sh search <query>
-#   ./run.sh get_url <url>
+#   ./run.sh capture_url <url> [--output-dir <dir>] [--scroll-offset <px>] [--viewport-width <px>] [--viewport-height <px>]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Determine where to build/keep the binary.
+# capture_url is handled by a Node.js + Playwright helper, not the Go binary.
+if [ "${1:-}" = "capture_url" ]; then
+  shift
+  exec node "$SCRIPT_DIR/internal/screenshot/capture_url.js" "$@"
+fi
+
+# Determine where to build/keep the Go binary.
 # Prefer the skill directory; fall back to /tmp if it's not writable.
 if [ -x "$SCRIPT_DIR/webtool" ]; then
   BINARY="$SCRIPT_DIR/webtool"
