@@ -1,0 +1,38 @@
+# Node/TypeScript — spec-driven project
+# Makefile-driven: build/test/lint/clean are the standard targets. CI, if
+# present, calls these same targets. Delete the `e2e` target if no e2e
+# mechanism is called for; otherwise set it to your runner:
+#   Playwright: npx playwright test
+#   Puppeteer:  npm run test:e2e   (a Puppeteer harness under jest/vitest/mocha)
+.PHONY: all build test lint clean e2e image image-run image-clean
+
+all: build test
+
+build:
+	npm run build
+
+test:
+	npm test
+
+lint:
+	npm run lint
+
+clean:
+	rm -rf dist node_modules/.cache
+
+# e2e — delete if no e2e mechanism is called for.
+e2e:
+	npx playwright test
+
+# --- container (build the payload application image) ------------------------
+# Delete these (and the Containerfile) if a container is not required.
+IMAGE ?= app
+
+image:
+	podman build -t $(IMAGE) .
+
+image-run:
+	podman run --rm -it $(IMAGE)
+
+image-clean:
+	podman rmi -f $(IMAGE) || true

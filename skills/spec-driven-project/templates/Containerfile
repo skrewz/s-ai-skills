@@ -1,0 +1,33 @@
+# Containerfile — builds the payload application as a container image.
+#
+# A starting point: adapt the builder and final stages to the chosen language,
+# the version you validated, and the deployment considerations you agreed with
+# the user (runtime dependencies, exposed ports, non-root user, multi-arch, push
+# registry). Keep it podman/Buildah-compatible.
+#
+# Build:  make image
+# Run:    make image-run
+
+# --- builder ----------------------------------------------------------------
+# Replace with the language-appropriate builder image at the validated version
+# (e.g. golang:1.24, python:3.13-slim, node:22-alpine, rust:1.8x).
+FROM golang:1.24 AS build
+WORKDIR /src
+# Copy the manifest and dependencies first (better layer caching), then the
+# sources, then build. Examples:
+#   Go:     COPY go.mod go.sum ./ && RUN go mod download
+#           COPY . .              && RUN CGO_ENABLED=0 go build -o /out/app ./cmd/...
+#   Python: COPY pyproject.toml uv.lock ./ && RUN uv sync --frozen --no-dev
+#           COPY . .              && RUN uv run python -m compileall -q .
+#   Node:   COPY package.json package-lock.json ./ && RUN npm ci
+#           COPY . .              && RUN npm run build
+#   Rust:   COPY . .              && RUN cargo build --release
+
+# --- final ------------------------------------------------------------------
+# Replace with a minimal runtime image (e.g. gcr.io/distroless/static:nonroot,
+# alpine:3.20). Run as a non-root user where possible.
+FROM gcr.io/distroless/static:nonroot
+COPY --from=build /out/app /app
+# EXPOSE <port>
+USER nonroot
+ENTRYPOINT ["/app"]

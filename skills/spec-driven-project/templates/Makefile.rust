@@ -1,0 +1,37 @@
+# Rust — spec-driven project
+# Makefile-driven: build/test/lint/clean are the standard targets. CI, if
+# present, calls these same targets. Delete the `e2e` target if no e2e
+# mechanism is called for; otherwise set it to your runner (e.g. a dedicated
+# e2e integration test, or playwright-rust).
+.PHONY: all build test lint clean e2e image image-run image-clean
+
+all: build test
+
+build:
+	cargo build
+
+test:
+	cargo test
+
+lint:
+	cargo clippy --all-targets
+
+clean:
+	cargo clean
+
+# e2e — delete if no e2e mechanism is called for.
+e2e:
+	cargo test --test e2e
+
+# --- container (build the payload application image) ------------------------
+# Delete these (and the Containerfile) if a container is not required.
+IMAGE ?= app
+
+image:
+	podman build -t $(IMAGE) .
+
+image-run:
+	podman run --rm -it $(IMAGE)
+
+image-clean:
+	podman rmi -f $(IMAGE) || true

@@ -8,6 +8,7 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 |---|---|
 | **pdf-reader** | Extract text and tables from PDFs using `pdfplumber`, `pdftotext`, or `pdftoppm` |
 | **screen-use** | Linux screen interaction — screenshots (`grim`/`scrot`) and input simulation (`ydotool`) |
+| **spec-driven-project** | Scaffold a spec-driven project — `specification/` source of truth, Makefile-driven build, `AGENTS.md`/`VALUES_AND_BELIEFS.md`; idempotent on existing repos |
 | **web-search-and-retrieval** | Go CLI for DuckDuckGo web search and HTML-to-markdown URL fetching |
 | **yt-transcript** | YouTube transcript extraction via `youtube-transcript-api` |
 
