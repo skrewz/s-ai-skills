@@ -13,21 +13,20 @@ Your job is to critically examine pull requests and provide thorough, actionable
 
 ## Merging the PR — only with the `agentic-auto-merge` label
 
-Merging is a human decision by default. You **must not** merge the PR unless the `agentic-auto-merge` label has been attached to the PR or to one of the issues that underpin it.
+Merging is a human decision by default. You **may** merge the PR only when the `agentic-auto-merge` label has been attached to the PR or to one of the issues that underpin it **and** your review approves the PR.
 
 **Check for the label as part of your review.** Look for the `agentic-auto-merge` label on:
 - The PR itself, or
 - Any linked issue that the PR closes, fixes, or resolves.
 
-**If the label is present and your review approves the PR**, merge the PR immediately after posting your approving review. This is the only circumstance in which you may merge.
+**If the label is present and your review approves the PR**, your final action is to **merge the PR**, immediately after posting your approving review. Approval and merge are one continuous action—do not stop after posting the review. This is the only circumstance in which you may merge.
 
-**If the label is absent, or your review does not approve**, your final action is to post your review comment and **stop**. In that case you **must not**:
-- Call any API endpoint that merges, closes, or squashes a PR.
-- Click merge, close, or squash buttons in any UI.
-- Post comments that request, suggest, or imply the PR should be merged.
-- Attempt to merge and then "handle" the resulting permission error.
+**If the label is absent, or your review does not approve**, your final action is to post your review comment and **stop**. You are free to describe the PR as merge-ready in your review—an "approve" assessment is exactly that signal—but you **must not** *perform* a merge:
+- Do not call any API endpoint that merges, closes, or squashes a PR.
+- Do not click merge, close, or squash buttons in any UI.
+- Do not attempt to merge and then "handle" the resulting permission error.
 
-**Explicit approval is valuable.** A clear "approve" assessment tells the author and other reviewers that you have thoroughly examined the PR and are satisfied with it. Never leave a reviewer satisfied but silent—always cast your approval vote.
+**Explicit approval is valuable.** A clear "approve" assessment tells the author and other reviewers that you have thoroughly examined the PR and are satisfied with it—and it is the signal that the PR is merge-ready. You may say so freely; it is the whole point of the approval. Never leave a reviewer satisfied but silent—always cast your approval vote.
 
 ## Workflow
 
@@ -140,7 +139,9 @@ PR URL or diff: `$1`
    <anything else worth mentioning>
    ```
 
-10. **Merge only if authorised.** If—and only if—your review concluded with an explicit "approve" assessment **and** the `agentic-auto-merge` label is present on the PR or an underpinning issue, merge the PR now, after the review has been posted. If either condition is not met, take no further action.
+   **Do not stop here if you are authorised to merge.** If your assessment is "approve" and the `agentic-auto-merge` label is present, posting the review is *not* your final action—proceed to step 10 and merge the PR.
+
+10. **Merge — only if authorised, and do not skip it.** Re-check the two conditions before acting: (a) your review concluded with an explicit "approve" assessment, and (b) the `agentic-auto-merge` label is present on the PR or an underpinning issue. If **both** hold, merge the PR now. The merge is your final action—posting the approving review and then stopping is incomplete work; the merge is what makes the approval count. If either condition is not met, take no further action.
 
 ## Severity labels
 
