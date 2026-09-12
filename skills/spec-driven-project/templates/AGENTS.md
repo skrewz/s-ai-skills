@@ -8,8 +8,10 @@ these rules lives in [`VALUES_AND_BELIEFS.md`](VALUES_AND_BELIEFS.md).
 All development work in this repository **must** follow the
 [`working-with-specification` skill](.agents/skills/working-with-specification/SKILL.md).
 It defines how the specification is the source of truth, how to reference it with
-the `§` convention, and the spec-first, red-then-green TDD workflow. Do not work
-around it.
+the `§` convention, the spec-first, red-then-green TDD workflow, and how proposed
+(not yet implemented) specification changes are carried — as chained issues
+(preferred) or in a separate folder — so that the specification is never ahead of
+or behind the implementation. Do not work around it.
 
 ## How to work
 

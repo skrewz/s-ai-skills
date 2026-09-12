@@ -118,6 +118,35 @@ the first draft as settled.
 - The ongoing per-change loop (specify → agree with the human → implement) is
   defined by the `working-with-specification` skill.
 
+### Specifying a whole project (or any multi-change effort)
+
+The overview is the agreed frame of the project. If the user also wants the
+specification for the **whole project** — or any other effort spanning several
+specification changes — laid out now, do **not** write it all into
+`specification/`: the specification must never be ahead of the implementation,
+and at this point the implementation is (still) empty. Instead, follow the
+*proposed specification changes* workflow defined by the
+`working-with-specification` skill:
+
+1. Draft the **proposed specification changes** — one per coherent slice of
+   behaviour, each stating the exact specification text that will land in
+   `specification/` and what the implementation must do to satisfy it.
+2. Detail a **plan** — the ordered sequence in which the proposed changes will
+   be implemented, with the dependencies and reasoning behind the order.
+3. **Present the plan and the proposed changes to the user** and revise them
+   together until both are agreed.
+4. **Give the user the choice** of how the proposed changes are carried:
+   - **Chained issues (preferred)** — one issue per proposed change, raised in
+     order and chained so the sequence can be followed; the issue body is the
+     authoritative ask. Optionally label the issues for agentic auto-merge (for
+     example the `agentic-auto-merge` label) so the chain can be driven
+     autonomously.
+   - **A separate folder** — for example `specification-proposed/`, outside
+     `specification/`, clearly marked as not yet authoritative.
+
+Either way, a proposed change enters `specification/` only in the same change
+that implements it — never before.
+
 ## Adapting the Makefile
 
 There is one concrete Makefile per supported language: `templates/Makefile.go`,

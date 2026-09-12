@@ -3,6 +3,14 @@
 This folder is the **source of truth** for the project. The implementation
 follows the specification, never the reverse.
 
+## What belongs here
+
+Only specification that is in lockstep with the implementation: at every merge
+point, this folder describes exactly the behaviour the implementation has.
+Agreed but not yet implemented specification changes are carried outside this
+folder — as chained issues (preferred) or in a separate folder such as
+`specification-proposed/`. See the `working-with-specification` skill.
+
 ## Structure
 
 - `overview.md` — the top-level specification: purpose, scope, non-goals, and a

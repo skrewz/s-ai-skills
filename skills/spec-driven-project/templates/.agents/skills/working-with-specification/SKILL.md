@@ -17,12 +17,78 @@ any work that touches the specification or the implementation.
 - **Source of truth.** If the specification says so, the implementation must
   follow — never the other way around. When the two disagree, the specification
   wins and the implementation is brought into line.
-- **Merge-lockstep.** The specification is changed first. By the time an agent
-  hands over for a merge proposal, the implementation reflects the specification
-  again.
+- **Never ahead, never behind (lockstep).** The specification is changed first,
+  and by the time an agent hands over for a merge proposal, the implementation
+  reflects the specification again. At every merge point the two agree: the
+  specification never describes behaviour the implementation does not have (ahead
+  of it) and never omits behaviour the implementation has (behind it).
 - **May be updated and slimmed.** If, during implementation, the specification
   has fallen out of sync or has gaps compared to what needs to happen, it may be
   updated (and trimmed) as part of the same change.
+
+## Proposed specification changes
+
+A **proposed specification change** is a change to the specification that has
+been drafted and agreed with the human but not yet implemented. A proposed
+change is **not** part of `specification/`: placing it there would put the
+specification ahead of the implementation and break the lockstep invariant.
+Proposed changes are carried outside `specification/` until the change that
+implements them brings them in.
+
+When the work ahead spans several specification changes — for example,
+specifying a whole project from an empty repository — do not write the
+specification all at once. Instead:
+
+1. **Draft the proposed specification changes.** One per coherent slice of
+   behaviour. Each states the exact specification text that will land in
+   `specification/` (target file, heading, and the `§` reference it will have),
+   together with what the implementation must do to satisfy it.
+2. **Detail a plan.** The ordered sequence in which the proposed changes will be
+   implemented, with the dependencies and reasoning behind the order.
+3. **Present the plan and the proposed changes to the human** and revise them
+   together until both are agreed — the same live conversation as any
+   specification change (see the workflow below), not a document dropped for
+   later.
+4. **Let the human choose how the proposed changes are carried:**
+   - **Chained issues (preferred).** Raise one issue per proposed change, in
+     order. Each issue references its predecessor and successor so the chain can
+     be followed, and notes where the plan lives (for example in the first issue
+     of the chain, or a dedicated tracking issue). The issue body carries the
+     full proposed specification change — **the issue is the authoritative ask**.
+     Each pull request that closes an issue applies exactly that change to
+     `specification/` and implements it red-then-green, so every pull request is
+     semantically coherent and keeps the specification and the implementation in
+     lockstep — and the repository is never polluted with specification sections
+     that are not yet true (no confusing specification document that can lead an
+     agent astray). If the repository's agentic pipeline supports label-based
+     auto-merging (for example an `agentic-auto-merge` label on an issue or pull
+     request, which an agentic reviewer honours by merging an approved pull
+     request), label the issues so the chain can be driven autonomously.
+   - **A separate folder (fallback).** Keep the proposed changes in a folder
+     outside `specification/` (for example `specification-proposed/`), clearly
+     marked as not yet authoritative. The lockstep invariant applies to
+     `specification/`, which the separate folder does not touch. When a proposed
+     change is implemented, its text moves into `specification/` and out of the
+     proposed folder in the same change.
+
+In both cases a proposed change enters `specification/` only in the same change
+that implements it — never before.
+
+A chained issue for a proposed specification change reads like this:
+
+    ## Proposed specification change
+
+    Part <k> of <N> — plan: <link to the first issue or tracking issue>
+    Depends on: #<previous issue> · Unblocks: #<next issue>
+
+    <the exact specification text that will land in specification/<path>.md
+    under ## <Heading> — §<path>/<slug>>
+
+    ## Acceptance
+
+    The pull request that closes this issue must (1) apply the specification
+    change above to `specification/` — this issue is the authoritative ask —
+    (2) implement it red-then-green, and (3) keep `make build test lint` green.
 
 ## The `§` reference convention
 
@@ -64,7 +130,9 @@ For every change:
 
 1. **Update the specification first.** Before touching implementation code,
    change the specification to describe the desired behaviour. Reference
-   specification locations with the `§` convention.
+   specification locations with the `§` convention. When the work spans several
+   specification changes, follow *Proposed specification changes* above instead
+   of editing `specification/` directly.
 2. **Present it and ask what needs rectifying.** Show the human the proposed
    specification (or the change to it) and ask whether anything needs
    rectifying. Frame it as a genuine proposal — "here is what I think we should
