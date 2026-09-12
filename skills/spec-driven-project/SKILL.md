@@ -141,6 +141,11 @@ and at this point the implementation is (still) empty. Instead, follow the
      authoritative ask. Optionally label the issues for agentic auto-merge (for
      example the `agentic-auto-merge` label) so the chain can be driven
      autonomously.
+     - **End-state issue** — the chain ends in an issue that is blocked by
+       **all** of the previous issues. Raise it **first**, and have it describe
+       the state the project should have arrived at once the chain is resolved.
+       Every other issue in the chain references that end-state issue in its
+       body — beyond blocking it, issue-wise.
    - **A separate folder** — for example `specification-proposed/`, outside
      `specification/`, clearly marked as not yet authoritative.
 
