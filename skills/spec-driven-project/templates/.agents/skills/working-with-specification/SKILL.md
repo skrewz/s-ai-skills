@@ -21,7 +21,9 @@ any work that touches the specification or the implementation.
   and by the time an agent hands over for a merge proposal, the implementation
   reflects the specification again. At every merge point the two agree: the
   specification never describes behaviour the implementation does not have (ahead
-  of it) and never omits behaviour the implementation has (behind it).
+  of it) and never omits behaviour the implementation has (behind it). This
+  applies to every file in `specification/`: the folder holds only what the
+  software currently is, not where it is going.
 - **May be updated and slimmed.** If, during implementation, the specification
   has fallen out of sync or has gaps compared to what needs to happen, it may be
   updated (and trimmed) as part of the same change.
@@ -33,7 +35,11 @@ been drafted and agreed with the human but not yet implemented. A proposed
 change is **not** part of `specification/`: placing it there would put the
 specification ahead of the implementation and break the lockstep invariant.
 Proposed changes are carried outside `specification/` until the change that
-implements them brings them in.
+implements them brings them in. The project's **frame** (purpose, scope,
+non-goals) — the statement of where the project is going — is carried with
+them: it is part of the plan, and the plan lives outside `specification/` (in
+the chained-issues workflow, in the first issue of the chain or a dedicated
+tracking issue; in the separate-folder workflow, in the proposed folder).
 
 When the work ahead spans several specification changes — for example,
 specifying a whole project from an empty repository — do not write the
@@ -43,8 +49,9 @@ specification all at once. Instead:
    behaviour. Each states the exact specification text that will land in
    `specification/` (target file, heading, and the `§` reference it will have),
    together with what the implementation must do to satisfy it.
-2. **Detail a plan.** The ordered sequence in which the proposed changes will be
-   implemented, with the dependencies and reasoning behind the order.
+2. **Detail a plan.** The frame (purpose, scope, non-goals) and the ordered
+   sequence in which the proposed changes will be implemented, with the
+   dependencies and reasoning behind the order.
 3. **Present the plan and the proposed changes to the human** and revise them
    together until both are agreed — the same live conversation as any
    specification change (see the workflow below), not a document dropped for
@@ -60,16 +67,45 @@ specification all at once. Instead:
      semantically coherent and keeps the specification and the implementation in
      lockstep — and the repository is never polluted with specification sections
      that are not yet true (no confusing specification document that can lead an
-     agent astray). If the repository's agentic pipeline supports label-based
-     auto-merging (for example an `agentic-auto-merge` label on an issue or pull
-     request, which an agentic reviewer honours by merging an approved pull
-     request), label the issues so the chain can be driven autonomously.
+     agent astray).
+     - **Where the chain is driven, and where it is broken.** If the
+       repository's agentic pipeline supports label-based auto-merging (for
+       example an `agentic-auto-merge` label on an issue or pull request, which
+       an agentic reviewer honours by merging an approved pull request), label
+       the issues for it only where the chain may be driven autonomously. That
+       is sound only while every link is (a) **settled** — its specification
+       text is exactly what the human agreed at planning time (a link whose
+       specification text is to be settled *during* implementation is not
+       settled) — and (b) **demonstrable** — its acceptance is verifiable by
+       the suite (`make build test lint`, and `make e2e` if present). Where
+       either fails, the chain **must be broken**: raise the issue as a
+       **non-agentic-merge issue** — deliberately *not* labelled for agentic
+       auto-merge — so that the pull request that closes it is reviewed by an
+       agent but **merged by a human**. The autonomous drive pauses there and
+       resumes once the human has merged.
+       - An agent cannot judge the risk of its own work — it is a party to the
+         outcome. So **which links are human-gated is the human's decision**,
+         not the agent's. The agent's job, when presenting the plan, is to think
+         it through and propose: for each link, state whether it is settled and
+         whether its acceptance is demonstrable, and recommend which links
+         should be non-agentic-merge, with reasons.
+       - The chain must be broken at least where a link (i) changes the working
+         agreements themselves (`AGENTS.md`, this skill,
+         `VALUES_AND_BELIEFS.md`) — an agent must not autonomously merge a
+         change to the rules it operates under — or (ii) cannot have its
+         acceptance demonstrated by the suite. When in doubt, break the chain:
+         a human gate is cheap, and an unauthorised autonomous merge is not
+         easily unwound.
+       - The human's decision is recorded in the plan and reflected in the
+         labels: the auto-merge label on the links the human has authorised to
+         run autonomously, none on the links the human has gated.
    - **A separate folder (fallback).** Keep the proposed changes in a folder
      outside `specification/` (for example `specification-proposed/`), clearly
      marked as not yet authoritative. The lockstep invariant applies to
      `specification/`, which the separate folder does not touch. When a proposed
      change is implemented, its text moves into `specification/` and out of the
-     proposed folder in the same change.
+     proposed folder in the same change. The plan (including the frame) lives in
+     this folder alongside the proposed changes.
 
 In both cases a proposed change enters `specification/` only in the same change
 that implements it — never before.
@@ -80,6 +116,8 @@ A chained issue for a proposed specification change reads like this:
 
     Part <k> of <N> — plan: <link to the first issue or tracking issue>
     Depends on: #<previous issue> · Unblocks: #<next issue>
+    Merge: <agentic auto-merge | human (non-agentic-merge)> — as decided at
+    planning time; reflected in the issue's labels
 
     <the exact specification text that will land in specification/<path>.md
     under ## <Heading> — §<path>/<slug>>
@@ -111,8 +149,6 @@ spaces with hyphens, and remove punctuation. See
 
 | Reference | Resolves to |
 |---|---|
-| `§overview/scope` | `specification/overview.md`, heading `## Scope` |
-| `§overview/non-goals` | `specification/overview.md`, heading `## Non-goals` |
 | `§authentication/session/sessions` | `specification/authentication/session.md`, heading `## Sessions` |
 | `§billing/pricing/pricing-tiers` | `specification/billing/pricing.md`, heading `## Pricing tiers` |
 

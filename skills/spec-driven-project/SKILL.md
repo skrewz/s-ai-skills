@@ -74,7 +74,8 @@ bring it in line with this project's scheme, and offer at least these options:
   adapt the scaffolding (the skill's `specification/` references and the
   `AGENTS.md` pointer) to that location instead.
 - **Start fresh** — create `specification/` from the templates and treat the
-  existing documents as separate (e.g. reference them from `overview.md`).
+  existing documents as separate (e.g. reference them from the plan, or from
+  the specification files as they are written).
 
 Record the user's decision and apply it in Step 4. If no existing scheme is
 found (green-field), skip this step.
@@ -93,7 +94,7 @@ this `SKILL.md`. For **each** artefact below, check whether it already exists:
 
 | Artefact | Template | Purpose |
 |---|---|---|
-| `specification/` | `templates/specification/` (copy `README.md` + `overview.md`) | The source of truth, organised into sub-folders per domain/feature. |
+| `specification/README.md` | `templates/specification/README.md` | The folder's own documentation: what belongs here, the structure, and the pointer to the `working-with-specification` skill. Scaffolding, not specification. |
 | `Makefile` | `templates/Makefile.<lang>` | Makefile-driven build/test/lint (and conditional `e2e`). See "Adapting the Makefile". |
 | `AGENTS.md` | `templates/AGENTS.md` | Working agreements; makes the `working-with-specification` skill mandatory. |
 | `.agents/skills/working-with-specification/SKILL.md` | `templates/.agents/skills/working-with-specification/SKILL.md` | How to work with the spec: source of truth, `§` convention, spec-first red-then-green TDD. |
@@ -103,51 +104,93 @@ this `SKILL.md`. For **each** artefact below, check whether it already exists:
 
 After applying, report exactly what you created and what you left in place.
 
-## Step 5 — Agree the initial specification with the user
+## Step 5 — Agree the frame with the user
 
-The `specification/overview.md` you create is a **proposal**, not a finished
-document. Draft its Purpose, Scope, and Non-goals from what the user has told
-you the project is, then **present it to the user and ask whether anything
-needs rectifying** before any implementation begins. Spec-driven development
-requires the human to actively participate in the specification — do not treat
-the first draft as settled.
+Before any implementation begins, agree the project's **frame** — its purpose,
+scope, and non-goals — with the user. The frame is **not** a file in
+`specification/`: that folder holds only specification in lockstep with the
+implementation (what the software currently is), and the frame is a statement
+of where the project is going, not what it currently is. The frame is carried
+in the **plan** (see below), alongside the ordered sequence of proposed
+changes.
 
-- **Hold the user's hand; don't stamp a file.** Presenting the spec is a live
+Draft the frame from what the user has told you the project is, then
+**present it to the user and ask whether anything needs rectifying** before
+the plan is settled. Spec-driven development requires the human to actively
+participate in the specification — do not treat the first draft as settled.
+
+- **Hold the user's hand; don't stamp a file.** Presenting the frame is a live
   conversation, not writing a file marked `status: proposal` and moving on.
   Walk through it together and revise until you are both ready to commit.
+- The frame is part of the plan and is carried where the plan lives: in the
+  chained-issues workflow, in the first issue of the chain or a dedicated
+  tracking issue; in the separate-folder workflow, in the plan document in the
+  proposed folder.
+- In a brown-field project, the frame's scope must cover what the project
+  already does as well as what it will come to do — so that, as the
+  specification lands, it is never *behind* the implementation.
 - The ongoing per-change loop (specify → agree with the human → implement) is
   defined by the `working-with-specification` skill.
 
 ### Specifying a whole project (or any multi-change effort)
 
-The overview is the agreed frame of the project. If the user also wants the
-specification for the **whole project** — or any other effort spanning several
-specification changes — laid out now, do **not** write it all into
-`specification/`: the specification must never be ahead of the implementation,
-and at this point the implementation is (still) empty. Instead, follow the
-*proposed specification changes* workflow defined by the
-`working-with-specification` skill:
+If the user also wants the specification for the **whole project** — or any
+other effort spanning several specification changes — laid out now, do **not**
+write it all into `specification/`: the specification must never be ahead of
+the implementation. Instead, follow the *proposed specification changes*
+workflow defined by the `working-with-specification` skill:
 
 1. Draft the **proposed specification changes** — one per coherent slice of
    behaviour, each stating the exact specification text that will land in
    `specification/` and what the implementation must do to satisfy it.
-2. Detail a **plan** — the ordered sequence in which the proposed changes will
-   be implemented, with the dependencies and reasoning behind the order.
+2. Detail a **plan** — the frame (purpose, scope, non-goals) and the ordered
+   sequence in which the proposed changes will be implemented, with the
+   dependencies and reasoning behind the order.
 3. **Present the plan and the proposed changes to the user** and revise them
    together until both are agreed.
 4. **Give the user the choice** of how the proposed changes are carried:
    - **Chained issues (preferred)** — one issue per proposed change, raised in
      order and chained so the sequence can be followed; the issue body is the
-     authoritative ask. Optionally label the issues for agentic auto-merge (for
-     example the `agentic-auto-merge` label) so the chain can be driven
-     autonomously.
+     authoritative ask. The plan (including the frame) lives in the first
+     issue of the chain or a dedicated tracking issue.
      - **End-state issue** — the chain ends in an issue that is blocked by
        **all** of the previous issues. Raise it **first**, and have it describe
        the state the project should have arrived at once the chain is resolved.
        Every other issue in the chain references that end-state issue in its
        body — beyond blocking it, issue-wise.
+     - **Where the chain is driven, and where it is broken.** Label the issues
+       for agentic auto-merge (for example the `agentic-auto-merge` label) only
+       where the chain may be driven autonomously: each pull request is then
+       reviewed and merged by an agent, and the chain proceeds without a human.
+       That is sound only while every link is (a) **settled** — its
+       specification text is exactly what the human agreed at planning time (a
+       link whose specification text is to be settled *during* implementation
+       is not settled) — and (b) **demonstrable** — its acceptance is
+       verifiable by the suite (`make build test lint`, and `make e2e` if
+       present). Where either fails, the chain **must be broken**: raise the
+       issue as a **non-agentic-merge issue** — deliberately *not* labelled for
+       agentic auto-merge — so that the pull request that closes it is reviewed
+       by an agent but **merged by a human**. The autonomous drive pauses there
+       and resumes once the human has merged.
+       - An agent cannot judge the risk of its own work — it is a party to the
+         outcome. So **which links are human-gated is the human's decision**,
+         not the agent's. The agent's job, when presenting the plan, is to
+         think it through and propose: for each link, state whether it is
+         settled and whether its acceptance is demonstrable, and recommend
+         which links should be non-agentic-merge, with reasons.
+       - The chain must be broken at least where a link (i) changes the
+         working agreements themselves (`AGENTS.md`, the
+         `working-with-specification` skill, `VALUES_AND_BELIEFS.md`) — an
+         agent must not autonomously merge a change to the rules it operates
+         under — or (ii) cannot have its acceptance demonstrated by the suite.
+         When in doubt, break the chain: a human gate is cheap, and an
+         unauthorised autonomous merge is not easily unwound.
+       - The human's decision is recorded in the plan and reflected in the
+         labels: the auto-merge label on the links the human has authorised to
+         run autonomously, none on the links the human has gated.
    - **A separate folder** — for example `specification-proposed/`, outside
-     `specification/`, clearly marked as not yet authoritative.
+     `specification/`, clearly marked as not yet authoritative. The plan
+     (including the frame) and the proposed changes live in this folder.
 
 Either way, a proposed change enters `specification/` only in the same change
 that implements it — never before.
