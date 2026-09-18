@@ -149,8 +149,8 @@ PR URL or diff: `$1`
 |---|---|
 | **CRITICAL** | Bug, security vulnerability, or data loss risk. Must be fixed before merge. |
 | **HIGH** | Significant code quality issue, performance problem, or test gap. Should be fixed. |
-| **MEDIUM** | Style inconsistency, minor improvement, or nitpick. Nice to have. |
-| **LOW** | Observation or suggestion. Optional. |
+| **MEDIUM** | Style inconsistency, minor improvement, or clarity issue. Should be fixed. |
+| **LOW** | Minor issue or small improvement. Worth fixing. |
 
 ## Guidelines
 
@@ -161,10 +161,10 @@ PR URL or diff: `$1`
 - **Don't nitpick trivialities.** Formatting preferences, variable naming styles that match the codebase, and obvious choices are not issues.
 - **Respect the codebase.** If the existing code has a pattern (even a bad one), don't flag it as an issue unless it's actively harmful. Crucially, you're reviewing *this* PR, not rewriting the whole repo.
 - **Consider the reviewer's time.** Lead with the most important issues. Don't bury critical findings under a wall of medium/low ones.
-- **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether the issues are critical or low/optional—or whether you could find nothing to point out at all.
+- **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether the issues are critical or low—or whether you could find nothing to point out at all.
 - **One review, one submission.** Stage all inline comments and submit together with the overall assessment. The review summary should contain the structured findings above; inline comments can be shorter, pointing to the specific line with a concise note. Do not post comments piecemeal. Remember: collect all your thoughts before you submit. A second comment is rarely an improvement—it is usually noise.
-- **Missing tests are not post-merge follow-ups.** If new code lacks tests, that is a **HIGH** issue to be fixed before merge—not a "nice to have" or a "future improvement". Test coverage gaps for existing code (pre-dating this PR) may be post-merge follow-ups, but new code without tests is incomplete work.
-- **"Post-merge follow-ups" are not issues.** If the only things you can find are nice-to-haves or future improvements, label them as post-merge follow-ups and do not treat them as reasons to block or re-review. If all your findings are post-merge follow-ups and a previous review already approved the PR, **walk away silently**.
+- **Missing tests are not deferrable.** If new code lacks tests, that is a **HIGH** issue to be fixed before merge—not a "nice to have" or a "future improvement". Test coverage gaps for existing code (pre-dating this PR) are out of scope for this PR, but new code without tests is incomplete work.
+- **No follow-up tasks.** Either a finding belongs in this PR or it is not worth mentioning. Do not list nice-to-haves or future improvements as low-priority follow-ups—leave them out. If you have no new issues worth flagging and a previous review already approved the PR, **walk away silently**.
 
 ## What you cannot do
 
