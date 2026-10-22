@@ -16,6 +16,7 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 
 | Template | Description |
 |---|---|
+| **outcome-decomposer** | Curates the forest of implementation tickets hanging off one ideation issue — reads state from the tracker, reconciles the graph against the outcome as written, reports on the tracker |
 | **pr-revisitor** | Revisits a pull request — checks ownership, answers reviewer questions, pushes fix commits, addresses CI failures, reports back with a summary |
 | **issue-implementer** | Considers an issue and attempts to start a pull request for it. |
 | **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, outputs at most five issues |
@@ -24,10 +25,11 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 
 Note how these connect (at least, are intended to connect):
 
-1. The `repo-ideation` prompt template spins up (and ideally curates) issues in repos.
-2. The `issue-implementer` turns those into PRs.
-3. The `pr-reviewer` acts as a counter-force to such implementation.
-4. And in a cycle, `pr-revisitor` adjusts to the `pr-reviewer` outputs.
+1. The `outcome-decomposer` turns a broad statement of an outcome into a forest of single-concern issues, and keeps that forest honest as the ideation progresses.
+2. The `repo-ideation` prompt template spins up (and ideally curates) issues in repos.
+3. The `issue-implementer` turns those into PRs.
+4. The `pr-reviewer` acts as a counter-force to such implementation.
+5. And in a cycle, `pr-revisitor` adjusts to the `pr-reviewer` outputs.
 
 ## Structure
 
@@ -43,3 +45,5 @@ Skills live in `skills/<name>/SKILL.md` — self-contained instruction sets that
 ### Prompt Templates
 
 Prompt templates live in `prompts/<name>.md` — Markdown snippets with YAML frontmatter that expand into full prompts when invoked via `/name` in the Pi editor. See the [pi prompt templates documentation](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/prompt-templates.md) for format details.
+
+Where a template carries rules worth arguing for, the argument lives beside it in `docs/<name>.md`. Those files are **not** prompts and are never dispatched: pi turns every `prompts/*.md` into a slash command, which is why they cannot live in `prompts/`. The contract is *cut arguments, keep rules* — change a rule and change its argument in the same commit.
