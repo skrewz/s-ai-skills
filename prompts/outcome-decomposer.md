@@ -180,6 +180,9 @@ member is missing. Never report a trouble on the ideation issue.
 
 - **Back-fill it idempotently:** each run, check every member carries it with the
   current URLs, and add it where missing as an ordinary edit.
+- **The block is the heading `## This issue is part of a forest`.** Nothing else
+  is it. A `## Provenance` section, or any prose merely linking the root, does not
+  count however accurate it is. Add the block; leave such prose where it is.
 - **URLs, never bare issue numbers.**
 - The tracker names the ideation issue in its own body and does not carry the
   block. Never add the block to the ideation issue (limit 4).
@@ -342,7 +345,8 @@ Read-only. If you find yourself writing, you have skipped ahead.
    Identify it from the graph, never from a label alone. If none fits, or more than
    one does, that is a defect (§Defects), not a choice you make.
 4. For every member, fetch: repository, number, state, title, body, labels,
-   assignment, its blocking edges, and any linked pull requests.
+   assignment, its blocking edges, and any linked pull requests. Note per member
+   whether its body ends with the pointer block (§Every member points back).
 5. Identify set issues by their `sync` label: members grouped, whether that still
    matches the graph, and the order named.
 6. Note every open pull request whose linked issue is a member. Work in flight
@@ -431,7 +435,9 @@ your choosing, outside any repository. This is the plan of record for the run.
 
 `action` is one of `create | edit | relink | delete | unchanged`; in `rationale`
 write the *why*, not the what. A `create` or `edit` row carries the member's whole
-body, pointer block included. Phase 5 asserts against this file.
+body, pointer block included. Phase 5 asserts against this file. A row is
+`unchanged` only if that member's body already ends with the pointer block; a
+member missing it is an `edit`.
 
 ### Phase 4 — Apply
 

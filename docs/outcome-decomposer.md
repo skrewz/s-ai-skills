@@ -215,6 +215,26 @@ way for this feature to rot: a flawless pointer block *reads* like a dependency,
 so a run that adds it may believe it has expressed an ordering. It has expressed
 nothing to the engine.
 
+**Why the block is named by its heading, and `unchanged` gated on it.** The
+instruction to back-fill the block already existed in two places — a Phase 4 bullet
+and Phase 5's first assertion — and a live run still left members without it. It
+fetched every member's body, found a hand-written `## Provenance` section naming
+the outcome, concluded the forest already pointed back, and wrote nothing. No rule
+was missing; the rule was satisfied *in substance* by prose that mentions the root,
+which is how a model reasons when asked for a property rather than a string. Hence
+two changes. The block is identified by a literal heading, which is checkable
+without judgement. And `unchanged` in the manifest is reserved for a member that
+already ends with it — the manifest is where the run commits to leaving something
+alone, so a gate there bites at the moment of decision, whereas an assertion in
+Phase 5 only reports a decision already taken. Prose is where a rule is explained;
+the manifest is where it is obeyed.
+
+**Why the redundant prose is left alone.** A `## Provenance` section naming the
+root duplicates what the membership edges already say, so it is tempting to delete
+it while adding the block. This role deletes only what curation makes wrong. The
+section is not wrong, and the human may have written it; two prose forms of one
+fact is untidy, an unreviewed deletion is not.
+
 ## Venues
 
 **Why the shape conversation lives on the ideation issue before commissioning.** The
