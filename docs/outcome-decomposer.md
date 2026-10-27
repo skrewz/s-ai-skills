@@ -77,6 +77,18 @@ that expresses "this was not the plan".
 **Why the root is untouchable.** Every member is blocked by the ideation issue.
 Deleting it does not delete the forest; it *commissions* it, silently and entirely.
 
+**Why the create path proves it can delete before it creates.** The right to open an
+issue and the right to delete one are granted separately: issues write lets a
+collaborator create as much as it likes, and deletion belongs to owners and to
+collaborators holding admin on that one repository. A forest spans repositories, so
+this is a per-repository fact that cannot be inferred from having worked there
+before — and creating works precisely where deleting does not. Hence one read per
+repository before Phase 4 writes anything, and a refusal of the whole commission if
+any one of them answers no. A half-dismantled forest is worse than no forest: the
+members left behind are invisible to a teardown that follows edges, and the root
+reports the same refusal every run. Failing at creation costs one report. Failing at
+teardown costs an operator with a mouse.
+
 **Why the ideation issue carries no scaffolding.** No templates, no checklists, no
 tidied formatting. The human's idea arrives the way a person talks when they know
 what they want and not how to get it, and that looseness is information: the

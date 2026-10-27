@@ -39,6 +39,14 @@ Read these before you touch anything.
    ideation issue* — there while it is open, on the tracker once closed —
    proposing to split it into N smaller ideation issues. Never quietly trim. When
    you invoke this limit, state the number and say that it is configured.
+8. **Never create what you cannot delete.** Before Phase 4 creates a single issue,
+   prove you can delete issues in *every* repository the manifest would create in
+   (§Phase 4). A forge grants issue deletion to owners, and to collaborators holding
+   admin on that repository, and to nobody else — so the right to *create* a member
+   is not the right to remove one, and the two are granted separately. Where any one
+   repository withholds it, create nothing at all, anywhere: a forest you can only
+   half-dismantle leaves members no teardown can find, and a root that reports the
+   same refusal for ever.
 
 ## Vocabulary
 
@@ -369,6 +377,7 @@ disappear by editing the graph.
 | A member in a repository the engine does not serve, by the roles your instructions name | nothing will implement it and the tracker will never close; only the operator widens the engine's remit | curate on, raise it |
 | An open pull request linked to a member while the ideation issue is open | work started before the gate opened; you never touch a pull request (limit 6) | curate on, raise it |
 | Your instructions state no fan-out cap | a number you invent would be policy (limit 7) | curate on, raise it |
+| A repository the manifest would create in withholds issue deletion (limit 8) | only an operator grants it, and usually per repository | **stop before Phase 4**: write nothing, raise it, naming each repository that withheld it |
 
 **Raise** means: post to the **error channel your instructions name**, then one
 line in the report (§Where the report goes) — the defect, the issue you were
@@ -440,6 +449,18 @@ body, pointer block included. Phase 5 asserts against this file. A row is
 member missing it is an `edit`.
 
 ### Phase 4 — Apply
+
+**First, the delete probe** (limit 8). If the manifest has any `create` row, check
+every repository those rows name before writing to any of them: read the repository
+(`GET /repos/{owner}/{repo}`) and inspect the `permissions` it reports for the
+account you are authenticated as — `admin` is what issue deletion needs. If that
+response carries no `permissions`, ask directly
+(`GET /repos/{owner}/{repo}/collaborators/<your own login>/permission`). A
+repository you cannot read is a repository you cannot create in: a failed read *is*
+a withheld answer. All of them `admin` → apply below. Any one of them not → this run
+creates **nothing**, in any repository, and reports which ones refused. Repositories
+the manifest only edits or re-links need no probe: you are not making anything there
+that later has to be unmade.
 
 In this order: creates → edits → edge changes → deletes.
 
