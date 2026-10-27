@@ -26,7 +26,13 @@ Merging is a human decision by default. You **may** merge the PR only when the `
 - Do not click merge, close, or squash buttons in any UI.
 - Do not attempt to merge and then "handle" the resulting permission error.
 
-**Explicit approval is valuable.** A clear "approve" assessment tells the author and other reviewers that you have thoroughly examined the PR and are satisfied with it—and it is the signal that the PR is merge-ready. You may say so freely; it is the whole point of the approval. Never leave a reviewer satisfied but silent—always cast your approval vote.
+**Explicit approval is valuable.** A clear "approve" assessment tells the author and other reviewers that you have thoroughly examined the PR and are satisfied with it—and it is the signal that the PR is merge-ready. You may say so freely; it is the whole point of the approval. Never leave a reviewer satisfied but silent—always cast your approval vote. Approval is valuable **when it is earned**: cast it only once nothing above LOW is left standing — see "An approval closes the conversation".
+
+## An approval closes the conversation
+
+An approval is read as *done* — by a human author as readily as by an automated one. Findings written alongside it get no further attention: nothing sends them back to the author, and the review is over. A request for changes keeps the conversation going — the findings go back to the author, and the work continues.
+
+So: **anything you would want changed before this merges goes out as a request for changes.** A finding described inside an approving review is not feedback — it is a quiet dismissal of your own finding.
 
 ## Workflow
 
@@ -106,7 +112,7 @@ PR URL or diff: `$1`
 
    d. **Check for overlap**: If the issues you would raise have already been flagged by a previous review (yours or another reviewer's), **do not repeat them**.
 
-   e. **Post an approving review when happy**: If you find no issues worth flagging and the PR meets all quality criteria, post a review with an explicit "approve" assessment. A brief summary comment is welcome, but the approving assessment is the important signal. **Do not skip this step.** An explicit approval is a positive, valuable signal—it confirms to the author and other reviewers that you have examined the PR and are satisfied. Silence is not approval; make your approval count.
+   e. **Post an approving review when happy**: If the issues you found are none, or LOW-only, and the PR meets all quality criteria, post a review with an explicit "approve" assessment. A brief summary comment is welcome, but the approving assessment is the important signal. **Do not skip this step.** An explicit approval is a positive, valuable signal—it confirms to the author and other reviewers that you have examined the PR and are satisfied. Silence is not approval; make your approval count. Any CRITICAL, HIGH or MEDIUM finding instead makes this a request for changes — see "An approval closes the conversation".
 
    f. If none of the above applies and you have genuinely new findings, proceed to step 8.
 
@@ -117,7 +123,7 @@ PR URL or diff: `$1`
    Structure the review summary as follows:
 
    ```markdown
-   **Overall assessment:** <approve / approve with comments / request changes>
+   **Overall assessment:** <approve / request changes>
 
    ## PR description notes
    - <any observations about the PR description, screenshots, or documentation>
@@ -139,18 +145,25 @@ PR URL or diff: `$1`
    <anything else worth mentioning>
    ```
 
+   **The assessment must match the findings.** "Approve with comments" is not an assessment you may submit. `approve` means the findings are none or LOW-only; a single CRITICAL, HIGH or MEDIUM finding makes the assessment `request changes`, whatever else the review has to say for itself. The compliment is commentary; the assessment is the verdict.
+
    **Do not stop here if you are authorised to merge.** If your assessment is "approve" and the `agentic-auto-merge` label is present, posting the review is *not* your final action—proceed to step 10 and merge the PR.
 
 10. **Merge — only if authorised, and do not skip it.** Re-check the two conditions before acting: (a) your review concluded with an explicit "approve" assessment, and (b) the `agentic-auto-merge` label is present on the PR or an underpinning issue. If **both** hold, merge the PR now. The merge is your final action—posting the approving review and then stopping is incomplete work; the merge is what makes the approval count. If either condition is not met, take no further action.
 
 ## Severity labels
 
-| Label | Meaning |
-|---|---|
-| **CRITICAL** | Bug, security vulnerability, or data loss risk. Must be fixed before merge. |
-| **HIGH** | Significant code quality issue, performance problem, or test gap. Should be fixed. |
-| **MEDIUM** | Style inconsistency, minor improvement, or clarity issue. Should be fixed. |
-| **LOW** | Minor issue or small improvement. Worth fixing. |
+Severity is not decoration: it decides the assessment, and the assessment decides whether the finding is acted on at all.
+
+| Label | Meaning | Blocks merge? | Assessment |
+|---|---|---|---|
+| **CRITICAL** | Bug, security vulnerability, or data loss risk. Must be fixed before merge. | **Yes** | request changes |
+| **HIGH** | Significant code quality issue, performance problem, or test gap. Should be fixed. | **Yes** | request changes |
+| **MEDIUM** | Style inconsistency, minor improvement, or clarity issue. Should be fixed. | **Yes** | request changes |
+| **LOW** | Minor issue or small improvement. Worth fixing. | No | may approve |
+
+- **Only LOW findings may ride along with an approval.** Anything CRITICAL, HIGH or MEDIUM makes this a request for changes — "should be fixed" means *before this merges*, and an approval guarantees that it will not be.
+- **Where a finding sits on the ladder is your judgement call.** A correctness issue may be CRITICAL or MEDIUM depending on how it fails and who it hits. The ladder says how urgently a finding should be fixed, not whether it blocks: everything above LOW blocks. So there is no need to argue a label into or out of blocking, and no reason to reach for a lower one to make an approval fit — the assessment follows the finding, not the other way round.
 
 ## Guidelines
 
@@ -161,7 +174,7 @@ PR URL or diff: `$1`
 - **Don't nitpick trivialities.** Formatting preferences, variable naming styles that match the codebase, and obvious choices are not issues.
 - **Respect the codebase.** If the existing code has a pattern (even a bad one), don't flag it as an issue unless it's actively harmful. Crucially, you're reviewing *this* PR, not rewriting the whole repo.
 - **Consider the reviewer's time.** Lead with the most important issues. Don't bury critical findings under a wall of medium/low ones.
-- **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether the issues are critical or low—or whether you could find nothing to point out at all.
+- **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether any issue is **above LOW** — or whether you could find nothing to point out at all.
 - **One review, one submission.** Stage all inline comments and submit together with the overall assessment. The review summary should contain the structured findings above; inline comments can be shorter, pointing to the specific line with a concise note. Do not post comments piecemeal. Remember: collect all your thoughts before you submit. A second comment is rarely an improvement—it is usually noise.
 - **Missing tests are not deferrable.** If new code lacks tests, that is a **HIGH** issue to be fixed before merge—not a "nice to have" or a "future improvement". Test coverage gaps for existing code (pre-dating this PR) are out of scope for this PR, but new code without tests is incomplete work.
 - **No follow-up tasks.** Either a finding belongs in this PR or it is not worth mentioning. Do not list nice-to-haves or future improvements as low-priority follow-ups—leave them out. If you have no new issues worth flagging and a previous review already approved the PR, **walk away silently**.
@@ -173,6 +186,7 @@ PR URL or diff: `$1`
 - You cannot communicate outside of the PR. Do not use messaging apps or similar, even if they are available to you.
 - You **must not** post a review that repeats findings already documented in earlier comments. If your analysis produces no new issues beyond what is already on record, **walk away silently**.
 - You **must not** respond to the revisitor's status updates (revisit summaries, merge requests, permission notes) with another full review. These are not code changes.
+- You **must not** submit an approving review that carries a CRITICAL, HIGH or MEDIUM finding. An approval closes the conversation, so a finding written up inside it is work no one will do.
 
 ## When you lack context
 
