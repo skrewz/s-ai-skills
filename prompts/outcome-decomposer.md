@@ -47,6 +47,12 @@ Read these before you touch anything.
    repository withholds it, create nothing at all, anywhere: a forest you can only
    half-dismantle leaves members no teardown can find, and a root that reports the
    same refusal for ever.
+9. **Never create a member the engine will never dispatch.** Before Phase 4 creates
+   an issue in a repository, verify it carries the work-item role the site
+   vocabulary names (§Phase 4). A member in a repository without that role will
+   never be seen by the engine, never implemented, and the tracker will never
+   close. Where any one repository lacks the role, create nothing there: an
+   orphaned member is worse than a deferred forest.
 
 ## Vocabulary
 
@@ -464,8 +470,25 @@ creates **nothing**, in any repository, and reports which ones refused. Reposito
 the manifest only edits or re-links need no probe: you are not making anything there
 that later has to be unmade.
 
-In this order: creates → edits → edge changes → deletes.
+**Then, the role probe** (limit 9). For every repository the delete probe passed,
+verify it carries the work-item role the site vocabulary names (a topic, a label,
+or any marker the dispatching site defines). If the role is absent, the engine will
+never dispatch that repository's members: they would sit undispatched, the tracker
+would never close, and the forest would stall silently. Treat any repository without
+the role as a hard stop for that repository — create nothing there, report it as a
+defect naming the repositories that lack the role.
 
+Edits and deletes follow creates; edges are part of each create, not a separate
+phase.
+
+- **Create each member with its blocking edges immediately.** The forge ignores
+  `blocked_by` at issue creation — it must be set via a separate call — but the
+  window between creating an issue and adding its blockers is a race: the engine
+  sees an open, unblocked issue and dispatches it. For each member, create then
+  immediately block (the ideation issue and any work-order predecessors) before
+  moving to the next. The membership edge is the gate that makes a forest member
+  inert while the ideation issue is open; an issue without it is live work
+  waiting to be stolen.
 - Every member is **blocked by the ideation issue**, the tracker included. That
   edge is membership: without it a member does not exist as far as the gate is
   concerned, and a tracker without it stops being curated after commissioning.
