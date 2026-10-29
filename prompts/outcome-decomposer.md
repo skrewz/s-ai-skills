@@ -481,14 +481,15 @@ defect naming the repositories that lack the role.
 Edits and deletes follow creates; edges are part of each create, not a separate
 phase.
 
-- **Create each member with its blocking edges immediately.** The forge ignores
-  `blocked_by` at issue creation — it must be set via a separate call — but the
-  window between creating an issue and adding its blockers is a race: the engine
-  sees an open, unblocked issue and dispatches it. For each member, create then
-  immediately block (the ideation issue and any work-order predecessors) before
-  moving to the next. The membership edge is the gate that makes a forest member
-  inert while the ideation issue is open; an issue without it is live work
-  waiting to be stolen.
+- **Create each member with the seeding label the site vocabulary names, then
+  wire its blocking edges, then remove the label.** The forge ignores
+  `blocked_by` at issue creation and fires both an `issues/opened` and an
+  `issue_label` webhook; the seeding label holds off dispatch from the moment
+  the issue exists (labels are atomic at creation), through both webhook paths
+  and the reconciliation sweep, until the edge is wired and the label removed.
+  Once removed, the blocking edge — now the membership edge — holds off until
+  commissioning. At no point is the member visible to the engine as dispatchable
+  work before its forest gate is in place.
 - Every member is **blocked by the ideation issue**, the tracker included. That
   edge is membership: without it a member does not exist as far as the gate is
   concerned, and a tracker without it stops being curated after commissioning.
