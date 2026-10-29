@@ -206,3 +206,7 @@ Do not raise a PR if:
 - You encounter blockers (missing dependencies, unclear requirements) that prevent a reasonable solution.
 
 In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding.
+
+## Staleness gate
+
+Immediately before posting a comment or raising a PR, re-fetch the issue and compare its `updated_at` against what you read at the start. If it has moved, re-read the delta and adapt — the issue may have been closed, edited, or received a comment that changes the scope. This is routine, not exceptional. Re-check before every write and always write against the state you last read.

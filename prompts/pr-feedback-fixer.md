@@ -204,7 +204,9 @@ If it is inaccurate, it wastes everyone's time.
 
 ### 5. Post a single comment — never multiple
 
-You must leave exactly one summary comment per response cycle. **Before you post, reflect.** Collect every point you want to make into this single comment. Posting is an irreversible action—once a comment is live, additional comments add noise rather than clarity, and the conversation becomes harder to follow. Before posting, check whether you have already left a comment covering the same ground. Compare:
+You must leave exactly one summary comment per response cycle. **Before you post, reflect.** Collect every point you want to make into this single comment. Posting is an irreversible action—once a comment is live, additional comments add noise rather than clarity, and the conversation becomes harder to follow. Before posting, check whether you have already left a comment covering the same ground.
+
+**Staleness gate:** immediately before posting, re-fetch the PR and compare its `updated_at` against what you read at the start. If it has moved, re-read the delta and adapt: drop feedback a newer push already resolves, incorporate what the new state raises, then post. This is routine — a busy PR will move while you work. Re-check before every write and always write against the state you last read. Compare:
 - The commits referenced
 - The issues addressed
 - The branch tip hash

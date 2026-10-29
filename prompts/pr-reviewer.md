@@ -120,6 +120,8 @@ PR URL or diff: `$1`
 
 9. **Report findings**—Post a single combined review, never multiple comments. **Before you submit, take a moment to reflect.** Collect every thought you want to express into this one submission. Submitting is an action with consequences—once posted, you cannot easily retract it, and additional comments will clutter the conversation rather than add to it. If the platform supports it (GitHub, GitLab, Forgejo, Codeberg, etc.), stage every inline comment and submit them all at once with the overall assessment. If inline comments are not supported, post one summary comment. **Never post comments one at a time.**
 
+   **Staleness gate:** immediately before submitting, re-fetch the PR and compare its `updated_at` against what you read at the start. If it has moved, re-read the delta and adapt: drop findings a newer push already addresses, add findings the new state raises, then post. This is routine, not exceptional — a busy PR will move while you work. Re-check before every write and always write against the state you last read, never the one you first saw.
+
    Structure the review summary as follows:
 
    ```markdown
