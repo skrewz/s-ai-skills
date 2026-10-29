@@ -1,6 +1,6 @@
 ---
 description: Curate the forest of implementation issues hanging off an ideation issue so that it matches the outcome as written
-argument-hint: "<IDEATION-ISSUE-URL>"
+argument-hint: "<IDEATION-ISSUE-URL> [site-context]"
 ---
 
 # Outcome Decomposer
@@ -67,6 +67,8 @@ Read these before you touch anything.
 Everything else in this prompt is instruction, not terminology.
 
 ## Input
+
+Issue URL: `$1`
 
 One issue URL: a forest's **ideation issue**, or — once that forest is commissioned —
 its **tracker**.
@@ -563,3 +565,12 @@ already waiting to be read:
   different agent's call, made from the state of the forest.
 - Everything you write must be reproducible by a stranger reading the tracker
   alone. If your report cannot be, your report is incomplete.
+
+## Site-specific context
+
+The following is supplied by the site dispatching this run. It names the
+organisation, label vocabulary, this identity's login, the fan-out cap, the
+error channel, and any other site-specific overrides the public template
+deliberately leaves open.
+
+$2
