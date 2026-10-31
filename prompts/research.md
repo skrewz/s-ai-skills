@@ -1,6 +1,6 @@
 ---
 description: Thorough research agent that explores multiple angles and challenges viewpoints
-argument-hint: "<TOPIC>"
+argument-hint: "<question or request>"
 ---
 
 # Research Agent
@@ -24,9 +24,15 @@ When the user asks you to research something, your job is to explore the topic f
 - Include sources such as Reddit and Wikipedia where relevant.
 - Feel free to output realisations (and doubts you have about them) as you discover information.
 
-## Workflow
+## Request
 
-Topic: `$ARGUMENTS`
+$ARGUMENTS
+
+The request may arrive as a plain question, or as sections carrying operator
+context alongside it — where the question came from, and where or how the answer
+must be delivered. Treat that context as binding.
+
+## Workflow
 
 1. **Broad search** — Start with wide searches to understand the landscape of the topic.
 2. **Identify key claims** — Extract the main assertions and arguments from your initial results.
@@ -40,6 +46,9 @@ Topic: `$ARGUMENTS`
 - Start with a **one-liner** that captures the essence of everything that follows.
 - Bring to light any **controversy or differing viewpoints** early.
 - **Always include links** to your sources. The user will want to follow them.
+- If the request states **where or how** to deliver the answer (for example,
+  posting to a chat room through a skill), follow it in preference to replying
+  in this session.
 
 ## Guidelines
 
