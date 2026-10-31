@@ -150,6 +150,99 @@ ideation issue
 - **Starting is not landing.** A blocking edge gates *starting*. "These must not
   land apart" is a landing set, below; say which you mean in your report.
 
+### Illustrating a forest
+
+Every record names the forest's final state **and draws it**, as Mermaid, in the
+same comment (§Phase 5). The drawing accompanies the manifest's table and the
+references; it never stands in place of them.
+
+Draw the forest **as built** — the edges Phase 5 re-read from the forge — never
+the forest the manifest intended. A diagram of intent is a defect report wearing
+a record's clothes.
+
+```mermaid
+flowchart TD
+  i_outcome_repo_35{{"outcome-repo#35 · ideation"}}
+  i_outcome_repo_36(["outcome-repo#36 · tracker"])
+  i_payments_service_37["payments-service#37 · tombstone and retention"]
+  i_payments_service_38["payments-service#38 · the purge, one command"]
+  i_payments_service_39["payments-service#39 · 410, never 500"]
+  i_payments_web_40["payments-web#40 · honest deletion docs"]
+  i_outcome_repo_41["outcome-repo#41 · set: 38, 39, 40 in order"]
+  i_payments_service_42["⚑ payments-service#42 · revoke signing keys"]
+  i_outcome_repo_35 --- i_payments_service_37
+  i_outcome_repo_35 --- i_payments_service_38
+  i_outcome_repo_35 --- i_payments_service_39
+  i_outcome_repo_35 --- i_payments_web_40
+  i_outcome_repo_35 --- i_outcome_repo_41
+  i_outcome_repo_35 --- i_payments_service_42
+  i_outcome_repo_35 -.-> i_outcome_repo_36
+  i_payments_service_37 ==> i_payments_service_38
+  i_payments_service_42 ==> i_payments_service_38
+  i_payments_service_37 ==> i_payments_service_39
+  i_payments_service_38 ==> i_outcome_repo_41
+  i_payments_service_39 ==> i_outcome_repo_41
+  i_payments_web_40 ==> i_outcome_repo_41
+  classDef root fill:#f1ecfd,stroke:#7a5af8,stroke-width:3px,color:#2d1b69
+  classDef tracker fill:#e9f2fc,stroke:#3b82c4,stroke-width:3px,color:#123a5c
+  classDef member fill:#eef2f5,stroke:#6b7a8c,color:#1f2933
+  classDef closed fill:#f6f8fa,stroke:#8c959f,stroke-dasharray:4 3,color:#57606a
+  class i_outcome_repo_35 root
+  class i_outcome_repo_36 tracker
+  class i_payments_service_37,i_payments_service_38,i_payments_service_39,i_payments_web_40,i_outcome_repo_41,i_payments_service_42 member
+```
+
+| Thing | Draw it as |
+|---|---|
+| ideation issue | hexagon `{{"…"}}`, the `root` class |
+| tracker | stadium `(["…"])`, the `tracker` class |
+| work item | rectangle `["…"]`, the `member` class |
+| set issue | rectangle, `member` class, its members' numbers in the label |
+| human task | rectangle prefixed `⚑` — a person owns it |
+| a member closed since the last run | its own shape prefixed `✓`, the `closed` class |
+| membership edge | `---` — thin by default, which is the point |
+| work-order edge | `==>`, thick by default |
+| the gate reaching the tracker | `-.->` dotted |
+
+- **Draw every recorded edge, membership edges included.** They are the
+  commissioning gate, not scaffolding: an edge you omit is a gate you have drawn
+  open. The one thing stated rather than drawn is the tracker's fan — every
+  member blocks it, which the tracker's shape already says, and drawing it adds
+  nothing but crossings. **Draw what varies; state what is definitional.**
+- Node id is `i_<repo>_<number>`, the repository's non-alphanumerics folded to
+  underscores — `i_payments_service_37`. A bare `i37` collides the moment two
+  repositories each own a `#37`, and a forest spans repositories by design.
+  Never derive an id from a title, and never invent one. The label is
+  `<repo>#<number> · <what it delivers>`, the second half five words or fewer,
+  wrapped with `<br/>` past about 30 characters.
+- **Colour says what an issue *is*, never what it does.** Take each hex from the
+  label the forge reports for that issue (`GET /repos/{owner}/{repo}/issues/{n}`
+  returns `labels[].color`) and use it as `stroke`, with a light tint of it as
+  `fill` and a dark `color` — the forge renders into the reader's own theme, and
+  a raw label hex as a fill is unreadable on the dark one. Where no label grants
+  the role, keep the default classes above. Read the hexes again every run, so a
+  recolour shows up as a diff rather than a stale picture.
+- The forge renders the source in the reader's browser, sandboxed and
+  sanitised. So: no `click`, no links, no `subgraph`, no HTML in a label other
+  than `<br/>`, and no `/* … */` comment — Mermaid rejects that outright and the
+  whole diagram fails. Put notes on `%%` lines.
+- Under 4 500 characters; the forge refuses 5 000 and renders nothing at all.
+  Past about 35 members, draw one node per repository labelled `<repo> (N)` and
+  leave the detail to the table. If the thin membership edges and the thick
+  work-order edges read the same once drawn, dim the former by index —
+  `linkStyle 0 1 2 stroke:#8b95a1`, counting from 0 in the order they were
+  declared, which is why the membership edges are declared first — never by
+  dropping them.
+- **Check it before you post it.** A diagram that fails to parse leaves a
+  permanent error on the record. Render it with whatever browser you have
+  (`capture_url` on a `file://` page wrapping the source in
+  `<pre class="mermaid">` works, and a `Syntax error` in the output means do not
+  post it); run the browserless lint regardless — every edge endpoint declared,
+  every `class` target declared, no `/* */`, no `click`, length under budget. If
+  you have no way to render it at all, post the table and say in one line that
+  the graph went unchecked: an absent drawing costs nothing, a broken one is a
+  flaw on the record until the next run buries it.
+
 ## Landing sets
 
 Some changes are individually correct but not individually deployable — a schema
@@ -305,7 +398,8 @@ rows beneath it — `#36` included.
 
 Label names come from the site dispatching you. What they must *do* is four
 things: say what an issue *is*, root or tracker; land a member alone; land it only
-with its set; keep an implementer away from it.
+with its set; keep an implementer away from it. That table, drawn, is the example
+under §Illustrating a forest — same forest, same numbers.
 
 What the table teaches:
 
@@ -554,7 +648,8 @@ say.** One comment on the tracker — the record — covering:
 4. **set issues created and deleted**, and the groups judged independently
    deployable;
 5. the judgment calls made and the rule or comment each rested on;
-6. the final state, as the manifest's summary;
+6. the final state, as the manifest's summary, **and drawn** — the forest as
+   built, per §Illustrating a forest;
 7. every defect raised (§Defects), naming the channel it was raised on and what
    you did not do, plus any cap refusal citing its number.
 
