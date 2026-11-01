@@ -159,6 +159,10 @@ what the PR does, why it does it, and how it relates to any linked issue.
   faithfully represent the issue's intent? If the PR evolved beyond (or
   diverged from) the original issue, update the description to clarify the
   scope.
+- **Magic strings:** The forge's magic strings (`Fixes #1337`, `Closes #1337`,
+  `Resolves #1337` etc.) must stay plain text, not Markdown hyperlinks — a
+  hyperlinked one is not matched and the issue never closes. Repair any the
+  description has drifted into.
 - **Screenshots:** If the PR involves UI changes, ensure screenshots are
   present, fresh, and accurate. Regenerate any that are stale, irrelevant,
   or no longer reflect the current implementation — this includes screenshots

@@ -49,6 +49,7 @@ PR URL or diff: `$1`
    - Is the PR well-described? Does it explain *why* the change was made, not just *what* changed?
    - Is the title clear and descriptive?
    - Are linked issues referenced appropriately?
+   - **Are the forge's magic strings plain text?** `Fixes #1337`, `Closes #1337`, `Resolves #1337` etc. must be plain text, not Markdown hyperlinks. Flag a hyperlinked one (MEDIUM).
    - If the PR involves UI changes, does it attach screenshots to illustrate what is new?
    - If screenshots are attached, do they actually show the new or changed UI? Or are they irrelevant/outdated?
    - Flag poor PR descriptions as an issue—a bad description is a barrier to effective review and future maintenance.

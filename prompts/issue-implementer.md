@@ -139,7 +139,7 @@ When the pre-condition check passes:
    - Body should explain *what* was changed and *why*, referencing the issue, in Markdown.
    - Include the **Change Inventory** (derived from your manifest) in the PR body.
    - Include any relevant screenshots, test output, or examples. **Screenshots must be fresh and accurately reflect the final implementation — never reuse outdated visuals.** If the issue description contained screenshots, assess whether they still apply and replace or supplement them as needed.
-   - **Importantly**, use `Fixes #<N>` or `Closes #<N>` in the body to link the issue.
+   - **Importantly**, use `Fixes #<N>` or `Closes #<N>` in the body to link the issue. Keep the forge's magic strings plain text — a hyperlinked `Fixes [#<N>](url)` is not matched, and the issue stays open.
 
 ## PR Description Template
 
