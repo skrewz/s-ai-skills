@@ -243,17 +243,21 @@ Not dispatched. Nothing here is read by a run.
   bytes wandered (node order, edge order, class order), a human reading the tracker's
   history could not see the changes that were also the graph moving. So the render is
   an order, not an improvisation.
-- **Structural styling is measured, not preferred.** Probed against a live Forgejo at
-  the `securityLevel: "strict"` it ships: a node given no class takes the reader's
-  theme and is legible in both, while every node carrying a hard-coded light `fill`
-  came out near-white on the dark theme. A palette in diagram source is correct in one
-  theme and wrong in the other, permanently.
-- **Anchors, never `click`.** Same probe: under strict mode the `_blank` a `click`
-  statement asks for is discarded, and the click navigates the sandboxed frame the SVG
-  lives in — the forest is replaced by the linked page inside its own box. An `<a>`
-  inside the label survives the sanitiser with `rel="noopener" target="_blank"` and
-  opens a real tab. This reads as a trivia item until someone "adds links" with the
-  obvious syntax; the rule exists so they don't.
+- **First heading, on purpose.** The block answers *where are we*, and a reader who has
+  to scroll past a members list to find it will not find it. Placement is stated as a
+  rule because leaving it to judgement ends with the block appended to the bottom, where
+  it is true, current, and never seen — the exact failure a living picture has to avoid.
+- **Every styling rule in §Illustrating a forest is a measurement, not a taste.** The
+  frame mermaid renders into carries mermaid's own CSS and no theme variables, so
+  anything coloured in diagram source is theme-blind: a hard-coded light `fill` came out
+  near-white on the dark theme, an uncoloured anchor came out the user-agent blue
+  (`rgb(0, 0, 238)`) on a node the dark theme filled `rgb(31, 32, 32)`, and `click`'s
+  `_blank` is discarded under `securityLevel: "strict"` — so that click navigates the
+  frame and the forest is replaced by the page. Measured in that frame, an anchor's
+  `style='color:inherit'` returns the theme's own label colour (`rgb(204, 204, 204)`, the
+  same an unlinked node reports); the same inherit on a `<span>` inside the anchor returns
+  the blue, which is why the attribute sits where it does. All of it probed against a
+  live Forgejo, 2026-11-01. Change a rule only with a measurement of your own.
 - **Two fence pairs stop the run rather than get resolved.** Choosing between two
   regions means guessing which is prose, and a guess there is limit 10 broken with
   confidence. Reporting and writing nothing is the only honest move.

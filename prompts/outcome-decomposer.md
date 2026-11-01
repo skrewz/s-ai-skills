@@ -169,14 +169,14 @@ a record's clothes.
 
 ```mermaid
 flowchart TD
-  i_outcome_repo_35{{"<a href='https://example.com/o/outcome-repo/issues/35' target='_blank'>outcome-repo#35 · ideation</a>"}}
-  i_outcome_repo_36(["<a href='https://example.com/o/outcome-repo/issues/36' target='_blank'>outcome-repo#36 · tracker</a>"])
-  i_payments_service_37["<a href='https://example.com/o/payments-service/issues/37' target='_blank'>payments-service#37 · tombstone and retention</a>"]
-  i_payments_service_38["<a href='https://example.com/o/payments-service/issues/38' target='_blank'>payments-service#38 · the purge, one command</a>"]
-  i_payments_service_39["<a href='https://example.com/o/payments-service/issues/39' target='_blank'>payments-service#39 · 410, never 500</a>"]
-  i_payments_web_40["<a href='https://example.com/o/payments-web/issues/40' target='_blank'>payments-web#40 · honest deletion docs</a>"]
-  i_outcome_repo_41["<a href='https://example.com/o/outcome-repo/issues/41' target='_blank'>outcome-repo#41 · set: 38, 39, 40 in order</a>"]
-  i_payments_service_42["⚑ <a href='https://example.com/o/payments-service/issues/42' target='_blank'>payments-service#42 · revoke signing keys</a>"]
+  i_outcome_repo_35{{"<a href='https://example.com/o/outcome-repo/issues/35' target='_blank' style='color:inherit'>outcome-repo#35 · ideation</a>"}}
+  i_outcome_repo_36(["<a href='https://example.com/o/outcome-repo/issues/36' target='_blank' style='color:inherit'>outcome-repo#36 · tracker</a>"])
+  i_payments_service_37["<a href='https://example.com/o/payments-service/issues/37' target='_blank' style='color:inherit'>payments-service#37 · tombstone and retention</a>"]
+  i_payments_service_38["<a href='https://example.com/o/payments-service/issues/38' target='_blank' style='color:inherit'>payments-service#38 · the purge, one command</a>"]
+  i_payments_service_39["<a href='https://example.com/o/payments-service/issues/39' target='_blank' style='color:inherit'>payments-service#39 · 410, never 500</a>"]
+  i_payments_web_40["<a href='https://example.com/o/payments-web/issues/40' target='_blank' style='color:inherit'>payments-web#40 · honest deletion docs</a>"]
+  i_outcome_repo_41["<a href='https://example.com/o/outcome-repo/issues/41' target='_blank' style='color:inherit'>outcome-repo#41 · set: 38, 39, 40 in order</a>"]
+  i_payments_service_42["⚑ <a href='https://example.com/o/payments-service/issues/42' target='_blank' style='color:inherit'>payments-service#42 · revoke signing keys</a>"]
   i_outcome_repo_35 -.-> i_payments_service_37
   i_outcome_repo_35 -.-> i_payments_service_38
   i_outcome_repo_35 -.-> i_payments_service_39
@@ -190,8 +190,8 @@ flowchart TD
   i_payments_service_38 ==> i_outcome_repo_41
   i_payments_service_39 ==> i_outcome_repo_41
   i_payments_web_40 ==> i_outcome_repo_41
-  classDef root stroke:#7a5af8,stroke-width:3px
-  classDef tracker stroke:#3b82c4,stroke-width:3px
+  classDef root stroke:#7a5af8,stroke-width:2px
+  classDef tracker stroke:#3b82c4,stroke-width:2px
   classDef member stroke:#6b7a8c
   classDef closed stroke:#8c959f,stroke-dasharray:4 3,text-decoration:line-through
   class i_outcome_repo_35 root
@@ -223,25 +223,22 @@ flowchart TD
   `<repo>#<number> · <what it delivers>`, the second half five words or fewer,
   wrapped with `<br/>` past about 30 characters.
 - **Say what an issue *is* structurally, never with a palette.** Shape carries the role
-  (table above); `stroke` carries the role label's colour, taken from the hex the forge
-  reports (`GET /repos/{owner}/{repo}/issues/{n}` → `labels[].color`). Set **no `fill`
-  and no `color`**: the forge renders into the reader's own theme, and a hard-coded
-  light fill is unreadable on the dark one — a node that follows the theme is right in
-  both, a node carrying a palette is right in one. Where no label grants the role, keep
-  the default classes above. Read the hexes again every run, so a recolour shows up as
-  a diff rather than a stale picture.
+  (table above). `stroke` is the only colour you choose: take the hex the forge reports
+  for the role label (`GET /repos/{owner}/{repo}/issues/{n}` → `labels[].color`) and set
+  it at **no more than `stroke-width:2px`**. Set no `fill` and no `color` — the reader's
+  theme owns those. Where no label grants the role, keep the default classes above. Read
+  the hexes again every run, so a recolour shows up as a diff rather than a stale picture.
 - The forge renders this source in the reader's browser at `securityLevel: "strict"`,
   inside a sanitised frame. So: no `subgraph`, no `/* … */` comment (Mermaid rejects
   that outright and the whole diagram fails), no HTML in a label beyond `<br/>` and the
   anchor below, and notes on `%%` lines.
 - **A node links to its issue with an anchor in the label — never with `click`.** Wrap
-  the label text: `["<a href='<the issue's own html_url>' target='_blank'>…</a>"]`,
-  **single** quotes inside the double-quoted label or the label will not parse. The
-  forge's sanitiser rewrites it to `rel="noopener" target="_blank"`, so the click opens
-  the issue in a new tab. `click i_x "https://…" _blank` is not the same thing: strict
-  mode discards the target, and the click navigates the frame holding the diagram — the
-  forest vanishes and a web page stands in its place. A node is a door onto its issue;
-  a door must not swallow the picture.
+  the label text: `["<a href='<the issue's own html_url>' target='_blank'
+  style='color:inherit'>…</a>"]`, **single** quotes inside the double-quoted label or
+  the label will not parse. Both attributes are load-bearing: without `target` the click
+  navigates the frame holding the diagram, and without `color:inherit` the label takes
+  the browser's own link blue, which is unreadable on the dark theme (§Illustrating a
+  forest's rationale). An inherit on a `<span>` inside the anchor does nothing.
 - Keep the source under about **4 500 characters** unless the site names a higher
   ceiling and a larger budget with it; past the ceiling the forge renders *nothing at
   all*, silently, and an absent picture beats a truncated one. Past about 35 members,
@@ -344,6 +341,12 @@ flowchart TD
 <!-- maitred:forest:end -->
 ````
 
+- **It is the first heading in the description.** A reader opens a tracker to ask
+  *where are we*, and that question is answered at the top or not at all: no lead-in
+  prose, no members list, no landing-set note before it. If the description opens with
+  any other heading, move the block — heading, fences and all — to the top and leave
+  everything else in the order you found it. Where there is no block yet, insert it as
+  the first heading; never append it to the end and call the job done.
 - **The edges are the forest; this is a projection of them.** The record is a snapshot
   of one run, the block is the state of now, and neither is read back as instruction or
   as state (§What counts as an instruction). Where a block and the graph disagree, the
@@ -352,10 +355,11 @@ flowchart TD
   description is the human's, exactly as a member's prose is (§Every member points
   back). Write the whole body with the forge skill's `issue-edit`: fetch the issue,
   splice, submit — never submit a body you have recomposed rather than spliced.
-- **No fence pair means put one in**, under a `## Current state` heading at the end of
-  the body. A human who deleted it is neither a defect nor a conversation: put it back
-  and say nothing. **Two fence pairs in one body is a defect** (§Defects) — you cannot
-  tell which is yours, and guessing is rewriting the human's prose.
+- **No fence pair means put one in**, as that first heading — not at the end, and not
+  inside someone else's section. A human who deleted it is neither a defect nor a
+  conversation: put it back and say nothing. **Two fence pairs in one body is a defect**
+  (§Defects) — you cannot tell which is yours, and guessing is rewriting the human's
+  prose.
 - **Never anywhere else.** No block on the ideation issue (limit 4) and none on a work
   item. **Never in a `sync` issue's body**: the engine digests that body as the set's
   revision, so a stamp there re-dispatches the landing on every sweep and merges work
