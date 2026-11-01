@@ -220,6 +220,46 @@ Not dispatched. Nothing here is read by a run.
   only what curation makes wrong: that section is not wrong, and the human may have
   written it. Two prose forms of one fact is untidy; an unreviewed deletion is not.
 
+## The tracker's current state block
+
+- **The description, not another comment.** A record is what a run said; the
+  description is what the forest is, and it is the first thing the forge puts in front
+  of a human who opens the tracker. The forest's drawing belongs where a person looks,
+  not below the eleventh run's prose.
+- **It is a projection, and that word is load-bearing.** Everything this role writes is
+  otherwise prose that gates nothing (§The pointer block). This block is the exception
+  made safe by its placement: a `sync` issue's body *is* read — the engine digests it
+  as the landing set's revision, so a stamp inside one would re-dispatch the landing
+  every sweep and merge work. Naming that seat as forbidden, rather than trusting the
+  agent to sense which bodies are read, is what keeps prose prose.
+- **The stamp moves when nothing else does, on purpose.** A reader must be able to tell
+  "the forest is quiet" from "nobody is looking". A stamp that advanced only on change
+  would say *quiet* for a curator that had silently stopped — the failure mode this
+  role is most obliged to make loud, paid for here with a little edit-history churn.
+  It is the one write that survives an empty delta, and the silence rule is stated as
+  governing *comments* because it was written long before an unconditional write
+  existed.
+- **Byte-stable rendering is what makes the churn survivable.** If the diagram's own
+  bytes wandered (node order, edge order, class order), a human reading the tracker's
+  history could not see the changes that were also the graph moving. So the render is
+  an order, not an improvisation.
+- **Structural styling is measured, not preferred.** Probed against a live Forgejo at
+  the `securityLevel: "strict"` it ships: a node given no class takes the reader's
+  theme and is legible in both, while every node carrying a hard-coded light `fill`
+  came out near-white on the dark theme. A palette in diagram source is correct in one
+  theme and wrong in the other, permanently.
+- **Anchors, never `click`.** Same probe: under strict mode the `_blank` a `click`
+  statement asks for is discarded, and the click navigates the sandboxed frame the SVG
+  lives in — the forest is replaced by the linked page inside its own box. An `<a>`
+  inside the label survives the sanitiser with `rel="noopener" target="_blank"` and
+  opens a real tab. This reads as a trivia item until someone "adds links" with the
+  obvious syntax; the rule exists so they don't.
+- **Two fence pairs stop the run rather than get resolved.** Choosing between two
+  regions means guessing which is prose, and a guess there is limit 10 broken with
+  confidence. Reporting and writing nothing is the only honest move.
+- The markers are HTML comments so the rendered page shows a heading, a line and a
+  diagram — the machinery is invisible where a human reads it.
+
 ## Venues
 
 - **The shape conversation lives on the root before commissioning.**
