@@ -220,6 +220,20 @@ Not dispatched. Nothing here is read by a run.
   only what curation makes wrong: that section is not wrong, and the human may have
   written it. Two prose forms of one fact is untidy; an unreviewed deletion is not.
 
+## Illustrating a forest
+
+- **The old 4 500-character budget was never measured.** It arrived with the drawing
+  convention carrying the claim that "the forge refuses 5 000 and renders nothing", an
+  assumed upstream default. Read from this instance's own page configuration the ceiling
+  is `mermaidMaxSourceCharacters: 50000`, so the number guarded a limit ten times away
+  and the work it was actually doing was legibility. Recorded so nobody reinstates it as
+  a safety margin.
+- **Legibility is not the diagram's problem.** A forest too large to read is an
+  argument about the fan-out cap — the human's call about scope, not the curator's call
+  about aesthetics. Collapsing repositories into single boxes to make a picture restful
+  has the graph quietly redrawn, which is the one thing a drawing of the forest must not
+  be. So collapse only where the ceiling forces it, and say so in the record.
+
 ## The tracker's current state block
 
 - **The description, not another comment.** A record is what a run said; the

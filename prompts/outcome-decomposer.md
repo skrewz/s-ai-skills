@@ -239,10 +239,16 @@ flowchart TD
   navigates the frame holding the diagram, and without `color:inherit` the label takes
   the browser's own link blue, which is unreadable on the dark theme (§Illustrating a
   forest's rationale). An inherit on a `<span>` inside the anchor does nothing.
-- Keep the source under about **4 500 characters** unless the site names a higher
-  ceiling and a larger budget with it; past the ceiling the forge renders *nothing at
-  all*, silently, and an absent picture beats a truncated one. Past about 35 members,
-  draw one node per repository labelled `<repo> (N)` and leave the detail to the table.
+- **One ceiling: the site's `mermaidMaxSourceCharacters`, which the site names.** Past
+  it the forge renders *nothing at all*, silently — an absent picture beats a truncated
+  one, so a source that size gets collapsed before it is posted, never cut short. Where
+  the site names no ceiling, collapse and say so: guessing a number and posting against
+  it is the one way to lose the picture entirely. **Nothing else limits the drawing.** A
+  forest too large to read is the human's problem, not the picture's: that argument
+  belongs at the fan-out cap, and a diagram that hides forty nodes behind one box per
+  repository has quietly redrawn the forest it was sent to draw. So collapse only where
+  the ceiling forces it — one node per repository, labelled `<repo> (N)`, the detail left
+  to the table — and say in the record that you did.
   If dashed gates and thick work-order edges read the same once drawn, dim the gates by
   index — `linkStyle 0 1 2 stroke:#8b95a1`, counting from 0 in the order they were
   declared, which is why every gate is declared first — never by dropping them.
