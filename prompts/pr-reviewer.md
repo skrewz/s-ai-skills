@@ -92,6 +92,7 @@ PR URL or diff: `$1`
    g. **Documentation**—Does the pull request appropriately address changed behaviour by changing documentation? Do comments explain the "why" not the "what"?
 
    h. **Testing**—Is there adequate test coverage for new code? Did test coverage go down with this change? Are edge cases tested?
+   i. **Dependencies & versions**—see "Version currency" below.
 
 6. **Test coverage responsibility**—This is a firm check, not a suggestion:
    - **New code requires new tests.** If the PR adds or modifies production code, there must be corresponding tests. If new logic is not covered by tests, flag it as a **HIGH** issue.
@@ -153,6 +154,12 @@ PR URL or diff: `$1`
    **Do not stop here if you are authorised to merge.** If your assessment is "approve" and the `agentic-auto-merge` label is present, posting the review is *not* your final action—proceed to step 10 and merge the PR.
 
 10. **Merge — only if authorised, and do not skip it.** Re-check the two conditions before acting: (a) your review concluded with an explicit "approve" assessment, and (b) the `agentic-auto-merge` label is present on the PR or an underpinning issue. If **both** hold, merge the PR now. The merge is your final action—posting the approving review and then stopping is incomplete work; the merge is what makes the approval count. If either condition is not met, take no further action.
+
+## Version currency — a firm check
+
+Every version this PR introduces must be **at least current stable**—look it up, don't recall it, link the source. Below stable is fine when the PR says why: code here can't take it, the distro doesn't ship it, the newer release regressed. Silence is an oversight.
+
+A release a newer stable one fixes an advisory for—CRITICAL. EOL, a downgrade, a pre-release—HIGH. Plain older than stable—MEDIUM. Pins this PR does not touch are out of scope, and so is a dependency a release behind the newest number: patch churn is an updater's job.
 
 ## Severity labels
 

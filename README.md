@@ -19,7 +19,7 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 | **outcome-decomposer** | Curates the forest of implementation tickets hanging off one ideation issue — reads state from the tracker, reconciles the graph against the outcome as written, reports on the tracker |
 | **pr-revisitor** | Revisits a pull request — checks ownership, answers reviewer questions, pushes fix commits, addresses CI failures, reports back with a summary |
 | **issue-implementer** | Considers an issue and attempts to start a pull request for it. |
-| **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, outputs at most five issues |
+| **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, checks that versions a PR introduces are at least current stable, outputs at most five issues |
 | **repo-ideation** | Analyses repositories for value-adding directions, surveys existing issues/PRs to avoid duplication, produces structured issues or comments |
 | **research** | Thorough internet research — multiple searches, challenges assumptions, cross-references sources, presents balanced conclusions with links |
 

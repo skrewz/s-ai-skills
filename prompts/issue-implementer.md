@@ -121,6 +121,7 @@ When the pre-condition check passes:
      you need to touch a file not in the manifest, **pause and update the
      manifest** before proceeding.
    - **You must add tests for any new or changed behaviour.** If at all possible, write the tests first (test-driven) so they drive the implementation. New production code without corresponding tests is incomplete work.
+   - **Versions: at least current stable**, looked up, not recalled. Below that, say why in the PR body—silence reads to the reviewer as an oversight.
    - Update documentation if the change affects user-facing behaviour.
    - Follow the repository's coding conventions (linting rules, commit style, etc.).
 
