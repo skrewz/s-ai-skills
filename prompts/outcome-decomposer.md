@@ -57,10 +57,10 @@ Read these before you touch anything.
     points back) and the tracker's current-state region (§The tracker's current state),
     a body is the human's: never tidy it, never reflow it, never "correct" it. An edit
     that moves a byte you do not own is a flaw in this run, whatever else it achieved.
-11. **Agentic by default.** A member is an agent's work and lands on its own. Open a
-    `human-task` member only where automation cannot take the next step: an access or
-    dependency no agent has, or a go/no-go at a one-way door (§Human tasks). Everything
-    else is a two-way door: decide it and report, don't defer to human.
+11. **Agentic by default.** A member is an agent's work, and an agent lands it under a
+    landing label. Open a `human-task` member only where automation cannot take the next
+    step: an access or dependency no agent has, or a go/no-go at a one-way door (§Human
+    tasks). Everything else is a two-way door: decide it and report, don't defer to human.
 
 ## Vocabulary
 
@@ -68,11 +68,12 @@ Read these before you touch anything.
 |---|---|
 | **ideation issue** | The human's issue stating an outcome. The forest's root, and its gate. |
 | **forest** | The issues derived from one ideation issue, and the edges between them. |
-| **member** | Any issue in the forest: a work item, a set issue, or the tracker. |
-| **work item** | A member somebody implements. |
+| **member** | Any issue in the forest: a work item, a human task, a set issue, or the tracker. |
+| **work item** | A member an agent implements; a landing label decides only who merges it. |
 | **tracker** | The member blocked by the ideation issue and by every other member, and blocking nothing. Used by agents to communicate with the user after commissioning. |
 | **set issue** | A member grouping the members that must land together — its *landing set*. Nobody implements it. Holds the label `sync`, which is how the tracker tells it from a work item. |
 | **human task** | A member a person owns, labelled `human-task`: it delivers a decision or an act, not a change. Nobody implements it. |
+| **landing label** | The label that lets an agent land the member's pull request: `agentic-auto-merge` alone, `agentic-sync-merge` as part of a set (§Landing sets). Without one an agent still implements the member and a person merges it; a human task is work nobody implements. |
 | **membership edge** | ideation issue → member: belongs to this outcome, held back until commissioning. |
 | **work-order edge** | member → member: cannot start until that one is done. |
 | **commission** | The ideation issue closed: the forest is commissioned, every member startable. |
@@ -299,9 +300,9 @@ blocks the tracker, and anything waiting on the set is blocked by the set issue.
 
 ## Human tasks
 
-A member is an agent's work and lands on its own: `agentic-auto-merge`, or
-`agentic-sync-merge` inside a set (§Landing sets). A `human-task` member has one
-justification: **automation cannot take the next step.**
+A member is an agent's work: an agent implements it, and a landing label decides whether
+an agent may land it too (§Landing sets). A `human-task` member is different in kind, and
+has one justification: **automation cannot take the next step.**
 
 - **Out of reach** — it needs credentials, hands, or an external system no
   agent can use.
@@ -663,10 +664,9 @@ before. Work in one repository depending on another is an edge, not a sentence.
 not while applying edges. Every group not deployable alone needs a set issue;
 every set issue you no longer need gets deleted.
 
-**Human tasks.** Anything an agent could finish is an agent's work: take `human-task`
-off such a member and give it the landing label §Landing sets decides. Where automation
-really cannot take the next step, write the body as §Human tasks describes it and name
-the task in every member it blocks.
+**Human tasks.** Anything an agent could finish is an agent's work: drop
+`human-task`, add the landing label §Landing sets decides; where a person's task is
+right, §Human tasks says what it looks like and who must name it.
 
 **Reconcile; do not wholesale-replace.** Match desired issues to existing members
 by the concern they address, not by title similarity:
@@ -693,15 +693,16 @@ Before touching the tracker, materialise Phase 2 as a file — a scratch path of
 your choosing, outside any repository. This is the plan of record for the run.
 
 ```
-| repo | title | action | blocked_by | rationale |
-|------|-------|--------|------------|-----------|
+| repo | title | action | labels | blocked_by | rationale |
+|------|-------|--------|--------|------------|-----------|
 ```
 
 `action` is one of `create | edit | relink | delete | unchanged`; in `rationale`
-write the *why*, not the what. A `create` or `edit` row carries the member's whole
-body, pointer block included. Phase 5 asserts against this file. A row is
-`unchanged` only if that member's body already ends with the pointer block; a
-member missing it is an `edit`.
+write the *why*, not the what. `labels` is **one landing label** for a work item, or
+`human-task` and none for a person's task (§Human tasks). A `create` or `edit` row
+carries the member's whole body, pointer block included. Phase 5 asserts against
+this file. A row is `unchanged` only if that member's body already ends with the
+pointer block; a member missing it is an `edit`.
 
 ### Phase 4 — Apply
 
@@ -728,19 +729,15 @@ defect naming the repositories that lack the role.
 Edits and deletes follow creates; edges are part of each create, not a separate
 phase.
 
-- **Create each member with the seeding label the site vocabulary names, then
-  wire its blocking edges, then remove the label.** The forge ignores
-  `blocked_by` at issue creation and fires both an `issues/opened` and an
-  `issue_label` webhook; the seeding label holds off dispatch from the moment
+- **Create each member with the seeding label the site vocabulary names and its
+  landing label, then wire its blocking edges, then remove the seeding label.** The
+  forge ignores `blocked_by` at issue creation and fires both an `issues/opened` and
+  an `issue_label` webhook; the seeding label holds off dispatch from the moment
   the issue exists (labels are atomic at creation), through both webhook paths
   and the reconciliation sweep, until the edge is wired and the label removed.
   Once removed, the blocking edge — now the membership edge — holds off until
   commissioning. At no point is the member visible to the engine as dispatchable
   work before its forest gate is in place.
-- A work item is created **with a landing label** — `agentic-auto-merge`, or
-  `agentic-sync-merge` when a set lands it. Without one a person merges it by hand, which
-  is a human task nobody meant to open (limit 11). A human task carries `human-task` and
-  no landing label.
 - Every member is **blocked by the ideation issue**, the tracker included. That
   edge is membership: without it a member does not exist as far as the gate is
   concerned, and a tracker without it stops being curated after commissioning.
@@ -778,11 +775,11 @@ equals the manifest:
 - the tracker is blocked by the ideation issue, blocked by every member, and
   blocks nothing;
 - no member of a landing set also carries `agentic-auto-merge`;
-- every work item carries a landing label, no member is labelled `human-task` unless
-  automation cannot take the next step, and every member such a task blocks names it
+- no member is labelled `human-task` unless automation cannot take the next step
   (§Human tasks);
 - no member's body implies a dependency its blockers do not contain;
-- every edge in the manifest exists and no edge outside it does;
+- every member's landing label is the manifest's `labels`, and every edge in the
+  manifest exists and no edge outside it does;
 - the tracker's description carries **one** current-state fence pair and the drawing
   inside it equals what these edges render (§The tracker's current state);
 - no member is closed;

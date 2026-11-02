@@ -111,6 +111,8 @@ Not dispatched. Nothing here is read by a run.
 
 - Only concepts that exist as stored data — objects, edges, fields, labels,
   configured values — earn a row.
+- `landing label` earns one as a **class** of labels rather than a single stored one,
+  because the fact worth stating is what a member *without* one is: a person's merge.
 - Behaviour words (curation, dissent, venue, trouble, report) are instruction
   vocabulary: defining them implies a tracker field that does not exist, and sends a
   run looking for something the database does not hold.
@@ -221,10 +223,19 @@ Not dispatched. Nothing here is read by a run.
   and nothing fails when that happens. The link is what turns the answer into part of the
   work. This does not contradict "prose is not a dependency": the edge still decides when,
   the prose carries what the human said.
-- **Why the landing label is stated at creation.** A work item created without one is
-  merged by a person by default (`prompts/pr-reviewer.md`), which is a human task nobody
-  meant to open. Nothing breaks when that happens, so it is said in Phase 4 and asserted in
-  Phase 5, the way an omitted landing set is.
+- **Why the landing label is a manifest column.** A work item created without one stays
+  an agent's to implement and is merged by a person by default (`prompts/pr-reviewer.md`):
+  a wait on the landing axis, not a `human-task`, and silent because nothing fails. A
+  Phase 4 bullet said it and runs still missed it: the recipe above that bullet names one
+  label, the seeding label, and ends by removing a label, so a run that had done both
+  narrated its label work as finished. Hence the label is decided in the manifest, where a
+  run commits to what it is about to write, and Phase 4 carries out the row. Same argument
+  as §The pointer block: prose is where a rule is explained, the manifest is where it is
+  obeyed.
+- **Two waits, two labels.** A missing landing label waits on one merge and leaves an
+  agent doing the work; `human-task` waits on the work itself and has no pull request at
+  all. Conflating them is how a forest halts for things a two-way door would settle, so
+  the prompt says which axis a member sits on by which label it carries.
 
 ## The pointer block
 
