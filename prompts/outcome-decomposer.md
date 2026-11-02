@@ -348,6 +348,9 @@ Every member body — created or edited — therefore ends with this block:
 ```markdown
 ## This issue is part of a forest
 
+<details>
+<summary><a href="…">🤔 IDEATION-TITLE </a>; <a href="…">📋 #TRACKER-ISSUE-NO</a></summary>
+
 Part of a forest curated from the ideation issue: <ideation issue URL>. That
 issue is the authority on scope.
 
@@ -359,8 +362,12 @@ a blocker not listed on this issue, a dependency you discover while working, a
 step that turned out to need a repository this forest does not touch, a
 decision you cannot make from this issue alone, or a check you believe another
 member is missing. Never report a trouble on the ideation issue.
+</details>
 ```
 
+- Replace `IDEATION-TITLE` with the title of the ideation ticket (sans emoji)
+  the user chose.
+- Replace `TRACKER-ISSUE-NO` with the issue number of the tracker for this forest.
 - **Back-fill it idempotently:** each run, check every member carries it with the
   current URLs, and add it where missing as an ordinary edit.
 - **The block is the heading `## This issue is part of a forest`.** Nothing else
@@ -515,7 +522,7 @@ rows beneath it — `#36` included.
 | Issue | Labels | What it delivers | Blocked by |
 |---|---|---|---|
 | `outcome-repo#35` | `ideation` | **the ideation issue** — a person thinking out loud, theirs alone to edit | nothing: it is the root |
-| `outcome-repo#36` | `outcome` | **tracker** — delivers nothing; every report lands here | the ideation issue and every member |
+| `outcome-repo#36` | `outcome` | **tracker** — delivers nothing; name leads with 📋; every report lands here | the ideation issue and every member |
 | `payments-service#37` | `agentic-auto-merge` | say what "deleted" means in the data: a tombstone, retention fields | the ideation issue |
 | `payments-service#38` | `agentic-sync-merge` | the purge — sessions, keys, files — behind one ops command | the ideation issue, `payments-service#37`, `payments-service#42` |
 | `payments-service#39` | `agentic-sync-merge` | a deleted account answers 410, never 500 | the ideation issue, `payments-service#37` |

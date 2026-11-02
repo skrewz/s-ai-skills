@@ -247,6 +247,32 @@ Not dispatched. Nothing here is read by a run.
 - **"Gates nothing" is said out loud** because that is how this feature rots: a
   flawless block *reads* like a dependency, so a run that adds one may believe it
   expressed an ordering. It expressed nothing to the engine.
+- **Why the block is a disclosure.** The two links are the block's load-bearing part;
+  the rest is reference material — what counts as a trouble, where it goes, what is not
+  one. Collapsed, the reader gets the links without clicking and the detail with one
+  click, and the member's own text stays the thing at the top of the page.
+- **Why the summary holds HTML anchors, not markdown.** `<details>` opens an HTML block,
+  and up to the next blank line everything in it is HTML: `[title](url)` inside a summary
+  renders as literal brackets. The same rule picks the placeholder style —
+  `IDEATION-TITLE` and `TRACKER-ISSUE-NO`, not `<ideation title>` — because an unknown tag
+  is stripped by the forge, and an unfilled placeholder that silently vanishes is worse
+  than one that shows up on the page looking unfinished.
+- **What the forge keeps of the block.** Issue bodies are rendered and then sanitised
+  (`modules/markup/sanitizer.go`: bluemonday's UGCPolicy plus Forgejo's own rules).
+  `details` and its `open` attribute survive, `summary` survives, and an anchor keeps its
+  `href` — but not `target`, which only the repository-description policy allows. So a
+  summary link navigates in the same tab, and writing `target="_blank"` in a body only
+  misleads the next reader about what will happen.
+- **Why a link in the summary is safe.** A click on a summary toggles the disclosure; a
+  click on a link inside one does not. Measured in Chromium through Playwright: clicking
+  the anchor produced the navigation and no `toggle` event, clicking the summary's own
+  text produced one. Firefox and WebKit were not measured here; the spec agrees, since a
+  click's activation behaviour belongs to the nearest element that has one, which for an
+  anchor is the anchor.
+- **Why the heading stays outside the disclosure.** See the next bullet: the rule Phases 1
+  and 5 apply is a literal heading, and a heading inside a summary is either unparsed
+  markdown or an `<h2>` in a summary. Either way the string stops being a heading and the
+  check becomes a judgement again.
 - **The block is named by its heading, and `unchanged` is gated on it.**
   - The back-fill instruction already existed twice — a Phase 4 bullet, Phase 5's
     first assertion — and a live run still left members without it.
