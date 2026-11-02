@@ -182,6 +182,50 @@ Not dispatched. Nothing here is read by a run.
 - **Sets are deleted, not closed.** As with delete-never-close: closing means done,
   and a closed set grouping nothing is a lie about a finished lockstep.
 
+## Human tasks
+
+- **Why they are rare.** A human task stops the branch that reaches it and everything
+  downstream of it, while the rest of the forest finishes early and then waits. So the cost
+  is the waiting rather than the work inside the issue, paid in wall-clock and in the
+  operator's attention. Asking often also trains them to skim, which makes the questions
+  that genuinely need an answer harder to get read (the same reason dissent is raised once,
+  §Pushing back). Which is why §The shape of a forest says *used sparingly*: a budget of
+  attention, not politeness.
+- **The one justification: automation cannot take the next step.** Two ways that happens,
+  and the issue names which. Either the step is **out of reach** — credentials, a person's
+  hands, a system outside every repository the forest touches — or the step stands at a
+  **one-way door**. The body carries the reason under "Why this was judged to need a
+  human" so a reader can check the call, the way the defect list lets a reader check a
+  defect (§Defects).
+- **One-way doors and two-way doors**, the Amazon distinction the rules borrow: a two-way
+  door is a step or decision that can be reverted with little effort, a one-way door is one
+  that cannot. Rollback covers the ordinary engineering decision, so the agent decides it,
+  puts it in the report and carries on — being wrong costs a fix-forward, being right costs
+  nothing. At a one-way door the decision is the human's and the graph waits: data deleted,
+  a key revoked, money spent, something said in public. A go/no-go is filed under the
+  one-way doors rather than beside them because that is what makes it worth asking about —
+  a go/no-go on something reversible is a two-way door wearing a question mark, and the
+  agent's to walk through. Two-way doors still get reported: the human learns what was
+  decided, they were simply never in the way of it.
+- **What is not a human task.** A question about the shape of the outcome is dissent while
+  the root is open (§Venues), not a member. A wish that someone would double-check the
+  agent's work is the reviewer's job and the labels' (§Landing sets). Neither needs an issue
+  that blocks the graph.
+- **Why the issue spells out the ask and the answer.** Whoever reads it arrives with no
+  context and no reason to acquire any, so the body says what is wanted, how to do it and
+  where to reply — the minimum that closes without a reply-and-wait cycle, which would pay
+  the stall twice. Options with a recommendation for a go/no-go, because a question with no
+  candidate answer invites a conversation where a choice was wanted.
+- **Why later issues link back to the task.** A blocking edge says only *do not start yet*
+  and carries no content, so an implementer who never sees the human's answer invents one,
+  and nothing fails when that happens. The link is what turns the answer into part of the
+  work. This does not contradict "prose is not a dependency": the edge still decides when,
+  the prose carries what the human said.
+- **Why the landing label is stated at creation.** A work item created without one is
+  merged by a person by default (`prompts/pr-reviewer.md`), which is a human task nobody
+  meant to open. Nothing breaks when that happens, so it is said in Phase 4 and asserted in
+  Phase 5, the way an omitted landing set is.
+
 ## The pointer block
 
 - **Every member carries it.** An implementer arrives with one URL and no memory of
@@ -335,9 +379,9 @@ Not dispatched. Nothing here is read by a run.
 - Commentary is one line per lesson; the reasons are the sections above.
 - The lessons, in order: parallel work stays parallel and edges come from consequences;
   one sentence plus its echo justifies a set issue; a judgment not to create a set
-  still belongs in the report; a human's task is placed, not derived, and is never the
-  set issue; a flaw in the instruction is argued in prose, not engineered into the
-  graph.
+  still belongs in the report; a human's task exists only where automation cannot take
+  the next step, is placed rather than derived, and is never the set issue; a flaw in the
+  instruction is argued in prose, not engineered into the graph.
 
 ## The phases
 

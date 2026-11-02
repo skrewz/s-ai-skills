@@ -57,6 +57,10 @@ Read these before you touch anything.
     points back) and the tracker's current-state region (§The tracker's current state),
     a body is the human's: never tidy it, never reflow it, never "correct" it. An edit
     that moves a byte you do not own is a flaw in this run, whatever else it achieved.
+11. **Agentic by default.** A member is an agent's work and lands on its own. Open a
+    `human-task` member only where automation cannot take the next step: an access or
+    dependency no agent has, or a go/no-go at a one-way door (§Human tasks). Everything
+    else is a two-way door: decide it and report, don't defer to human.
 
 ## Vocabulary
 
@@ -68,6 +72,7 @@ Read these before you touch anything.
 | **work item** | A member somebody implements. |
 | **tracker** | The member blocked by the ideation issue and by every other member, and blocking nothing. Used by agents to communicate with the user after commissioning. |
 | **set issue** | A member grouping the members that must land together — its *landing set*. Nobody implements it. Holds the label `sync`, which is how the tracker tells it from a work item. |
+| **human task** | A member a person owns, labelled `human-task`: it delivers a decision or an act, not a change. Nobody implements it. |
 | **membership edge** | ideation issue → member: belongs to this outcome, held back until commissioning. |
 | **work-order edge** | member → member: cannot start until that one is done. |
 | **commission** | The ideation issue closed: the forest is commissioned, every member startable. |
@@ -146,8 +151,8 @@ ideation issue
   on — not by "everything", not by the ideation issue alone.
 - **Add only edges that are real.** No transitive edge for readability, no
   invented ordering because two issues touch the same repository.
-- **Human work is an ordinary node**, blocking and blocked like any other. Its
-  position is yours to place; its scope is not yours to rewrite.
+- **Human work is an ordinary node**, blocking and blocked like any other — and an
+  exception to the default (§Human tasks). Used sparingly.
 - **Completeness matters more than tidiness.** On commissioning every member is
   eligible at once; each member's own predecessors are what stop work starting
   early. A missing edge does not misorder the plan — it **starts work that is not
@@ -291,6 +296,49 @@ blocks the tracker, and anything waiting on the set is blocked by the set issue.
 - **Delete a set that no longer applies** — its members independently deployable,
   or fewer than two members left. Delete, never close (limit 2).
 - Set issues count against the fan-out cap.
+
+## Human tasks
+
+A member is an agent's work and lands on its own: `agentic-auto-merge`, or
+`agentic-sync-merge` inside a set (§Landing sets). A `human-task` member has one
+justification: **automation cannot take the next step.**
+
+- **Out of reach** — it needs credentials, hands, or an external system no
+  agent can use.
+- **A go/no-go** or any other **one-way door** — the next step cannot be undone
+  by rolling it back: data deleted, a key revoked, money spent, something said
+  in public.
+
+A **two-way door** — any step or decision that can be reverted with little
+effort — is the agent's to decide on, say so in the record (§Phase 5), carry
+on. Being wrong costs a fix-forward; stopping to ask costs the forest its
+progress and the human their attention.
+
+Write the issue for a human who has no context. Be clear about what is asked
+and how they can answer:
+
+```markdown
+## What is being asked
+
+<one line: the go/no-go or the act, and what it unblocks>
+
+**To do it:** <the step, naming the command or page where one exists>
+
+**To answer:** comment here — a go/no-go, yes or no and one line why; an act, say it is
+done.
+
+**Why this was judged to need a human:** <the access, dependency or judgment
+that is missing>. <N> later issue(s) read this thread and follow what you
+write.
+```
+
+- For a go/no-go, give the options, recommend one if reasonable. One line each.
+- Human tasks sit mid-forest, where something can wait on it. They cannot be
+  part of sets. The pointer block still ends the body (§Every member points
+  back).
+- **Every member it blocks names this issue** — URL, and one line saying the
+  thread there carries instructions to follow. The edge blocks *when* while the
+  textual reference is what sends the implementer to read the human's answer.
 
 ## Every member points back
 
@@ -503,9 +551,12 @@ What the table teaches:
 - `payments-service#37` was judged independently deployable, and that judgment is
   in the report.
 - `payments-service#42` came from one sentence, not from the work: somebody with
-  credentials does a thing no agent should. It gets edges like any member,
-  including the one `payments-service#38` waits on, and its scope is not yours to
-  rewrite. It is not the set issue.
+  credentials does a thing no agent should. It gets edges like any member, including the
+  one `payments-service#38` waits on, and its scope is not yours to rewrite. It is not
+  the set issue.
+- It is the only person's task in this forest. The four work items land themselves, and
+  `payments-service#38` names `payments-service#42` in its body as well as blocking on it,
+  so whoever implements the purge reads the human's answer there.
 - **Nothing here ends in a human task.** The last things to close are work items;
   the tracker is blocked by every member and unblocks on its own when the last one
   closes, and a different agent finishes the outcome (§Boundaries). A person's task
@@ -605,6 +656,11 @@ before. Work in one repository depending on another is an edge, not a sentence.
 not while applying edges. Every group not deployable alone needs a set issue;
 every set issue you no longer need gets deleted.
 
+**Human tasks.** Anything an agent could finish is an agent's work: take `human-task`
+off such a member and give it the landing label §Landing sets decides. Where automation
+really cannot take the next step, write the body as §Human tasks describes it and name
+the task in every member it blocks.
+
 **Reconcile; do not wholesale-replace.** Match desired issues to existing members
 by the concern they address, not by title similarity:
 
@@ -674,6 +730,10 @@ phase.
   Once removed, the blocking edge — now the membership edge — holds off until
   commissioning. At no point is the member visible to the engine as dispatchable
   work before its forest gate is in place.
+- A work item is created **with a landing label** — `agentic-auto-merge`, or
+  `agentic-sync-merge` when a set lands it. Without one a person merges it by hand, which
+  is a human task nobody meant to open (limit 11). A human task carries `human-task` and
+  no landing label.
 - Every member is **blocked by the ideation issue**, the tracker included. That
   edge is membership: without it a member does not exist as far as the gate is
   concerned, and a tracker without it stops being curated after commissioning.
@@ -711,6 +771,9 @@ equals the manifest:
 - the tracker is blocked by the ideation issue, blocked by every member, and
   blocks nothing;
 - no member of a landing set also carries `agentic-auto-merge`;
+- every work item carries a landing label, no member is labelled `human-task` unless
+  automation cannot take the next step, and every member such a task blocks names it
+  (§Human tasks);
 - no member's body implies a dependency its blockers do not contain;
 - every edge in the manifest exists and no edge outside it does;
 - the tracker's description carries **one** current-state fence pair and the drawing
@@ -735,7 +798,8 @@ say.** One comment on the tracker — the record — covering:
 3. **blocking edges added and removed, by reference**;
 4. **set issues created and deleted**, and the groups judged independently
    deployable;
-5. the judgment calls made and the rule or comment each rested on;
+5. the judgment calls made and what each rested on, **including the decisions taken at
+   two-way doors rather than asked about** (§Human tasks);
 6. the final state, as the manifest's summary, **and drawn** — the forest as
    built, per §Illustrating a forest;
 7. every defect raised (§Defects), naming the channel it was raised on and what
