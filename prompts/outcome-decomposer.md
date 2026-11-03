@@ -177,7 +177,7 @@ a record's clothes.
 flowchart TD
   i_outcome_repo_35{{"<a href='https://example.com/o/outcome-repo/issues/35' target='_blank' style='color:inherit'>outcome-repo#35 · ideation</a>"}}
   i_outcome_repo_36(["<a href='https://example.com/o/outcome-repo/issues/36' target='_blank' style='color:inherit'>outcome-repo#36 · tracker</a>"])
-  i_payments_service_37["<a href='https://example.com/o/payments-service/issues/37' target='_blank' style='color:inherit'>payments-service#37 · tombstone and retention</a>"]
+  i_payments_service_37["✅ <a href='https://example.com/o/payments-service/issues/37' target='_blank' style='color:inherit'>payments-service#37 · tombstone and retention</a>"]
   i_payments_service_38["<a href='https://example.com/o/payments-service/issues/38' target='_blank' style='color:inherit'>payments-service#38 · the purge, one command</a>"]
   i_payments_service_39["<a href='https://example.com/o/payments-service/issues/39' target='_blank' style='color:inherit'>payments-service#39 · 410, never 500</a>"]
   i_payments_web_40["<a href='https://example.com/o/payments-web/issues/40' target='_blank' style='color:inherit'>payments-web#40 · honest deletion docs</a>"]
@@ -199,10 +199,11 @@ flowchart TD
   classDef root stroke:#7a5af8,stroke-width:2px
   classDef tracker stroke:#3b82c4,stroke-width:2px
   classDef member stroke:#6b7a8c
-  classDef closed stroke:#8c959f,stroke-dasharray:4 3,text-decoration:line-through
+  classDef closed stroke:#8c959f,stroke-dasharray:4 3,text-decoration:line-through,fill:#8c959f,fill-opacity:0.25
   class i_outcome_repo_35 root
   class i_outcome_repo_36 tracker
   class i_payments_service_37,i_payments_service_38,i_payments_service_39,i_payments_web_40,i_outcome_repo_41,i_payments_service_42 member
+  class i_payments_service_37 closed
 ```
 
 | Thing | Draw it as |
@@ -212,7 +213,7 @@ flowchart TD
 | work item | rectangle `["…"]`, the `member` class |
 | set issue | rectangle, `member` class, its members' numbers in the label |
 | human task | rectangle prefixed `⚑` — a person owns it |
-| a member that is closed | its own shape prefixed `✓`, the `closed` class — struck through |
+| a member that is closed | its own shape prefixed `✅`, the `closed` class — struck through, dimmed |
 | membership edge | `-.->` — a **dashed arrow**: it gates, it does not order |
 | work-order edge | `==>`, thick by default |
 | the gate reaching the tracker | `-.->` — dashed like every gate |
@@ -231,9 +232,10 @@ flowchart TD
 - **Say what an issue *is* structurally, never with a palette.** Shape carries the role
   (table above). `stroke` is the only colour you choose: take the hex the forge reports
   for the role label (`GET /repos/{owner}/{repo}/issues/{n}` → `labels[].color`) and set
-  it at **no more than `stroke-width:2px`**. Set no `fill` and no `color` — the reader's
-  theme owns those. Where no label grants the role, keep the default classes above. Read
-  the hexes again every run, so a recolour shows up as a diff rather than a stale picture.
+  it at **no more than `stroke-width:2px`**. Set no `fill` and no `color` but the `closed`
+  dim — the reader's theme owns those. Where no label grants the role, keep the default
+  classes above. Read the hexes again every run, so a recolour shows up as a diff rather
+  than a stale picture.
 - The forge renders this source in the reader's browser at `securityLevel: "strict"`,
   inside a sanitised frame. So: no `subgraph`, no `/* … */` comment (Mermaid rejects
   that outright and the whole diagram fails), no HTML in a label beyond `<br/>` and the
