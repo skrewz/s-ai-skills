@@ -300,20 +300,23 @@ blocks the tracker, and anything waiting on the set is blocked by the set issue.
 
 ## Human tasks
 
-A member is an agent's work: an agent implements it, and a landing label decides whether
-an agent may land it too (§Landing sets). A `human-task` member is different in kind, and
-has one justification: **automation cannot take the next step.**
+A `human-task` member is different in kind from a work item, and has one
+justification: **automation cannot take the next step.**
 
-- **Out of reach** — it needs credentials, hands, or an external system no
-  agent can use.
-- **A go/no-go** or any other **one-way door** — the next step cannot be undone
-  by rolling it back: data deleted, a key revoked, money spent, something said
-  in public.
+- **Out of reach** — it needs credentials, hands, or an external system no agent
+  can use.
+- **A go/no-go** or any other **one-way door** — the next step cannot be undone by
+  rolling it back: data deleted, a key revoked, money spent, something said in
+  public.
 
-A **two-way door** — any step or decision that can be reverted with little
-effort — is the agent's to decide on, say so in the record (§Phase 5), carry
-on. Being wrong costs a fix-forward; stopping to ask costs the forest its
-progress and the human their attention.
+A **two-way door** — anything reverted with little effort — is the agent's to decide
+on, say so in the record (§Phase 5), carry on. Being wrong costs a fix-forward;
+stopping to ask costs the forest its progress and the human their attention.
+
+**A person should almost never merge.** A one-way door *inside* an otherwise agentic
+member is split at the door — the reversible part one agentic member, then a
+`human-task` blocked by it for the step past — not a member left without a landing
+label (§Landing sets), which trades a one-line question for a diff to read.
 
 Write the issue for a human who has no context. Be clear about what is asked
 and how they can answer:

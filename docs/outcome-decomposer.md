@@ -209,6 +209,16 @@ Not dispatched. Nothing here is read by a run.
   a go/no-go on something reversible is a two-way door wearing a question mark, and the
   agent's to walk through. Two-way doors still get reported: the human learns what was
   decided, they were simply never in the way of it.
+- **Why a decision beats a review.** The bias is short: a person should almost never
+  merge. The two shapes wait the same length and cost the reader differently. A human task
+  asks for one line of judgement and arrives with the
+  reversible work already done, so the wait is only for the answer. A member no agent may
+  land asks a person to hold the agent's whole context — the files it read, the tests it
+  ran, the blast radius of its change — before anything may land. A review answers *no, do
+  it again*, which dispatches the implementer and pays for the work twice; a go/no-go
+  answers *no, don't*, having spent nothing. And an unlabeled member is not a decision at
+  all: it is the default, so nothing in the record says anyone chose it, where the human
+  task names its ground, its door and its date.
 - **What is not a human task.** A question about the shape of the outcome is dissent while
   the root is open (§Venues), not a member. A wish that someone would double-check the
   agent's work is the reviewer's job and the labels' (§Landing sets). Neither needs an issue
