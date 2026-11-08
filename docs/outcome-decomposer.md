@@ -44,8 +44,8 @@ Not dispatched. Nothing here is read by a run.
   - The engine hands the root while uncommissioned, the tracker once commissioned —
     the tracker stays open, so the pulse comes from there.
   - Both arrive as one URL; the argument's type distinguishes nothing.
-  - A tracker blocks nothing, so root-style enumeration on one yields an empty
-    forest.
+  - A tracker blocks nothing inside its forest, so root-style enumeration on one yields
+    an empty forest.
   - The natural answer to an empty forest is to build it all again, doubling every
     member.
   - Resolving first is the only thing separating a re-curation from a duplicate
@@ -67,6 +67,23 @@ Not dispatched. Nothing here is read by a run.
   - Every member is blocked by it.
   - Deleting it does not delete the forest; it *commissions* it, silently and
     entirely.
+- **A tracker is untouchable by an order to tear down.**
+  - A tracker is a member, so an early teardown deleted it last, after the rest.
+  - Once an outcome is worth waiting on, other graphs point at it: an initiative, a
+    small fix, another root's member blocked by the tracker before that forest was
+    commissioned. Those edges are not this forest's, and deleting the issue beneath
+    them retracts them silently — the gate opens on work whose dependency never landed.
+  - A scope built by walking outward compounds it: "the issues the tracker blocks" pulls
+    another forest's members into the deletion set, and a two-way walk from the tracker
+    can arrive at a *different* forest's tracker standing as a blocker, and delete that
+    too.
+  - So the order deletes every member that delivers something and leaves any tracker it
+    finds standing, its own included: the record, and everything gated behind it, stay
+    where a human can read them and decide.
+  - The root keeps its membership edge to that tracker, which is what leaves the tracker
+    gated rather than readable as finished work — an open root is an open blocker, so no
+    wrap-up fires and nothing downstream moves until the human closes the root or
+    re-arms the root for curation.
 - **The create path proves it can delete first.**
   - Creating and deleting are granted separately: issues write lets a collaborator
     create freely; deletion needs owner, or admin on that one repository.
@@ -153,6 +170,20 @@ Not dispatched. Nothing here is read by a run.
   edge is either too strong (work cannot start) or too weak (both merge apart
   anyway) — a graph that looks careful and protects nothing. Hence name the mechanism
   in the report rather than overload the edge.
+- **The forest is bounded by the root's membership edges.** Membership is an edge, so
+  the boundary is derivable rather than a matter of taste: the root's membership edges
+  enumerate the forest in one hop, a work-order edge only ever orders members among
+  themselves, and nothing a tracker merely gates joins either way.
+  - An edge out of a tracker is never a membership, because membership edges start at
+    the root, not the tracker; the tracker's role is to be the member every other member
+    blocks, which identifies it but never bounds the forest.
+  - "The tracker blocks nothing" was the old shorthand for the same shape, and it broke
+    the moment a tracker legitimately gated another forest's work: a revisit read a
+    healthy graph as a defect and offered to remove an edge some other root had asked
+    for by name.
+  - Saying *nothing inside its forest* keeps the enumeration, the identification and the
+    drawing rule unchanged; what changed is that an outbound edge is now evidence of
+    another forest's dependency rather than of a malformed forest.
 - **A person's task gates by edge, not by set.** The example's key revocation is an
   execution dependency on the landing axis, but landing means merging a pull request
   and a human task has none, so it cannot join a set. A blocking edge is the only

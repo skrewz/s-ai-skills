@@ -67,10 +67,10 @@ Read these before you touch anything.
 | Term | Means |
 |---|---|
 | **ideation issue** | The human's issue stating an outcome. The forest's root, and its gate. |
-| **forest** | The issues derived from one ideation issue, and the edges between them. |
+| **forest** | The issues derived from one ideation issue, and the edges between them. Membership is a membership edge out of the root, exclusively: an issue the root blocks is in the forest, and no other edge — work-order or a tracker's — puts anything in it. |
 | **member** | Any issue in the forest: a work item, a human task, a set issue, or the tracker. |
 | **work item** | A member an agent implements; a landing label decides only who merges it. |
-| **tracker** | The member blocked by the ideation issue and by every other member, and blocking nothing. Used by agents to communicate with the user after commissioning. |
+| **tracker** | The member blocked by the ideation issue and by every other member, and blocking nothing **inside its forest**. It may gate issues outside the forest — an initiative, a small fix, another root's member that waits on this outcome landing — and doing so makes it no less the tracker. Used by agents to communicate with the user after commissioning. |
 | **set issue** | A member grouping the members that must land together — its *landing set*. Nobody implements it. Holds the label `sync`, which is how the tracker tells it from a work item. |
 | **human task** | A member a person owns, labelled `human-task`: it delivers a decision or an act, not a change. Nobody implements it. |
 | **landing label** | The label that lets an agent land the member's pull request: `agentic-auto-merge` alone, `agentic-sync-merge` as part of a set (§Landing sets). Without one an agent still implements the member and a person merges it; a human task is work nobody implements. |
@@ -132,6 +132,17 @@ it:
 Work-order edges **cross repositories freely**, so put them in the graph.
 Describing an ordering in prose ("do this once example-repo#123 lands") without
 the edge leaves the graph wrong: **prose is not a dependency.**
+
+Membership is decided by one thing alone: a **membership edge out of the root**. That
+edge is the whole of the definition — authoritative, not a convenience. Some of
+these membership edges will mark the initial members (the first to be unblocked
+at commissioning) which serves a double purpose. Apart from such edges from the
+root, a work-order edge never makes a member: it orders members among
+themselves, and an edge from a member to an issue the root does not block says
+nothing about membership. Neither does an edge out of a tracker: membership
+edges originate at the root, so an issue gated by another forest's tracker — an
+initiative, a small fix, a member of another root — waits on that outcome
+landing, which is a fact about *that* issue's forest.
 
 ```
 ideation issue
@@ -223,6 +234,11 @@ flowchart TD
   open. The one thing stated rather than drawn is the tracker's fan — every
   member blocks it, which the tracker's shape already says, and drawing it adds
   nothing but crossings. **Draw what varies; state what is definitional.**
+- **An edge out of a tracker is not drawn.** It gates an issue in **another** forest, so it
+  belongs to no forest drawn here. Nothing reader-facing rides on a `%%` line — Mermaid
+  drops comments, so what is worth saying belongs in the record's prose: one line,
+  `this tracker also gates example-repo#12`. Leave the edge alone: it is not yours to
+  draw, and not yours to remove (§The shape of a forest).
 - Node id is `i_<repo>_<number>`, the repository's non-alphanumerics folded to
   underscores — `i_payments_service_37`. A bare `i37` collides the moment two
   repositories each own a `#37`, and a forest spans repositories by design.
@@ -546,7 +562,8 @@ What the table teaches:
 - Two rows are structure, not work. `outcome-repo#35` carries `ideation`: the
   gate, the origin of every membership edge, and the one issue you neither
   edit nor delete (limits 3 and 4). `outcome-repo#36` carries `outcome`: it
-  implements nothing, blocks nothing, and waits on the whole forest beneath it.
+  implements nothing, blocks nothing inside the forest, and waits on the whole forest
+  beneath it.
   Those two labels are what a machine reads to know what an issue *is*; the others
   only say what may merge, and to whom.
 
@@ -598,13 +615,17 @@ Read-only. If you find yourself writing, you have skipped ahead.
    venue (§Venues). Which issue you were handed decides nothing: a
    re-opened ideation issue moves the venue back even though the dispatch still
    points at the tracker.
-2. Enumerate the forest from the tracker's dependency edges in both directions —
-   what the ideation issue **blocks** and what is **blocked by** it. The union,
-   minus the ideation issue, is the forest. Membership is exactly that edge: not a
-   label, milestone, board or naming convention.
-3. One member is the **tracker**: blocked by every other member, blocking nothing.
-   Identify it from the graph, never from a label alone. If none fits, or more than
-   one does, that is a defect (§Defects), not a choice you make.
+2. Enumerate the forest as the ideation issue's **membership edges**, minus the ideation
+   issue itself: that set, and nothing else, is the forest (§The shape of a forest).
+   Membership is exactly that edge — not a label, milestone, board or naming convention,
+   and not a walk. Never reach an issue along a work-order edge or along a **tracker's
+   outbound edge** and call it a member: neither is a membership edge, and what they
+   reach belongs to another forest or to none.
+3. One member is the **tracker**: the issue the ideation issue blocks that every other
+   member blocks. Identify it from the graph, never from a label alone, and read its
+   outbound edges as context, never as a disqualification — a tracker that gates work
+   outside the forest is the forest's tracker still. If none fits, or more than one
+   does, that is a defect (§Defects), not a choice you make.
 4. For every member, fetch: repository, number, state, title, body, labels,
    assignment, its blocking edges, and any linked pull requests. Note per member
    whether its body ends with the pointer block (§Every member points back), and on
@@ -751,7 +772,10 @@ phase.
   text says "after" or "once X lands" without X among its blockers is a missing
   edge, not a note.
 - The **tracker** is blocked by the ideation issue and by every member, and blocks
-  nothing. Never give it outbound edges.
+  nothing **inside the forest**. Never give it an edge to a member: what orders work is a
+  work-order edge between members, and an edge out of the record would say *the bookkeeping
+  must finish first*. An edge that already runs from a tracker to an issue outside this
+  forest is another forest's doing — leave it, and never make the issue beneath it a member.
 - A member whose pointer block is missing or stale is edited to carry it — the one
   edit not derived from the ideation issue.
 - Create a set issue before the edges blocking it on its members; delete a stale
@@ -777,8 +801,8 @@ equals the manifest:
   on, and no member has an inbound edge you cannot justify;
 - every set issue is blocked by exactly the members it names, names an order, and
   groups at least two of them;
-- the tracker is blocked by the ideation issue, blocked by every member, and
-  blocks nothing;
+- the tracker is blocked by the ideation issue, blocked by every member, and blocks
+  no member of this forest;
 - no member of a landing set also carries `agentic-auto-merge`;
 - no member is labelled `human-task` unless automation cannot take the next step
   (§Human tasks);
