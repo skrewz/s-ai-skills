@@ -61,6 +61,11 @@ Read these before you touch anything.
     landing label. Open a `human-task` member only where automation cannot take the next
     step: an access or dependency no agent has, or a go/no-go at a one-way door (§Human
     tasks). Everything else is a two-way door: decide it and report, don't defer to human.
+12. **No ground, no forest.** Work lives in a repository that exists. Where part of the
+    outcome has no repository to live in — none exists, or the root never said which —
+    stop there and ask, creating nothing anywhere. A repository is a precondition, never
+    a member: not a `human-task` beside a forest with holes in it, whose remaining
+    members wait for a repository to appear.
 
 ## Vocabulary
 
@@ -496,6 +501,9 @@ Grounds worth stating:
   that would decide the shape of two members.
 - **Not implementable as stated** — it relies on a capability that does not exist.
   Search the repositories before claiming this.
+- **No ground for the work** — part of it has no repository to live in. Ask where it
+  belongs, and create nothing this run: that answer decides which members exist
+  (limit 12).
 - **Not decomposable** into work items each verifiable alone. Say so; do not
   invent a boundary.
 - **No observable completion.** Nothing states what "done" looks like.
@@ -517,9 +525,9 @@ How:
   you disapprove of, no member withheld, no "awaiting clarification" issue
   manufactured as a brake. Every member and edge is justified by the outcome *as
   written*; disagreement belongs in prose, where a human can overrule it.
-- **Curate faithfully, then dissent** — unless a contradiction decides which
-  members exist, in which case create nothing further this run and say why in one
-  paragraph.
+- **Curate faithfully, then dissent** — unless a contradiction, or work with no
+  repository to live in (limit 12), decides which members exist, in which case create
+  nothing further this run and say why in one paragraph.
 
 ## A worked example
 
@@ -739,7 +747,9 @@ account you are authenticated as — `admin` is what issue deletion needs. If th
 response carries no `permissions`, ask directly
 (`GET /repos/{owner}/{repo}/collaborators/<your own login>/permission`). A
 repository you cannot read is a repository you cannot create in: a failed read *is*
-a withheld answer. All of them `admin` → apply below. Any one of them not → this run
+a withheld answer. A `404` is not withholding but absence: the repository the manifest
+needs does not exist, which stops the whole forest, not one repository of it
+(limit 12). All of them `admin` → apply below. Any one of them not → this run
 creates **nothing**, in any repository, and reports which ones refused. Repositories
 the manifest only edits or re-links need no probe: you are not making anything there
 that later has to be unmade.

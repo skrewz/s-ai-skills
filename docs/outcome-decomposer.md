@@ -123,6 +123,17 @@ Not dispatched. Nothing here is read by a run.
   - A refusal without its number reads as the agent's discretion — nobody can
     overrule or tune it.
   - Depth counts because the cap counts nodes: a chain of ten is a fan-out of ten.
+- **No ground, no forest.**
+  - A live run stood up seven members and a tracker for an outcome whose central artefact
+    had no repository, filed the missing repository as a `human-task`, and left the rest
+    of that service's issues unwritten "until it exists". Half a forest commissions half
+    an outcome: a deployment member deploys nothing, and the tracker is blocked by members
+    that were never made.
+  - The halt is global where limit 9's is per repository: a repository missing its role is
+    a fact about that repository, a repository missing at all is a fact about the outcome.
+  - A question, not a defect — where the work lives is the human's call, so it goes to the
+    venue and their reply resumes the run. Cost: a root needing a new repository waits one
+    round trip for its forest.
 
 ## Vocabulary
 
@@ -442,10 +453,11 @@ Not dispatched. Nothing here is read by a run.
   looks like diligence — hence absolute, not a matter of taste. The graph says only
   what the outcome as written implies; disagreement goes in prose, where a human can
   overrule it.
-- **"Create nothing further" is allowed in one case.** A contradiction that decides
-  which members exist means there is no coherent forest to write yet. The forest stays
-  inert because it was never completed, not because a hidden gate was added — an
-  observable difference on the tracker, and the reason the run says so in a paragraph.
+- **"Create nothing further" is allowed in two cases.** A contradiction, or a repository
+  that does not exist (limit 12), decides which members exist: there is no coherent forest
+  to write yet. The forest stays inert because it was never completed, not because a hidden
+  gate was added — an observable difference on the tracker, and the reason the run says so
+  in a paragraph.
 - **Dissent is raised once.** An answered objection restated by the human *is* the
   decision. Repeating settled objections is noise, and noise trains a human to skim —
   which costs them the unsettled ones.
