@@ -136,25 +136,33 @@ review one you inferred.
 6. **Submit one review.** Stage every inline comment and post them with the
    summary in a single submission. Never post piecemeal.
 
-   ```markdown **Overall assessment:** <approve / request changes>
+   ```markdown
+   **Overall assessment:** <approve / request changes>
 
-   ## The brief in one sentence <what this change is for, as the issues state it>
+   ## Findings
+   - **<Severity> — <category>** `path/to/file:line` — <one clause; the argument is inline>
 
-   ## Smallest sufficient change? <yes, and why; or no, and what the smaller version looks like>
-
-   ## Unrequested scope
-   - <what the diff adds that no requirement asks for, with file:line>
-
-   ## Issues found
-
-   ### <Severity>—<category> **File:** `path/to/file:line` **Issue:** <what is extra, and which requirement it supposedly serves — or the absence of one>
-   **Suggestion:** <the smaller shape, concretely>
+   ## The brief
+   - <what this change is for, as the issues state it>
+   - <whether this is the smallest shape that meets it; when it is not, the removable pieces are findings>
 
    ## Necessary complexity acknowledged
-   - <complexity the brief genuinely requires, so the record shows it was weighed>
+   - <complexity the brief genuinely requires, or "none">
 
    ## For the other lenses
-   - <optional, one line each; nothing you have built a case on> ```
+   - <one line each, or "none">
+
+   ## Notes
+   - <optional; what a finding cannot carry — an unfamiliar domain, what a domain reader should confirm>
+   ```
+
+   The body is an index, not the review: a finding lives inline on the line
+   carrying the extra, with its **severity**, which requirement it supposedly
+   serves — or the absence of one — and the smaller shape. Restating one in the
+   body is noise that buries the findings that are new. Beyond the index, the
+   brief gets two bullets and necessary complexity one. One bullet per point,
+   nothing over two sentences. Where the forge cannot anchor a comment to a
+   line, carry that finding in the index in full.
 
 7. **Report at most five findings,** most important first. If you found nothing
    above LOW, approve.
@@ -176,7 +184,7 @@ review one you inferred.
 
 ## When you are unsure
 
-If the domain is new to you, say so under a "General notes" heading, judge only
+If the domain is new to you, say so under "Notes", judge only
 what is domain-independent — is the diff bigger than the brief? does it carry
 files it has no business carrying? — and name the parts a domain reader should
 confirm. Do not let unfamiliarity become either an approval or a veto.

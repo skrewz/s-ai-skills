@@ -68,7 +68,8 @@ the merge engine may land the change.
    the leftover will cost the next person who touches this, **LOW** when it is
    only cosmetic. An explained miss is usually fine: leaving a wider cleanup
    out of a focused change is a legitimate call, and one sentence in the
-   description settles it. Say which of the two you concluded.
+   description settles it. Say which of the two you concluded: an unexplained miss
+   goes inline, an explained one gets one line under "Notes".
 
 8. **Documented behaviour.** Docs, README, specification files, CLI help and
    error strings updated where behaviour changed. A change that documents
@@ -197,41 +198,30 @@ review one you inferred.
    commits already resolve, add what they raise, then post. Write against the
    state you last read, never the one you first saw.
 
-6. **Submit one review,** all inline comments staged with the summary:
+6. **Submit one review,** every finding an inline comment on the exact line it
+   concerns, staged with a short summary in a single submission:
 
    ```markdown
    **Overall assessment:** <approve / request changes>
 
-   ## Description and intent
-   <does the description still state what this revision does; are the forge magic
-   strings plain text>
-
-   ## Correctness
-   <does it do what the issue asks; the edge cases you walked and what you concluded>
-
-   ## Issues found
-
-   ### <Severity>—<category>
-   **File:** `path/to/file:line`
-   **Issue:** <what breaks, or what will hurt later, concretely>
-   **Suggestion:** <the change you would make>
-
-   ## Tests
-   <what the change covers, what it does not, what would slip through>
-
-   ## Dependencies
-   <what this change adds or leans on, whether that is the right weight for the
-   job, and what you checked against current stable>
-
-   ## Refactoring the change invited
-   <opportunities this diff created or exposed; which were taken, which were left, and whether leaving them was explained>
-
-   ## Positive observations
-   <what is done well — including the right thing done for the right reasons>
+   ## Findings
+   - **<Severity> — <category>** `path/to/file:line` — <one clause; the argument is inline>
+   - **<Severity> — <category>** PR description — <one clause; expanded here, as no line can carry it>
 
    ## For the other lenses
-   - <optional, one line each>
+   - <one line each, or "none">
+
+   ## Notes
+   - <optional; what a finding cannot carry — praise, an unfamiliar domain, what a domain reader should confirm>
    ```
+
+   The body is an index, not the review: a finding lives inline with its
+   **severity**, what breaks or will hurt later, and the change you would make.
+   Restating one in the body is noise that buries the findings that are new. The
+   list under "What you look for" is what you check, not what you write — no
+   walkthrough of the edge cases that passed. One bullet per point, nothing over
+   two sentences. Where the forge cannot anchor a comment to a line, carry that
+   finding in the index in full.
 
 7. **Five findings maximum,** most consequential first. Lead with what breaks.
 
@@ -250,6 +240,6 @@ review one you inferred.
 
 ## When you lack context
 
-State it plainly under "General notes". Judge the parts that carry across
+State it plainly under "Notes". Judge the parts that carry across
 domains — error handling, tests, naming, structure — and name what a domain
 reader should confirm. Uncertainty is neither an approval nor a veto.
