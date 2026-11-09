@@ -193,7 +193,7 @@ a record's clothes.
 flowchart TD
   i_outcome_repo_35{{"<a href='https://example.com/o/outcome-repo/issues/35' target='_blank' style='color:inherit'>outcome-repo#35 · ideation</a>"}}
   i_outcome_repo_36(["<a href='https://example.com/o/outcome-repo/issues/36' target='_blank' style='color:inherit'>outcome-repo#36 · tracker</a>"])
-  i_payments_service_37["✅ <a href='https://example.com/o/payments-service/issues/37' target='_blank' style='color:inherit'>payments-service#37 · tombstone and retention</a>"]
+  i_payments_service_37["✅ <a href='https://example.com/o/payments-service/issues/37' target='_blank' style='color:inherit;text-decoration:line-through'>payments-service#37 · tombstone and retention</a><br/>closed <YYYY-MM-DD HH:MM> <TZ>"]
   i_payments_service_38["<a href='https://example.com/o/payments-service/issues/38' target='_blank' style='color:inherit'>payments-service#38 · the purge, one command</a>"]
   i_payments_service_39["<a href='https://example.com/o/payments-service/issues/39' target='_blank' style='color:inherit'>payments-service#39 · 410, never 500</a>"]
   i_payments_web_40["<a href='https://example.com/o/payments-web/issues/40' target='_blank' style='color:inherit'>payments-web#40 · honest deletion docs</a>"]
@@ -215,7 +215,7 @@ flowchart TD
   classDef root stroke:#7a5af8,stroke-width:2px
   classDef tracker stroke:#3b82c4,stroke-width:2px
   classDef member stroke:#6b7a8c
-  classDef closed stroke:#8c959f,stroke-dasharray:4 3,text-decoration:line-through,fill:#8c959f,fill-opacity:0.25
+  classDef closed stroke:#3fb950,stroke-dasharray:4 3,fill:#2ea043,fill-opacity:0.25
   class i_outcome_repo_35 root
   class i_outcome_repo_36 tracker
   class i_payments_service_37,i_payments_service_38,i_payments_service_39,i_payments_web_40,i_outcome_repo_41,i_payments_service_42 member
@@ -229,7 +229,7 @@ flowchart TD
 | work item | rectangle `["…"]`, the `member` class |
 | set issue | rectangle, `member` class, its members' numbers in the label |
 | human task | rectangle prefixed `⚑` — a person owns it |
-| a member that is closed | its own shape prefixed `✅`, the `closed` class — struck through, dimmed |
+| a member that is closed | its own shape prefixed `✅`, the `closed` class — tinted green, dashed, its title struck through, then a plain `closed <YYYY-MM-DD HH:MM> <TZ>` line below |
 | membership edge | `-.->` — a **dashed arrow**: it gates, it does not order |
 | work-order edge | `==>`, thick by default |
 | the gate reaching the tracker | `-.->` — dashed like every gate |
@@ -268,6 +268,15 @@ flowchart TD
   navigates the frame holding the diagram, and without `color:inherit` the label takes
   the browser's own link blue, which is unreadable on the dark theme (§Illustrating a
   forest's rationale). An inherit on a `<span>` inside the anchor does nothing.
+- **A closed member carries the strike and the timestamp, not the class.** The `closed`
+  class tints the node green and dashes it, but the **strike goes on the anchor's inline
+  style** — `style='color:inherit;text-decoration:line-through'` — never on the class; a
+  class-level strike crosses the timestamp line too. Below the anchor, on its own
+  `<br/>`, a plain `closed <YYYY-MM-DD HH:MM> <TZ>` line states when it closed: the
+  issue's `closed_at` (UTC) converted to the timezone the site names and taken from the
+  clock (§Site-specific context), exactly as the `Last revisited:` stamp does — a DST-
+  aware zone whose abbreviation the clock chooses, never a zone you write into the
+  source. An open member gets no such line.
 - **One ceiling: the site's `mermaidMaxSourceCharacters`, which the site names.** Past
   it the forge renders *nothing at all*, silently — an absent picture beats a truncated
   one, so a source that size gets collapsed before it is posted, never cut short. Where
