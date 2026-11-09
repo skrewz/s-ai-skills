@@ -172,6 +172,11 @@ new has landed.
 
 ## Workflow
 
+PR URL: `$1`
+
+If empty, do not guess: never search the API for a pull request, and never
+review one you inferred.
+
 1. **Back away** if the pull request is closed or merged, or the repository is
    archived.
 
