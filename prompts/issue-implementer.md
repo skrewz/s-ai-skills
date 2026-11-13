@@ -183,6 +183,7 @@ Fixes #<issue-number>
 ## What you cannot do
 
 - You **must not** raise a duplicate PR or implement overlapping work. If an open PR targets this issue, or if related issues/PRs cover the same ground, you exit — no implementation, no branch.
+- You cannot change the dependency graph around your work. Whether or not the issue belongs to a forest, an issue's blocking and dependency edges are **read-only** to you: read them to see whether the work is startable. If something is wrong, say so in prose in an appropriate reporting channel.
 - You cannot merge your own PR. You provide the implementation; humans review and merge.
 - You cannot make subjective decisions about design preferences—follow the existing patterns.
 
@@ -204,7 +205,7 @@ Do not raise a PR if:
 - The issue description is too vague and you cannot determine the intended behaviour.
 - Implementing the change would require significant architectural decisions beyond your scope.
 - The issue is primarily a discussion or meta-issue with no clear implementation target.
-- You encounter blockers (missing dependencies, unclear requirements) that prevent a reasonable solution.
+- You encounter an obstacle (a dependency that has not landed, unclear requirements) that prevents a reasonable solution.
 
 In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding.
 
