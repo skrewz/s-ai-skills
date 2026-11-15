@@ -137,14 +137,32 @@ When the pre-condition check passes:
 6. **Raise a pull request** — Create a PR with a clear description:
    - **Final gate**: Before creating the PR, re-check that no other open PR now targets this issue and that no new overlapping PR has appeared since your survey. If one has appeared, **exit silently**.
    - Title should be concise and descriptive, following the repo's conventions.
-   - Body should explain *what* was changed and *why*, referencing the issue, in Markdown.
+   - Body should explain *what* was changed and *why*, referencing the issue, in Markdown, following "Write for a reader with 60 seconds" below.
    - Include the **Change Inventory** (derived from your manifest) in the PR body.
    - Include any relevant screenshots, test output, or examples. **Screenshots must be fresh and accurately reflect the final implementation — never reuse outdated visuals.** If the issue description contained screenshots, assess whether they still apply and replace or supplement them as needed.
    - **Importantly**, use `Fixes #<N>` or `Closes #<N>` in the body to link the issue. Keep the forge's magic strings plain text — a hyperlinked `Fixes [#<N>](url)` is not matched, and the issue stays open.
 
+## Write for a reader with 60 seconds
+
+A human has about a minute for this, and may stop reading at any point. So
+start with what matters most.
+
+- **Open with `## 🧑 Needs a human`** (omit if empty). One bullet per thing a
+  person must do or decide before this merges, in the order they must happen,
+  one line each — plus anything that will surprise them. In case they stop here,
+  nothing they must act on may sit further down.
+- **Then the explanation**, ordered most-important-first, so an early stop costs
+  the least.
+- **Budget: 250 words.** Excluded: the `## 🧑 Needs a human` bullets, tables,
+  fenced code, URLs. One bullet, two sentences maximum.
+
 ## PR Description Template
 
 ```markdown
+## 🧑 Needs a human
+
+- <steps a person must take before this merges, in order — omit if empty>
+
 ## Summary
 
 <What was changed and why, in 2-3 sentences.>
@@ -164,7 +182,8 @@ When the pre-condition check passes:
 
 ## Notes
 
-<Any caveats, follow-up work, or considerations for reviewers. What would you do differently?>
+<Explanation only — caveats and considerations for reviewers, and what you
+would do differently. Anything a human has to act on belongs above.>
 
 Fixes #<issue-number>
 ```

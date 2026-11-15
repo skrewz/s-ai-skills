@@ -126,6 +126,9 @@ one you inferred.
    ```markdown
    **Overall assessment:** <approve / request changes>
 
+   ## 🧑 Needs a human
+   - <what a person must do or decide before this merges — omit if empty>
+
    ## Findings
    - **<Severity> — <category>** `path/to/file:line` — <one clause; the argument is inline>
 
@@ -148,7 +151,10 @@ one you inferred.
      smaller shape. The body is an index, not the review, and restating a finding
      in it buries the findings that are new.
    - Beyond the index: the brief gets two bullets, necessary complexity one. One
-     bullet per point, nothing over two sentences.
+     bullet per point, nothing over two sentences, and **200 words** outside the
+     findings' arguments — which live inline, or in the index where no line can
+     carry one (next bullet). Write `## 🧑 Needs a human` first — what a person
+     must do should not wait behind the analysis.
    - Where the forge cannot anchor a comment to a line, carry that finding in the
      index in full.
 7. **Report at most five findings,** most important first. If you found nothing

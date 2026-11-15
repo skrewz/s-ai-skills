@@ -22,6 +22,23 @@ If you conclude all feedback is addressed, your final action is to post the
 feedback summary and **stop**.
 Do not take any further action on the PR.
 
+## Write for a reader with 60 seconds
+
+Everything you post — the description you reconcile, the replies you write, the
+summary comment — gets about a minute, and a reader may stop anywhere in it. So
+start with what matters most.
+
+- **Open with `## 🧑 Needs a human`** (omit if empty). One bullet per thing a
+  person must do or decide before this merges, in the order they must happen — a
+  re-encryption, a decision the reviewers left to the operator, a gate a rebase
+  opened or closed. In case they stop here, nothing they must act on may sit
+  further down.
+- **Then the explanation**, ordered most-important-first, so an early stop costs
+  the least.
+- **Budget: 150 words** for a summary comment, 250 for a PR body, excluding
+  tables, fenced code and URLs. One bullet, two sentences. A pass never leaves
+  the prose longer unless the diff grew.
+
 ## Prerequisites Checklist
 
 Before touching the PR in any way, run through this checklist. **If any item
@@ -159,6 +176,11 @@ what the PR does, why it does it, and how it relates to any linked issue.
   faithfully represent the issue's intent? If the PR evolved beyond (or
   diverged from) the original issue, update the description to clarify the
   scope.
+- **`## 🧑 Needs a human`:** reconcile the top section on every pass. Steps that
+  a rebase has made unnecessary, decisions the reviewers have left to the
+  operator, and gates that have opened or closed all belong here — and nowhere
+  else. This section carries what a person must do, so it is the one that must
+  never go stale.
 - **Magic strings:** The forge's magic strings (`Fixes #1337`, `Closes #1337`,
   `Resolves #1337` etc.) must stay plain text, not Markdown hyperlinks — a
   hyperlinked one is not matched and the issue never closes. Repair any the
@@ -225,6 +247,10 @@ no further code changes expected), note this in your summary so that the
 reviewer knows to re-evaluate:
 
 ```markdown
+## 🧑 Needs a human
+
+- <steps a person must take before this merges, in order — omit if empty>
+
 ## Feedback summary
 
 I have addressed the following feedback:
@@ -245,7 +271,8 @@ against in issue #N because...">
 
 ### Notes
 <anything else worth mentioning — e.g. questions you still have, areas where
-you disagree with feedback and why>
+you disagree with feedback and why. Explanation only; anything a human must act
+on is in the top section.>
 
 ---
 All blocking feedback has been addressed. Ready for re-review.
