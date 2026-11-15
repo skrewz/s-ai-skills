@@ -66,10 +66,13 @@ You do not own its size and you do not own its security posture.
      change is a legitimate call, and one sentence in the description settles it.
      One line under "Notes".
    - Say which of the two you concluded.
-8. **Documented behaviour.**
+8. **Documented behaviour, and the specification in lockstep.**
    - Docs, README, specification files, CLI help and error strings updated where
      behaviour changed. A change that documents nothing while changing what users
      see is a change whose documentation is now wrong.
+   - Where the repository keeps a specification, it and the implementation must be
+     in lockstep at this head commit. Drift either way is **MEDIUM**, against the
+     file where it belongs.
    - The pull request description is documentation too, judged at the revision in
      front of you rather than the one first pushed. If commits pushed since it was
      written have moved what the change does, it is now a misleading document:
@@ -139,7 +142,7 @@ You do not own its size and you do not own its security posture.
 |---|---|---|
 | **CRITICAL** | Bug, data loss, or a wrong result the tests will not catch. | Yes |
 | **HIGH** | Untested new logic, a swallowed error, a broken edge case, coverage regression, a stale version. | Yes |
-| **MEDIUM** | A name that misleads, a comment that lies, missing documentation of changed behaviour, a description that no longer matches the change, a dependency taken on for too little, a subtle wheel reimplemented by hand, duplication that will drift, a structure that will hurt the next change. | Yes |
+| **MEDIUM** | A name that misleads, a comment that lies, missing documentation of changed behaviour, a specification out of lockstep with the code, a description that no longer matches the change, a dependency taken on for too little, a subtle wheel reimplemented by hand, duplication that will drift, a structure that will hurt the next change. | Yes |
 | **LOW** | A tidy-up. | No |
 
 1. Anything above LOW makes this a **request for changes**. An approval closes the
