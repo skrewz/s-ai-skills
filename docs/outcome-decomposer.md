@@ -289,6 +289,46 @@ Not dispatched. Nothing here is read by a run.
   all. Conflating them is how a forest halts for things a two-way door would settle, so
   the prompt says which axis a member sits on by which label it carries.
 
+## Members state intent
+
+- **Review is the customer of this rule.** At review time the question is "does
+  this change solve what the member set out to solve". A body that states only a
+  mechanism leaves the reviewer to reverse-engineer the intent from the diff — and
+  a diff can obey a prescribed mechanism while missing the outcome entirely.
+  Intent plus acceptance criteria gives the review something to check against; a
+  line-number prescription checks only that the instruction was typed correctly.
+  Criteria are calibrated, not maximised: enough to guard the forest's forward
+  progression, loose enough to leave the design to the implementer — criteria
+  naming a mechanism are the banned prescription returning as tests. Motivating
+  examples belong beside the intent rather than inside the criteria: the failure
+  actually seen sharpens what "solved" means, and a concrete case promoted to a
+  criterion reads as required behaviour.
+- **Prescribing design is micro-management whether or not the run has read the
+  code — and reading it makes it worse.** A mechanism named from the outcome
+  alone is a guess dressed as an instruction. A mechanism named after skimming
+  the repository is worse placed: familiarity reads as understanding, and the
+  concrete instructions that follow are well-informed enough to sound decisive
+  and thin enough to be wrong. The implementer, being an agent following
+  instructions, changes those very lines even when the repository suggests
+  better; the design belongs to whoever picks the work up and has to defend it
+  in review.
+- **Mechanism-naming bodies rot.** Code moves without anyone revisiting the
+  forest — no refactor edits issue bodies. A body naming paths, symbols and lines
+  is accurate until the first merge that touches them and false from then on, and
+  a false instruction reads as authoritative precisely when it is stalest. Intent
+  survives refactors; acceptance criteria are the only part of a body still
+  checkable once the code has moved.
+- **Scope boundaries keep the graph honest.** Members of one forest share
+  concerns; without a stated boundary an implementer drifts into the next
+  member's work, one pull request lands two members, and the graph's ordering is
+  quietly bypassed — a missing edge arrived at from the text side (§The shape of a
+  forest argues the graph-side half).
+- **Why a section, a Phase 2 pointer and a Phase 5 assertion.** Live runs produced
+  bodies heavy with file-and-line prescriptions while a one-line Phase 2
+  instruction stood above them. The fix that has worked for this failure class
+  before (§The pointer block) is a rule made checkable at the moment of decision
+  and asserted against afterwards, not another paragraph of prose.
+
 ## The pointer block
 
 - **Every member carries it.** An implementer arrives with one URL and no memory of
@@ -467,7 +507,8 @@ Not dispatched. Nothing here is read by a run.
 - Kept deliberately: for a small local model an example buys more correctness per
   token than any paragraph of rules, showing shape rather than properties.
 - Commentary is one line per lesson; the reasons are the sections above.
-- The lessons, in order: parallel work stays parallel and edges come from consequences;
+- The lessons, in order: rows state what they deliver, and bodies state intent rather
+  than files; parallel work stays parallel and edges come from consequences;
   one sentence plus its echo justifies a set issue; a judgment not to create a set
   still belongs in the report; a human's task exists only where automation cannot take
   the next step, is placed rather than derived, and is never the set issue; a flaw in the
@@ -484,9 +525,11 @@ Not dispatched. Nothing here is read by a run.
 - **Delete-and-recreate is not the default.** Replacing an issue destroys its
   discussion — including the operator's clarifications, which are instruction — and
   burns numbers for nothing. Legitimate only as the degenerate case of a large delta.
-- **"Write it as if for a stranger" is literal.** The next agent on a member may be a
-  re-review or reassignment with nothing but the body. Bodies naming mechanism, files
-  and verification are why an agent that remembers nothing can curate the forest.
+- **"Write it as if for a stranger" is literal.** The next agent on a member may
+  be a re-review or reassignment with nothing but the body. Bodies stating intent,
+  acceptance criteria and boundaries are why an agent that remembers nothing can
+  pick the work up — and why a reviewer has something to check the diff against
+  (§Members state intent).
 - **A written manifest.** Without materialised desired state, "validation" degrades
   into the run agreeing with itself. Phase 5 asserts against the file, and its
   `rationale` column is what makes the report auditable a month later.

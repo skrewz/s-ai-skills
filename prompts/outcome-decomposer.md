@@ -376,6 +376,36 @@ write.
   thread there carries instructions to follow. The edge blocks *when* while the
   textual reference is what sends the implementer to read the human's answer.
 
+## Members state intent
+
+A member body says **what must be true when the member lands**, not how to make
+it true. The implementer explores the repository, designs the change and chooses
+the mechanism; that division is the job's whole shape. A body prescribing the
+design or implementation is micro-management — and it leaves nothing for
+reviewers to review against.
+
+A work-item body therefore carries three things:
+
+- **Intent** — the outcome this member delivers, in the ideation issue's terms,
+  and what is wrong today that makes it needed.
+- **Acceptance criteria** — the observable facts that establish the intent, each
+  checkable without reading a diff: behaviour, output, a command's result. They
+  exist to firm up the intent; everything they leave open is the implementer's
+  problem (and reviewers' job to validate). Thus, acceptance criteria must be
+  sufficient to guard the project's (i.e. the forest's) forward progression and
+  also vague enough to allow an implementer to do their job.
+- **Scope** — what is inside this member and what is deliberately not: the next
+  member's job, a concern the forest places elsewhere, an exclusion the outcome
+  names. Boundaries are what keep one pull request from landing two members.
+- **See also** — if there are concrete examples that motivate the intent,
+  include them here. Omit this section if it would be empty.
+
+
+
+Where the outcome itself names an artefact — the docs page that must stop
+promising instant deletion — name the artefact; the edit to make is still the
+implementer's.
+
 ## Every member points back
 
 An implementer arrives at a member with one URL and no memory of this prompt.
@@ -583,6 +613,8 @@ What the table teaches:
   beneath it.
   Those two labels are what a machine reads to know what an issue *is*; the others
   only say what may merge, and to whom.
+- Every row is stated as what it delivers. Behind the table, each work item's
+  body says intent, acceptance criteria and scope (§Members state intent).
 
 - The three are parallel because nothing orders them: `payments-service#38`,
   `payments-service#39`, `payments-web#40`. Their edges come from consequences, not
@@ -725,9 +757,10 @@ by the concern they address, not by title similarity:
 Delete-and-recreate is a legitimate degenerate case when the delta is large, never
 the default.
 
-Write an edited member as if for a stranger: a title naming the change, a body
-naming the mechanism and the files, and how completion is verified. Never put a
-secret, a token or an internal hostname in a body; use `example.com`-derived
+Write an edited member as if for a stranger who arrives with no context and
+designs the change themselves: a title naming the change, a body stating intent,
+acceptance criteria and scope (§Members state intent). Never
+put a secret, a token or an internal hostname in a body; use `example.com`-derived
 names.
 
 ### Phase 3 — Write the manifest
@@ -826,6 +859,8 @@ equals the manifest:
 - no member is labelled `human-task` unless automation cannot take the next step
   (§Human tasks);
 - no member's body implies a dependency its blockers do not contain;
+- every work-item body states intent, acceptance criteria and scope, and does
+  not unduly prescribe implementation (§Members state intent);
 - every member's landing label is the manifest's `labels`, and every edge in the
   manifest exists and no edge outside it does;
 - the tracker's description carries **one** current-state fence pair and the drawing
