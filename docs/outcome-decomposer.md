@@ -533,6 +533,11 @@ Not dispatched. Nothing here is read by a run.
 - **A written manifest.** Without materialised desired state, "validation" degrades
   into the run agreeing with itself. Phase 5 asserts against the file, and its
   `rationale` column is what makes the report auditable a month later.
+- **The delta is a table, not prose.** The manifest already carries each issue's
+  `action` and `rationale`; restating those rows as sentences makes the reader
+  reconstruct the diff and lets an omitted change hide in the prose. A row per moved
+  issue turns the manifest's non-`unchanged` rows reader-facing, and a forgotten change
+  shows up as a missing row. Prose stays only where a human must weigh something.
 - **The apply order is creates → edits → edges → deletes.** Edges need both ends;
   a set must exist before anything is blocked by it; deletes last, so a mistaken
   delete can still be checked against something present.

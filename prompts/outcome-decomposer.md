@@ -439,7 +439,9 @@ member is missing. Never report a trouble on the ideation issue.
 - **The block is the heading `## This issue is part of a forest`.** Nothing else
   is it. A `## Provenance` section, or any prose merely linking the root, does not
   count however accurate it is. Add the block; leave such prose where it is.
-- **URLs, never bare issue numbers.**
+- **Everything is a link when it can be — URLs, never bare issue numbers.** A member by
+  its `html_url`, a comment by its permalink, source by a commit-pinned
+  `src/commit/<sha>` URL; never a branch, which moves.
 - The tracker names the ideation issue in its own body and does not carry the
   block. Never add the block to the ideation issue (limit 4).
 - A block naming a *different* tracker than this forest's means two forests were
@@ -881,16 +883,37 @@ say.** One comment on the tracker — the record — covering:
 1. **any dissent, or question left open** — ahead of everything else, so the forest
    cannot be commissioned over it; linked to the ideation-issue comment, where one
    is due;
-2. the meta-work performed (issues re-phrased, re-ordered, split, merged);
-3. **blocking edges added and removed, by reference**;
-4. **set issues created and deleted**, and the groups judged independently
-   deployable;
-5. the judgment calls made and what each rested on, **including the decisions taken at
+2. **what moved**, as the change table (§The change table);
+3. the judgment calls made and what each rested on, **including the decisions taken at
    two-way doors rather than asked about** (§Human tasks);
-6. the final state, as the manifest's summary, **and drawn** — the forest as
+4. the final state, as the manifest's summary, **and drawn** — the forest as
    built, per §Illustrating a forest;
-7. every defect raised (§Defects), naming the channel it was raised on and what
+5. every defect raised (§Defects), naming the channel it was raised on and what
    you did not do, plus any cap refusal citing its number.
+
+### The change table
+
+A non-empty delta is a table, not prose. One row per issue this run moved — the
+manifest's non-`unchanged` rows plus every edge change; a member left alone earns no
+row (§Loop-breakers).
+
+| Issue | What went out | What went in | Why |
+|-------|---------------|--------------|-----|
+
+- **Issue** — a link to the member's own `html_url`; for an edge move, the member whose
+  blockers changed.
+- **What went out** — the facet that ceased (issue, title, label, blocker, edge); `—` if created.
+- **What went in** — the facet that stands now; `—` if deleted.
+- **Why** — the manifest `rationale`: the *why*, linking what forced the move.
+
+**Link whatever has an address** — URLs, never bare numbers (§Every member points
+back): a comment by its permalink, a member by its `html_url`, source by a
+commit-pinned `src/commit/<sha>` URL — never a branch, which moves.
+
+A merge is one row (out the vanished issue, in the survivor); a split is the original
+plus a row per new member; an edge or set change is a row on the member or set it
+moves. Order rows by repository, then number, so two records diff row by row. Prose is
+kept only where a human must weigh something — dissent, judgment, defects.
 
 #### Where the report goes
 
