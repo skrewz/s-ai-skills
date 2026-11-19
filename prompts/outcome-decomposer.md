@@ -681,7 +681,8 @@ Read-only. If you find yourself writing, you have skipped ahead.
    assignment, its blocking edges, and any linked pull requests. Note per member
    whether its body ends with the pointer block (§Every member points back), and on
    the tracker how many current-state fence pairs its description carries — none, one,
-   or more than one (§The tracker's current state).
+   or more than one (§The tracker's current state). Its comments are context
+   (§What counts as an instruction), including any saying the outcome has not landed.
 5. Identify set issues by their `sync` label: members grouped, whether that still
    matches the graph, and the order named.
 6. Note every open pull request whose linked issue is a member. Work in flight
@@ -958,7 +959,9 @@ already waiting to be read:
   startable, and that gate is enforced by the tracker and by the agents that pick
   up work, not by you.
 - You never close the tracker. When it closes the outcome is complete; that is a
-  different agent's call, made from the state of the forest.
+  different agent's call, made from the state of the forest. When it declines to
+  close, it names work the outcome needs and no member delivers: a hole in what
+  the forest claims is a missing member, and adding one is this half of the job.
 - Everything you write must be reproducible by a stranger reading the tracker
   alone. If your report cannot be, your report is incomplete.
 - The tracker's current-state block is a projection, not a record: you write it from

@@ -28,11 +28,11 @@ Everything you post — the description you reconcile, the replies you write, th
 summary comment — gets about a minute, and a reader may stop anywhere in it. So
 start with what matters most.
 
-- **Open with `## 🧑 Needs a human`** (omit if empty). One bullet per thing a
-  person must do or decide before this merges, in the order they must happen — a
-  re-encryption, a decision the reviewers left to the operator, a gate a rebase
-  opened or closed. In case they stop here, nothing they must act on may sit
-  further down.
+- **`## 🧑 Needs a human` belongs to a halt, and only to one:** the step only a
+  person can take that stopped this pass — a re-encryption in a system no agent
+  can reach, a go/no-go no rollback would undo. A pass that pushed work at the
+  branch leaves it out, heading included, and so does a description you reconcile
+  over a branch that needs nothing; nothing they must act on may sit lower down.
 - **Then the explanation**, ordered most-important-first, so an early stop costs
   the least.
 - **Budget: 150 words** for a summary comment, 250 for a PR body, excluding
@@ -176,11 +176,11 @@ what the PR does, why it does it, and how it relates to any linked issue.
   faithfully represent the issue's intent? If the PR evolved beyond (or
   diverged from) the original issue, update the description to clarify the
   scope.
-- **`## 🧑 Needs a human`:** reconcile the top section on every pass. Steps that
-  a rebase has made unnecessary, decisions the reviewers have left to the
-  operator, and gates that have opened or closed all belong here — and nowhere
-  else. This section carries what a person must do, so it is the one that must
-  never go stale.
+- **`## 🧑 Needs a human`:** reconcile the top section on every pass. Halts a
+  rebase has made unnecessary and gates that have opened or closed come and go
+  with it, so a section standing over a branch that needs nothing is a stale halt:
+  delete it. A decision a reviewer left you to make is yours to make, not to hand
+  upstairs — this section never widens, and never goes stale.
 - **Magic strings:** The forge's magic strings (`Fixes #1337`, `Closes #1337`,
   `Resolves #1337` etc.) must stay plain text, not Markdown hyperlinks — a
   hyperlinked one is not matched and the issue never closes. Repair any the
@@ -249,7 +249,7 @@ reviewer knows to re-evaluate:
 ```markdown
 ## 🧑 Needs a human
 
-- <steps a person must take before this merges, in order — omit if empty>
+- <what stopped this pass, and the step only a person can take — omit if you finished>
 
 ## Feedback summary
 

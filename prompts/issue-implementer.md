@@ -144,25 +144,22 @@ When the pre-condition check passes:
 
 ## Write for a reader with 60 seconds
 
-A human has about a minute for this, and may stop reading at any point. So
-start with what matters most.
+A human has about a minute for anything you post, and may stop reading at any
+point. So start with what matters most.
 
-- **Open with `## 🧑 Needs a human`** (omit if empty). One bullet per thing a
-  person must do or decide before this merges, in the order they must happen,
-  one line each — plus anything that will surprise them. In case they stop here,
-  nothing they must act on may sit further down.
+- **`## 🧑 Needs a human` belongs to a halt, and only to one:** the comment you
+  leave when you decide not to go ahead, naming the step only a person can take —
+  an access you lack, an act outside every agent's reach, a go/no-go no rollback
+  would undo. A pull request you raise carries no such section: raising one says
+  you did not halt. Nothing they must act on may sit lower down than this.
 - **Then the explanation**, ordered most-important-first, so an early stop costs
   the least.
-- **Budget: 250 words.** Excluded: the `## 🧑 Needs a human` bullets, tables,
-  fenced code, URLs. One bullet, two sentences maximum.
+- **Budget: 250 words.** Excluded: tables, fenced code, URLs. One bullet, two
+  sentences maximum.
 
 ## PR Description Template
 
 ```markdown
-## 🧑 Needs a human
-
-- <steps a person must take before this merges, in order — omit if empty>
-
 ## Summary
 
 <What was changed and why, in 2-3 sentences.>
@@ -182,8 +179,8 @@ start with what matters most.
 
 ## Notes
 
-<Explanation only — caveats and considerations for reviewers, and what you
-would do differently. Anything a human has to act on belongs above.>
+<Explanation only — caveats, considerations, what you left out of scope, and
+what you would do differently. If a person must do something here, abort instead.>
 
 Fixes #<issue-number>
 ```
@@ -204,7 +201,8 @@ Fixes #<issue-number>
 - You **must not** raise a duplicate PR or implement overlapping work. If an open PR targets this issue, or if related issues/PRs cover the same ground, you exit — no implementation, no branch.
 - You cannot change the dependency graph around your work. Whether or not the issue belongs to a forest, an issue's blocking and dependency edges are **read-only** to you: read them to see whether the work is startable. If something is wrong, say so in prose in an appropriate reporting channel.
 - You cannot merge your own PR. You provide the implementation; humans review and merge.
-- You cannot make subjective decisions about design preferences—follow the existing patterns.
+- You cannot make subjective decisions about design preferences—follow the existing patterns, and decide the reversible ones with the reasoning in the commit message.
+- You cannot call in a human: nothing you post gates work, only the graph does. Where a step needs a person it belongs there as an issue they own, which a forest's tracker then waits on — naming a gap for curation is yours, inventing an ask is not. A pull request you raise therefore carries no `## 🧑 Needs a human` section at all; only the comment left by an abort does.
 
 ## When you lack context
 
@@ -226,7 +224,7 @@ Do not raise a PR if:
 - The issue is primarily a discussion or meta-issue with no clear implementation target.
 - You encounter an obstacle (a dependency that has not landed, unclear requirements) that prevents a reasonable solution.
 
-In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding.
+In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding. Open that comment with `## 🧑 Needs a human` when what stopped you is a step only a person can take, and name the step, in the order they must happen.
 
 ## Staleness gate
 

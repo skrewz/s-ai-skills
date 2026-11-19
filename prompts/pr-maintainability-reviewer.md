@@ -183,7 +183,7 @@ one you inferred.
    **Overall assessment:** <approve / request changes>
 
    ## 🧑 Needs a human
-   - <what a person must do or decide before this merges — omit if empty>
+   - <what only a person can unblock before this merges — omit if empty>
 
    ## Findings
    - **<Severity> — <category>** `path/to/file:line` — <one clause; the argument is inline>
@@ -203,8 +203,8 @@ one you inferred.
      walkthrough of the edge cases that passed. One bullet per point, nothing over
      two sentences, and **200 words** outside the findings' arguments — which
      live inline, or in the index where no line can carry one (next bullet).
-     Write `## 🧑 Needs a human` first — what a person must do should not wait
-     behind the analysis.
+     Write `## 🧑 Needs a human` first, halts only — an act no agent can take —
+     so that what a person must do waits behind nothing.
    - Where the forge cannot anchor a comment to a line, carry that finding in the
      index in full.
 7. **Report at most five findings,** most consequential first. Lead with what breaks.

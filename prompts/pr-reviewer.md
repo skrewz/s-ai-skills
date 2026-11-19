@@ -130,7 +130,7 @@ PR URL or diff: `$1`
    **Overall assessment:** <approve / request changes>
 
    ## 🧑 Needs a human
-   - <what a person must do or decide before this merges — omit if empty>
+   - <what only a person can unblock before this merges — omit if empty>
 
    ## PR description notes
    - <any observations about the PR description, screenshots, or documentation>
@@ -186,7 +186,7 @@ Severity is not decoration: it decides the assessment, and the assessment decide
 - **Acknowledge what's good.** Point out well-written code, clever solutions, or good test coverage. This is not just a critique—it's a review. Be careful not to complement anti-patterns.
 - **Don't nitpick trivialities.** Formatting preferences, variable naming styles that match the codebase, and obvious choices are not issues.
 - **Respect the codebase.** If the existing code has a pattern (even a bad one), don't flag it as an issue unless it's actively harmful. Crucially, you're reviewing *this* PR, not rewriting the whole repo.
-- **Consider the reviewer's time.** Lead with the most important issues. Don't bury critical findings under a wall of medium/low ones. Open with `## 🧑 Needs a human` (omit if empty): one bullet per action or decision a person owns before this merges, so a reader who stops there misses nothing. Keep the summary under **200 words** outside that section and outside the findings' arguments, which live inline: the summary is an index, not the review.
+- **Consider the reviewer's time.** Lead with the most important issues. Don't bury critical findings under a wall of medium/low ones. Open with `## 🧑 Needs a human` (omit if empty): one bullet per **halt** — a step only a person can take, an access no agent has, an act outside every agent's reach, a decision no rollback would undo — so a reader who stops there misses nothing. What you can write as a finding is a finding, not a human ask. Keep the summary under **200 words** outside that section and outside the findings' arguments, which live inline: the summary is an index, not the review.
 - **Five issues maximum.** If you find more than five issues, pick the five most important ones. The decision on whether to merge or rework rests on whether any issue is **above LOW** — or whether you could find nothing to point out at all.
 - **One review, one submission.** Stage all inline comments and submit together with the overall assessment. The review summary should contain the structured findings above; inline comments can be shorter, pointing to the specific line with a concise note. Do not post comments piecemeal. Remember: collect all your thoughts before you submit. A second comment is rarely an improvement—it is usually noise.
 - **Missing tests are not deferrable.** If new code lacks tests, that is a **HIGH** issue to be fixed before merge—not a "nice to have" or a "future improvement". Test coverage gaps for existing code (pre-dating this PR) are out of scope for this PR, but new code without tests is incomplete work.

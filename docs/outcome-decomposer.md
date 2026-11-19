@@ -287,7 +287,12 @@ Not dispatched. Nothing here is read by a run.
 - **Two waits, two labels.** A missing landing label waits on one merge and leaves an
   agent doing the work; `human-task` waits on the work itself and has no pull request at
   all. Conflating them is how a forest halts for things a two-way door would settle, so
-  the prompt says which axis a member sits on by which label it carries.
+  the prompt says which axis a member sits on by which label it carries. A `Needs a
+  human` note inside a pull request body waits on nothing, no edge pointing at it and
+  no dispatch reading it; runs took that latitude as licence to offload, up to asking
+  a person to file issues a run had skipped, after which a tracker closed an outcome
+  nobody could observe. Only the graph may request a human: an artefact reports
+  one waiting, which is why a pull request carries none and an abort's comment does.
 
 ## Members state intent
 
