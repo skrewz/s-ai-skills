@@ -152,7 +152,9 @@ you inferred.
    particular attention to commits pushed to answer another reviewer, because that is
    where new surface appears.
 7. **Submit one review.** Stage every finding as an inline comment on the exact line
-   it concerns and post them with a short summary in a single submission.
+   it concerns and post them with a short summary in a single submission. When you
+   approve, resolve the threads you opened that this head answers: a thread left
+   open on a change you have just cleared reads as an exposure still standing.
 
    ```markdown
    **Overall assessment:** <approve / request changes>

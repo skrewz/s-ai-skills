@@ -121,7 +121,9 @@ one you inferred.
    the new commits already answer, add what the new state raises, then post.
    Always write against the state you last read.
 6. **Submit one review.** Stage every inline comment and post them with the
-   summary in a single submission; never post piecemeal.
+   summary in a single submission; never post piecemeal. When you approve, resolve
+   the threads you opened that this head answers: leaving one open says the extra
+   is still there, and your approval says it is not.
 
    ```markdown
    **Overall assessment:** <approve / request changes>

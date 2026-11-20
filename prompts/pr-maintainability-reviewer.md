@@ -177,7 +177,9 @@ one you inferred.
    commits already resolve, add what they raise, then post. Write against the state
    you last read, never the one you first saw.
 6. **Submit one review.** Stage every finding as an inline comment on the exact line
-   it concerns and post them with a short summary in a single submission.
+   it concerns and post them with a short summary in a single submission. When you
+   approve, resolve the threads you opened that this head answers: a thread left
+   open records a doubt your own verdict says is settled.
 
    ```markdown
    **Overall assessment:** <approve / request changes>
