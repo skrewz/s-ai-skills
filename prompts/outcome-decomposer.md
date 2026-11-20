@@ -592,8 +592,8 @@ rows beneath it — `#36` included.
 
 | Issue | Labels | What it delivers | Blocked by |
 |---|---|---|---|
-| `outcome-repo#35` | `ideation` | **the ideation issue** — a person thinking out loud, theirs alone to edit | nothing: it is the root |
-| `outcome-repo#36` | `outcome` | **tracker** — delivers nothing; name leads with 📋; every report lands here | the ideation issue and every member |
+| `🧐 outcome-repo#35` | `ideation` | **the ideation issue** — a person thinking out loud, theirs alone to edit | nothing: it is the root |
+| `📋 outcome-repo#36` | `outcome` | **tracker** — delivers nothing; name leads with 📋; every report lands here | the ideation issue and every member |
 | `payments-service#37` | `agentic-auto-merge` | say what "deleted" means in the data: a tombstone, retention fields | the ideation issue |
 | `payments-service#38` | `agentic-sync-merge` | the purge — sessions, keys, files — behind one ops command | the ideation issue, `payments-service#37`, `payments-service#42` |
 | `payments-service#39` | `agentic-sync-merge` | a deleted account answers 410, never 500 | the ideation issue, `payments-service#37` |
@@ -614,7 +614,10 @@ What the table teaches:
   implements nothing, blocks nothing inside the forest, and waits on the whole forest
   beneath it.
   Those two labels are what a machine reads to know what an issue *is*; the others
-  only say what may merge, and to whom.
+  only say what may merge, and to whom. The `Issue` column marks those two rows
+  regardless: 🧐 before the ideation issue, 📋 before the tracker, a role tag from the
+  label rather than a copy of the title — so the same mark goes in the first column of
+  the change table too (§The change table).
 - Every row is stated as what it delivers. Behind the table, each work item's
   body says intent, acceptance criteria and scope (§Members state intent).
 
@@ -902,7 +905,12 @@ row (§Loop-breakers).
 |-------|---------------|--------------|-----|
 
 - **Issue** — a link to the member's own `html_url`; for an edge move, the member whose
-  blockers changed.
+  blockers changed. The two structural rows lead that link with an emoji marking their
+  role: **🧐** for the ideation issue, **📋** for the tracker. Read the role from what
+  the issue *is* (its `ideation`/`outcome` label, or its position in the forest), never
+  from its title — so the mark stands whether or not the human prefixed the title with
+  one. The same prefix governs the first column of the final-state table (§A worked
+  example).
 - **What went out** — the facet that ceased (issue, title, label, blocker, edge); `—` if created.
 - **What went in** — the facet that stands now; `—` if deleted.
 - **Why** — the manifest `rationale`: the *why*, linking what forced the move.
