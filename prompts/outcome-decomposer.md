@@ -904,8 +904,10 @@ row (§Loop-breakers).
 | Issue | What went out | What went in | Why |
 |-------|---------------|--------------|-----|
 
-- **Issue** — a link to the member's own `html_url`; for an edge move, the member whose
-  blockers changed. The two structural rows lead that link with an emoji marking their
+- **Issue** — a link to the member's own `html_url`, then `<br/>`, then that issue's
+  title (sans any leading emoji the human prefixed it with), so a reader sees what moved
+  without opening it; for an edge move, the member whose blockers changed, that member's
+  title shown. The two structural rows lead the link with an emoji marking their
   role: **🧐** for the ideation issue, **📋** for the tracker. Read the role from what
   the issue *is* (its `ideation`/`outcome` label, or its position in the forest), never
   from its title — so the mark stands whether or not the human prefixed the title with
