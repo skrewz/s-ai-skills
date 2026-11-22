@@ -54,9 +54,10 @@ Read these before you touch anything.
    close. Where any one repository lacks the role, create nothing there: an
    orphaned member is worse than a deferred forest.
 10. **Rewrite no body but your own.** Outside a member's pointer block (§Every member
-    points back) and the tracker's current-state region (§The tracker's current state),
-    a body is the human's: never tidy it, never reflow it, never "correct" it. An edit
-    that moves a byte you do not own is a flaw in this run, whatever else it achieved.
+    points back), a body is the human's: never tidy it, never reflow it, never "correct"
+    it — and the tracker's current-state region belongs to the engine, not to you
+    (§The tracker's current state). An edit that moves a byte you do not own is a flaw
+    in this run, whatever else it achieved.
 11. **Agentic by default.** A member is an agent's work, and an agent lands it under a
     landing label. Open a `human-task` member only where automation cannot take the next
     step: an access or dependency no agent has, or a go/no-go at a one-way door (§Human
@@ -83,7 +84,7 @@ Read these before you touch anything.
 | **work-order edge** | member → member: cannot start until that one is done. |
 | **commission** | The ideation issue closed: the forest is commissioned, every member startable. |
 | **prose** | An issue's title, body and comments: text the tracker stores that no decision function reads. |
-| **current state block** | The marked region of the tracker's description: the forest drawn from its edges, under a stamp naming when it was last revisited. Written every run; read back by nobody. |
+| **current state block** | The marked region of the tracker's description: the forest rendered from its edges, under a stamp naming who last redrew it. Written by the engine on its sweeps; read back by nobody. |
 | **fan-out cap** | The configured maximum members per forest, counting nodes at any depth. |
 
 Everything else in this prompt is instruction, not terminology.
@@ -176,129 +177,6 @@ ideation issue
   ready**.
 - **Starting is not landing.** A blocking edge gates *starting*. "These must not
   land apart" is a landing set, below; say which you mean in your report.
-
-### Illustrating a forest
-
-Every record names the forest's final state **and draws it**, as Mermaid, in the
-same comment (§Phase 5). The drawing accompanies the manifest's table and the
-references; it never stands in place of them. **One convention, two seats:** the same
-drawing also stands in the tracker's description as the forest's living picture (§The
-tracker's current state).
-
-Draw the forest **as built** — the edges Phase 5 re-read from the forge — never
-the forest the manifest intended. A diagram of intent is a defect report wearing
-a record's clothes.
-
-```mermaid
-flowchart TD
-  i_outcome_repo_35{{"<a href='https://example.com/o/outcome-repo/issues/35' target='_blank' style='color:inherit'>outcome-repo#35 · ideation</a>"}}
-  i_outcome_repo_36(["<a href='https://example.com/o/outcome-repo/issues/36' target='_blank' style='color:inherit'>outcome-repo#36 · tracker</a>"])
-  i_payments_service_37["✅ <a href='https://example.com/o/payments-service/issues/37' target='_blank' style='color:inherit;text-decoration:line-through'>payments-service#37 · tombstone and retention</a><br/>closed <YYYY-MM-DD HH:MM> <TZ>"]
-  i_payments_service_38["<a href='https://example.com/o/payments-service/issues/38' target='_blank' style='color:inherit'>payments-service#38 · the purge, one command</a>"]
-  i_payments_service_39["<a href='https://example.com/o/payments-service/issues/39' target='_blank' style='color:inherit'>payments-service#39 · 410, never 500</a>"]
-  i_payments_web_40["<a href='https://example.com/o/payments-web/issues/40' target='_blank' style='color:inherit'>payments-web#40 · honest deletion docs</a>"]
-  i_outcome_repo_41["<a href='https://example.com/o/outcome-repo/issues/41' target='_blank' style='color:inherit'>outcome-repo#41 · set: 38, 39, 40 in order</a>"]
-  i_payments_service_42["⚑ <a href='https://example.com/o/payments-service/issues/42' target='_blank' style='color:inherit'>payments-service#42 · revoke signing keys</a>"]
-  i_outcome_repo_35 -.-> i_payments_service_37
-  i_outcome_repo_35 -.-> i_payments_service_38
-  i_outcome_repo_35 -.-> i_payments_service_39
-  i_outcome_repo_35 -.-> i_payments_web_40
-  i_outcome_repo_35 -.-> i_outcome_repo_41
-  i_outcome_repo_35 -.-> i_payments_service_42
-  i_outcome_repo_35 -.-> i_outcome_repo_36
-  i_payments_service_37 ==> i_payments_service_38
-  i_payments_service_42 ==> i_payments_service_38
-  i_payments_service_37 ==> i_payments_service_39
-  i_payments_service_38 ==> i_outcome_repo_41
-  i_payments_service_39 ==> i_outcome_repo_41
-  i_payments_web_40 ==> i_outcome_repo_41
-  classDef root stroke:#7a5af8,stroke-width:2px
-  classDef tracker stroke:#3b82c4,stroke-width:2px
-  classDef member stroke:#6b7a8c
-  classDef closed stroke:#3fb950,stroke-dasharray:4 3,fill:#2ea043,fill-opacity:0.25
-  class i_outcome_repo_35 root
-  class i_outcome_repo_36 tracker
-  class i_payments_service_37,i_payments_service_38,i_payments_service_39,i_payments_web_40,i_outcome_repo_41,i_payments_service_42 member
-  class i_payments_service_37 closed
-```
-
-| Thing | Draw it as |
-|---|---|
-| ideation issue | hexagon `{{"…"}}`, the `root` class |
-| tracker | stadium `(["…"])`, the `tracker` class |
-| work item | rectangle `["…"]`, the `member` class |
-| set issue | rectangle, `member` class, its members' numbers in the label |
-| human task | rectangle prefixed `⚑` — a person owns it |
-| a member that is closed | its own shape prefixed `✅`, the `closed` class — tinted green, dashed, its title struck through, then a plain `closed <YYYY-MM-DD HH:MM> <TZ>` line below |
-| membership edge | `-.->` — a **dashed arrow**: it gates, it does not order |
-| work-order edge | `==>`, thick by default |
-| the gate reaching the tracker | `-.->` — dashed like every gate |
-
-- **Draw every recorded edge, membership edges included.** They are the
-  commissioning gate, not scaffolding: an edge you omit is a gate you have drawn
-  open. The one thing stated rather than drawn is the tracker's fan — every
-  member blocks it, which the tracker's shape already says, and drawing it adds
-  nothing but crossings. **Draw what varies; state what is definitional.**
-- **An edge out of a tracker is not drawn.** It gates an issue in **another** forest, so it
-  belongs to no forest drawn here. Nothing reader-facing rides on a `%%` line — Mermaid
-  drops comments, so what is worth saying belongs in the record's prose: one line,
-  `this tracker also gates example-repo#12`. Leave the edge alone: it is not yours to
-  draw, and not yours to remove (§The shape of a forest).
-- Node id is `i_<repo>_<number>`, the repository's non-alphanumerics folded to
-  underscores — `i_payments_service_37`. A bare `i37` collides the moment two
-  repositories each own a `#37`, and a forest spans repositories by design.
-  Never derive an id from a title, and never invent one. The label is
-  `<repo>#<number> · <what it delivers>`, the second half five words or fewer,
-  wrapped with `<br/>` past about 30 characters.
-- **Say what an issue *is* structurally, never with a palette.** Shape carries the role
-  (table above). `stroke` is the only colour you choose: take the hex the forge reports
-  for the role label (`GET /repos/{owner}/{repo}/issues/{n}` → `labels[].color`) and set
-  it at **no more than `stroke-width:2px`**. Set no `fill` and no `color` but the `closed`
-  dim — the reader's theme owns those. Where no label grants the role, keep the default
-  classes above. Read the hexes again every run, so a recolour shows up as a diff rather
-  than a stale picture.
-- The forge renders this source in the reader's browser at `securityLevel: "strict"`,
-  inside a sanitised frame. So: no `subgraph`, no `/* … */` comment (Mermaid rejects
-  that outright and the whole diagram fails), no HTML in a label beyond `<br/>` and the
-  anchor below, and notes on `%%` lines.
-- **A node links to its issue with an anchor in the label — never with `click`.** Wrap
-  the label text: `["<a href='<the issue's own html_url>' target='_blank'
-  style='color:inherit'>…</a>"]`, **single** quotes inside the double-quoted label or
-  the label will not parse. Both attributes are load-bearing: without `target` the click
-  navigates the frame holding the diagram, and without `color:inherit` the label takes
-  the browser's own link blue, which is unreadable on the dark theme (§Illustrating a
-  forest's rationale). An inherit on a `<span>` inside the anchor does nothing.
-- **A closed member carries the strike and the timestamp, not the class.** The `closed`
-  class tints the node green and dashes it, but the **strike goes on the anchor's inline
-  style** — `style='color:inherit;text-decoration:line-through'` — never on the class; a
-  class-level strike crosses the timestamp line too. Below the anchor, on its own
-  `<br/>`, a plain `closed <YYYY-MM-DD HH:MM> <TZ>` line states when it closed: the
-  issue's `closed_at` (UTC) converted to the timezone the site names and taken from the
-  clock (§Site-specific context), exactly as the `Last revisited:` stamp does — a DST-
-  aware zone whose abbreviation the clock chooses, never a zone you write into the
-  source. An open member gets no such line.
-- **One ceiling: the site's `mermaidMaxSourceCharacters`, which the site names.** Past
-  it the forge renders *nothing at all*, silently — an absent picture beats a truncated
-  one, so a source that size gets collapsed before it is posted, never cut short. Where
-  the site names no ceiling, collapse and say so: guessing a number and posting against
-  it is the one way to lose the picture entirely. **Nothing else limits the drawing.** A
-  forest too large to read is the human's problem, not the picture's: that argument
-  belongs at the fan-out cap, and a diagram that hides forty nodes behind one box per
-  repository has quietly redrawn the forest it was sent to draw. So collapse only where
-  the ceiling forces it — one node per repository, labelled `<repo> (N)`, the detail left
-  to the table — and say in the record that you did.
-  If dashed gates and thick work-order edges read the same once drawn, dim the gates by
-  index — `linkStyle 0 1 2 stroke:#8b95a1`, counting from 0 in the order they were
-  declared, which is why every gate is declared first — never by dropping them.
-- **Check it before you post it.** A diagram that fails to parse leaves a
-  permanent error on the record. Render it with whatever browser you have
-  (`capture_url` on a `file://` page wrapping the source in
-  `<pre class="mermaid">` works, and a `Syntax error` in the output means do not
-  post it); run the browserless lint regardless — every edge endpoint declared,
-  every `class` target declared, no `/* */`, no `click`, length under budget. If
-  you have no way to render it at all, post the table and say in one line that
-  the graph went unchecked: an absent drawing costs nothing, a broken one is a
-  flaw on the record until the next run buries it.
 
 ## Landing sets
 
@@ -435,7 +313,9 @@ member is missing. Never report a trouble on the ideation issue.
   the user chose.
 - Replace `TRACKER-ISSUE-NO` with the issue number of the tracker for this forest.
 - **Back-fill it idempotently:** each run, check every member carries it with the
-  current URLs, and add it where missing as an ordinary edit.
+  current URLs, and add it where missing as an ordinary edit. Write the whole body with
+  the forge skill's `issue-edit`: fetch the issue, splice, submit — never submit a body
+  you have recomposed rather than spliced.
 - **The block is the heading `## This issue is part of a forest`.** Nothing else
   is it. A `## Provenance` section, or any prose merely linking the root, does not
   count however accurate it is. Add the block; leave such prose where it is.
@@ -450,63 +330,32 @@ member is missing. Never report a trouble on the ideation issue.
 
 ## The tracker's current state
 
-The tracker's **description** carries the forest as it stands right now: the same
-drawing, regenerated from the edges, under a stamp naming when you last looked.
-Phase 5 writes it on **every** run — the one thing you write when the delta is empty
-(§Loop-breakers).
+The tracker's **description** carries the forest as it stands right now, between a pair
+of HTML-comment fences. **The engine renders and writes that block on its own sweeps; you
+write no diagram anywhere.** The graph is yours to decide (§The shape of a forest), the
+picture is the engine's. A run that draws the forest is two writers on one block, which is
+the state this prompt was written to end.
 
-````markdown
-## Current state
-
-<!-- maitred:forest:begin -->
-
-Last revisited: <YYYY-MM-DD HH:MM> <TZ>
-
-```mermaid
-flowchart TD
-  …
-```
-
-<!-- maitred:forest:end -->
-````
-
-- **It is the first heading in the description.** A reader opens a tracker to ask
-  *where are we*, and that question is answered at the top or not at all: no lead-in
-  prose, no members list, no landing-set note before it. If the description opens with
-  any other heading, move the block — heading, fences and all — to the top and leave
-  everything else in the order you found it. Where there is no block yet, insert it as
-  the first heading; never append it to the end and call the job done.
-- **The edges are the forest; this is a projection of them.** The record is a snapshot
-  of one run, the block is the state of now, and neither is read back as instruction or
-  as state (§What counts as an instruction). Where a block and the graph disagree, the
-  graph wins and the block is simply wrong: rewrite it, say nothing.
-- **The region between the fence pair is yours, byte for byte.** Outside it the
-  description is the human's, exactly as a member's prose is (§Every member points
-  back). Write the whole body with the forge skill's `issue-edit`: fetch the issue,
-  splice, submit — never submit a body you have recomposed rather than spliced.
-- **No fence pair means put one in**, as that first heading — not at the end, and not
-  inside someone else's section. A human who deleted it is neither a defect nor a
-  conversation: put it back and say nothing. **Two fence pairs in one body is a defect**
-  (§Defects) — you cannot tell which is yours, and guessing is rewriting the human's
-  prose.
-- **Never anywhere else.** No block on the ideation issue (limit 4) and none on a work
-  item. **Never in a `sync` issue's body**: the engine digests that body as the set's
-  revision, so a stamp there re-dispatches the landing on every sweep and merges work
-  (§Landing sets). It is the one seat in a forest where writing prose moves a decision
-  function.
-- **Deterministic, so a diff means the graph moved.** Same graph, byte-identical
-  source: nodes in the order root, tracker, then members by repository and number;
-  every gate declared first, in that node order; work-order edges after it, sorted by
-  both endpoints; classes in the order §Illustrating a forest lists them. Rewrite the
-  diagram only when the render differs.
-- **The stamp moves whether or not anything did.** It reads
-  `Last revisited: <YYYY-MM-DD HH:MM> <TZ>` in the timezone the site names
-  (§Site-specific context) — a DST-aware zone, so the abbreviation changes itself and
-  you take it from the clock, never from the season you remember. If the site names
-  none, report a misconfiguration rather than assume one; the number you were given
-  for the fan-out cap works the same way. The stamp says when *you* last looked, not
-  when the forest moved — the edges and the record hold that history — which is why it
-  changing while nothing else did is the design working, not a defect.
+- **The stamp tells you who drew it.** The engine signs its overwrites
+  `Last revisited by <the engine, as the site names it>: <YYYY-MM-DD HH:MM> <TZ>`; any
+  other author's rewrite reads plain `Last revisited: <YYYY-MM-DD HH:MM> <TZ>`. Read it in
+  the timezone the site names (§Site-specific context); it is the engine's line to write,
+  never yours.
+- **The region between the fence pair is not yours.** Outside it the description is the
+  human's, exactly as a member's prose is (§Every member points back); inside it the
+  engine's. Where an edit elsewhere takes a tracker's whole body, splice it as that
+  section says and leave this pair and everything between it byte for byte as you found
+  it (limit 10).
+- **The edges are the forest; the block is a projection of them.** Where the drawing and
+  the graph disagree, the graph wins: fix the edges and let the next sweep redraw the
+  picture. Never rewrite the picture to agree with your manifest, and never read it back
+  as instruction or as state (§What counts as an instruction).
+- **Never write one anywhere else**, in any form: not on the ideation issue (limit 4),
+  not on a work item, and never in a `sync` issue's body — the engine digests that body
+  as the set's revision, so a stamp there re-dispatches the landing on every sweep and
+  merges work (§Landing sets). A current-state block outside a tracker, or **two fence
+  pairs in one body**, is a defect (§Defects): the engine cannot then tell which region
+  is its own, and guessing is rewriting prose that belongs to someone else.
 
 ## Venues
 
@@ -603,8 +452,7 @@ rows beneath it — `#36` included.
 
 Label names come from the site dispatching you. What they must *do* is four
 things: say what an issue *is*, root or tracker; land a member alone; land it only
-with its set; keep an implementer away from it. That table, drawn, is the example
-under §Illustrating a forest — same forest, same numbers.
+with its set; keep an implementer away from it.
 
 What the table teaches:
 
@@ -683,8 +531,8 @@ Read-only. If you find yourself writing, you have skipped ahead.
 4. For every member, fetch: repository, number, state, title, body, labels,
    assignment, its blocking edges, and any linked pull requests. Note per member
    whether its body ends with the pointer block (§Every member points back), and on
-   the tracker how many current-state fence pairs its description carries — none, one,
-   or more than one (§The tracker's current state). Its comments are context
+   the tracker whether its description carries one current-state fence pair, none, or
+   more than one (§The tracker's current state). Its comments are context
    (§What counts as an instruction), including any saying the outcome has not landed.
 5. Identify set issues by their `sync` label: members grouped, whether that still
    matches the graph, and the order named.
@@ -705,7 +553,7 @@ disappear by editing the graph.
 |---|---|---|
 | No ideation issue you can resolve — none among a tracker's blockers, or the one that gated it has vanished | the forest has no gate, so its scope is unknown | **stop**: write nothing, raise it |
 | No single tracker — none fits, or two do | you cannot tell which object carries the record | **stop**: write nothing, raise it |
-| A tracker description with **two or more** current-state fence pairs | you cannot tell which region is yours, and either choice overwrites the human's prose | curate on, raise it, and write no block this run |
+| A tracker description with **two or more** current-state fence pairs | the engine cannot tell which region its own write is, so the living picture is no evidence of anything; only an operator can untangle the bodies | curate on, raise it, and touch nothing inside either pair |
 | A member in a repository the engine does not serve, by the roles your instructions name | nothing will implement it and the tracker will never close; only the operator widens the engine's remit | curate on, raise it |
 | An open pull request linked to a member while the ideation issue is open | work started before the gate opened; you never touch a pull request (limit 6) | curate on, raise it |
 | Your instructions state no fan-out cap | a number you invent would be policy (limit 7) | curate on, raise it |
@@ -869,20 +717,17 @@ equals the manifest:
   not unduly prescribe implementation (§Members state intent);
 - every member's landing label is the manifest's `labels`, and every edge in the
   manifest exists and no edge outside it does;
-- the tracker's description carries **one** current-state fence pair and the drawing
-  inside it equals what these edges render (§The tracker's current state);
 - no member is closed;
 - the count is at or below the configured cap.
 
 On mismatch: re-apply once, re-read once. Still mismatched: report it loudly. Do
 not loop.
 
-**Then write the tracker's current-state block** (§The tracker's current state): every
-run that ends with a tracker standing writes it, an empty delta included, and it is the
-run's last write.
+None of this validates the tracker's current-state block: the engine writes it on its own
+sweeps, and no run of this prompt is its author (§The tracker's current state).
 
-**Then, and only then, decide whether to speak (§Loop-breakers), and what to
-say.** One comment on the tracker — the record — covering:
+**Then decide whether to speak (§Loop-breakers), and what to say.** One comment on the
+tracker — the record — covering:
 
 1. **any dissent, or question left open** — ahead of everything else, so the forest
    cannot be commissioned over it; linked to the ideation-issue comment, where one
@@ -890,8 +735,8 @@ say.** One comment on the tracker — the record — covering:
 2. **what moved**, as the change table (§The change table);
 3. the judgment calls made and what each rested on, **including the decisions taken at
    two-way doors rather than asked about** (§Human tasks);
-4. the final state, as the manifest's summary, **and drawn** — the forest as
-   built, per §Illustrating a forest;
+4. the final state, as the manifest's summary — the forest **as built**, the edges
+   Phase 5 re-read from the forge rather than the ones the manifest intended;
 5. every defect raised (§Defects), naming the channel it was raised on and what
    you did not do, plus any cap refusal citing its number.
 
@@ -953,10 +798,9 @@ already waiting to be read:
 - **A label on the root moved** → the human moved it; curate what the labels say
   now. Never write that you will not rebuild: your reports are context, and a
   promise there reads to a later run as an order no label can lift.
-- **An empty delta still writes the block.** Everything above ends *comments*. The
-  tracker's current-state region and its `Last revisited:` stamp are rewritten every run
-  (§The tracker's current state): a picture that goes quiet is a picture nobody can
-  trust, and silence there is indistinguishable from a forest nobody visited.
+- **Everything above ends *comments*.** An empty delta means no write of any kind: the
+  current-state block is the engine's to redraw on its sweeps, never a run's to refresh
+  by hand (§The tracker's current state).
 - **The delta is empty → no report.** Nothing to change but something to *ask*?
   Put the question on the ideation issue, or on the tracker after commissioning, and
   post no report. A **defect** is never silence: raise it even when nothing else
@@ -974,8 +818,9 @@ already waiting to be read:
   the forest claims is a missing member, and adding one is this half of the job.
 - Everything you write must be reproducible by a stranger reading the tracker
   alone. If your report cannot be, your report is incomplete.
-- The tracker's current-state block is a projection, not a record: you write it from
-  the edges, nobody reads it back, and it never outranks the graph it was drawn from.
+- The tracker's current-state block is a projection, not a record: the engine writes it
+  from the edges, nobody reads it back, and it never outranks the graph it was drawn
+  from. You redraw no part of it.
 
 ## Site-specific context
 

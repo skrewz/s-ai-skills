@@ -192,8 +192,8 @@ Not dispatched. Nothing here is read by a run.
     the moment a tracker legitimately gated another forest's work: a revisit read a
     healthy graph as a defect and offered to remove an edge some other root had asked
     for by name.
-  - Saying *nothing inside its forest* keeps the enumeration, the identification and the
-    drawing rule unchanged; what changed is that an outbound edge is now evidence of
+  - Saying *nothing inside its forest* keeps the enumeration and the identification
+    rules unchanged; what changed is that an outbound edge is now evidence of
     another forest's dependency rather than of a malformed forest.
 - **A person's task gates by edge, not by set.** The example's key revocation is an
   execution dependency on the landing axis, but landing means merging a pull request
@@ -398,63 +398,70 @@ Not dispatched. Nothing here is read by a run.
   only what curation makes wrong: that section is not wrong, and the human may have
   written it. Two prose forms of one fact is untidy; an unreviewed deletion is not.
 
-## Illustrating a forest
+## Who draws the forest
 
-- **The old 4 500-character budget was never measured.** It arrived with the drawing
-  convention carrying the claim that "the forge refuses 5 000 and renders nothing", an
-  assumed upstream default. Read from this instance's own page configuration the ceiling
-  is `mermaidMaxSourceCharacters: 50000`, so the number guarded a limit ten times away
-  and the work it was actually doing was legibility. Recorded so nobody reinstates it as
-  a safety margin.
-- **Legibility is not the diagram's problem.** A forest too large to read is an
-  argument about the fan-out cap — the human's call about scope, not the curator's call
-  about aesthetics. Collapsing repositories into single boxes to make a picture restful
-  has the graph quietly redrawn, which is the one thing a drawing of the forest must not
-  be. So collapse only where the ceiling forces it, and say so in the record.
+The drawing and the tracker's current-state block left this prompt for the engine, which
+renders that block from the edges on its own sweeps. The engine's own history carries the
+provenance — the write, making it run by default, and signing its writes as the engine's
+are three separate steps there. The rule the move was for is a single one: **one writer per
+block**. While both wrote, a fresh picture was no evidence of anything — the prompt might
+have drawn it minutes before a sweep — and every convention below was argued twice, in two
+repositories, with nothing to keep the two honest.
 
-## The tracker's current state block
-
-- **The description, not another comment.** A record is what a run said; the
-  description is what the forest is, and it is the first thing the forge puts in front
-  of a human who opens the tracker. The forest's drawing belongs where a person looks,
-  not below the eleventh run's prose.
-- **It is a projection, and that word is load-bearing.** Everything this role writes is
-  otherwise prose that gates nothing (§The pointer block). This block is the exception
-  made safe by its placement: a `sync` issue's body *is* read — the engine digests it
-  as the landing set's revision, so a stamp inside one would re-dispatch the landing
-  every sweep and merge work. Naming that seat as forbidden, rather than trusting the
-  agent to sense which bodies are read, is what keeps prose prose.
+- **The graph stays here.** The engine draws; this role still decides the forest, its
+  edges and its landing sets. Cutting the drawing out of a prompt must not cut the
+  reasoning out with it, and a slimming pass that drops an edge rule because it once sat
+  beside a Mermaid example has gone too far.
+- **An engine write names the engine.** A stamp naming the engine against a plain
+  `Last revisited:` is what lets a reader say who drew a picture from the block alone, no
+  log and no diff. With the engine refreshing that picture on sweeps, the stamp is the only
+  evidence anyone has of who moved it, which makes the attribution — not the drawing — the
+  load-bearing half of the arrangement. The site names the exact line the engine signs
+  with.
+- **A projection belongs in the description, not in another comment.** A record is what a
+  run said; the description is what the forest is, and it is the first thing the forge
+  puts in front of a human who opens the tracker. The placement is safe only because of
+  where it is *not*: a `sync` issue's body is read — the engine digests it as the landing
+  set's revision, so a stamp inside one re-dispatches the landing every sweep and merges
+  work. Naming that seat forbidden, rather than trusting an agent to sense which bodies
+  are read, is what keeps prose prose — which is why the prompt still forbids it even
+  though the prompt no longer writes blocks.
 - **The stamp moves when nothing else does, on purpose.** A reader must be able to tell
-  "the forest is quiet" from "nobody is looking". A stamp that advanced only on change
-  would say *quiet* for a curator that had silently stopped — the failure mode this
-  role is most obliged to make loud, paid for here with a little edit-history churn.
-  It is the one write that survives an empty delta, and the silence rule is stated as
-  governing *comments* because it was written long before an unconditional write
-  existed.
-- **Byte-stable rendering is what makes the churn survivable.** If the diagram's own
-  bytes wandered (node order, edge order, class order), a human reading the tracker's
-  history could not see the changes that were also the graph moving. So the render is
-  an order, not an improvisation.
-- **First heading, on purpose.** The block answers *where are we*, and a reader who has
-  to scroll past a members list to find it will not find it. Placement is stated as a
-  rule because leaving it to judgement ends with the block appended to the bottom, where
-  it is true, current, and never seen — the exact failure a living picture has to avoid.
-- **Every styling rule in §Illustrating a forest is a measurement, not a taste.** The
-  frame mermaid renders into carries mermaid's own CSS and no theme variables, so
-  anything coloured in diagram source is theme-blind: a hard-coded light `fill` came out
-  near-white on the dark theme, an uncoloured anchor came out the user-agent blue
-  (`rgb(0, 0, 238)`) on a node the dark theme filled `rgb(31, 32, 32)`, and `click`'s
-  `_blank` is discarded under `securityLevel: "strict"` — so that click navigates the
-  frame and the forest is replaced by the page. Measured in that frame, an anchor's
-  `style='color:inherit'` returns the theme's own label colour (`rgb(204, 204, 204)`, the
-  same an unlinked node reports); the same inherit on a `<span>` inside the anchor returns
-  the blue, which is why the attribute sits where it does. All of it probed against a
-  live Forgejo, 2026-11-01. Change a rule only with a measurement of your own.
-- **Two fence pairs stop the run rather than get resolved.** Choosing between two
-  regions means guessing which is prose, and a guess there is limit 10 broken with
-  confidence. Reporting and writing nothing is the only honest move.
-- The markers are HTML comments so the rendered page shows a heading, a line and a
-  diagram — the machinery is invisible where a human reads it.
+  "the forest is quiet" from "nobody is looking", and a stamp that advanced only on change
+  would say *quiet* for an engine that had silently stopped — the failure mode most
+  obliged to be made loud. The unconditional write that carried that proof is the
+  engine's now, so the prompt's silence rule governs *comments* and nothing else; the
+  engine's own stamp, moving on a sweep that dispatched no curation run, is what still
+  answers the question.
+- **Legibility is not the drawing's problem.** A forest too large to read is an argument
+  about the fan-out cap — a human's call about scope, not a curator's call about
+  aesthetics — and it stays this role's business. A renderer that collapsed repositories
+  into single boxes to make a picture restful would have the graph quietly redrawn, which
+  is the one thing a picture of the forest must not be.
+- **Two fence pairs in one body are reported, not resolved.** Choosing between two regions
+  means guessing whose prose is whose, and a guess there is limit 10 broken with
+  confidence. Neither writer can pick one safely, so this role curates on, raises it, and
+  touches nothing inside either pair — a narrower refusal than the old "write no block
+  this run", which was about a write this role no longer makes.
+- **The measurements outlive the rules.** The rules they justify live with the renderer
+  now; the findings are kept here so nobody re-litigates them from scratch:
+  - *The 4 500-character budget was never measured.* It arrived with a drawing convention
+    claiming "the forge refuses 5 000 and renders nothing", an assumed upstream default.
+    Read from this instance's own page configuration the ceiling is
+    `mermaidMaxSourceCharacters: 50000`, so the number guarded a limit ten times away and
+    the work it was actually doing was legibility. Nobody should reinstate it as a safety
+    margin.
+  - *Every styling rule was a measurement, not a taste.* The frame mermaid renders into
+    carries mermaid's own CSS and no theme variables, so anything coloured in diagram
+    source is theme-blind: a hard-coded light `fill` came out near-white on the dark
+    theme, an uncoloured anchor came out the user-agent blue (`rgb(0, 0, 238)`) on a node
+    the dark theme filled `rgb(31, 32, 32)`, and `click`'s `_blank` is discarded under
+    `securityLevel: "strict"` — so that click navigates the frame and the forest is
+    replaced by the page. Measured in that frame, an anchor's `style='color:inherit'`
+    returns the theme's own label colour (`rgb(204, 204, 204)`, the same an unlinked node
+    reports); the same inherit on a `<span>` inside the anchor returns the blue, which is
+    why the attribute sits where it does. All of it probed against a live Forgejo,
+    2026-11-01. Change a rule only with a measurement of your own.
 
 ## Venues
 
