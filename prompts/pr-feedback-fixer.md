@@ -203,9 +203,11 @@ what the PR does, why it does it, and how it relates to any linked issue.
 
 #### Rebased or updated branch
 
-If the branch is significantly behind the target:
+If the branch is significantly behind the target, or data has leaked into a
+commit reachable from the PR head:
 
-- Rebase onto the target branch.
+- Rebase, squash or filter onto the target branch. If you're handling a leak,
+  validate it's gone from history.
 - Resolve any conflicts carefully, preserving your changes.
 - Force-push only if you are confident. Double-check that the PR is yours at
   this stage.
@@ -290,7 +292,7 @@ is in order.
 | Situation | Response |
 |---|---|
 | **Bug / correctness issue** | Fix immediately; push a commit |
-| **Security concern** | Fix immediately; push a commit; explain in comment |
+| **Security concern or data leak** | Fix immediately; push a commit, or rewrite the branch if it sits in history; explain in comment |
 | **Missing tests** | Add tests; push a commit |
 | **Unclear code** | Add clarifying comments or rename; push a commit |
 | **Genuine question** | Reply with explanation |

@@ -204,7 +204,10 @@ you inferred.
 - Treat an "approval review dismissed automatically" notice, a revisit summary or a
   merge note as feedback.
 - Defer a leakage or authorisation finding to a follow-up. It is either fixed before
-  this lands or it is on the internet.
+  this lands or it is on the internet. A blob reachable from the PR head is the
+  fixer's to make unreachable by rewriting the branch; once that lands the exposure
+  is closed at the head, and only the forge's garbage-collection and the merge
+  strategy remain — a human halt, not a CRITICAL you re-file each revision.
 
 ## When you lack context
 
