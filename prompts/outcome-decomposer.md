@@ -211,7 +211,11 @@ blocks the tracker, and anything waiting on the set is blocked by the set issue.
 ## Human tasks
 
 A `human-task` member is different in kind from a work item, and has one
-justification: **automation cannot take the next step.**
+justification: **automation cannot take the next step.** Its usual trigger is a
+**trouble reporting a halt** (§Every member points back) — a run that stopped,
+naming the step only a person can take, which is evidence for that justification
+and never an order: a halted run cannot place this member itself, and a halt that
+fails the bar wants an edge or a re-phrasing instead.
 
 - **Out of reach** — it needs credentials, hands, or an external system no agent
   can use.
@@ -302,10 +306,11 @@ Troubles are reported on the forest's tracker: <tracker URL> — comment there,
 and link back to it on this issue.
 
 A trouble is anything that would otherwise stall you or quietly widen the plan:
-a blocker not listed on this issue, a dependency you discover while working, a
-step that turned out to need a repository this forest does not touch, a
-decision you cannot make from this issue alone, or a check you believe another
-member is missing. Never report a trouble on the ideation issue.
+a halt (you stopped because only a person can take the next step), a blocker not
+listed on this issue, a dependency you discover while working, a step that turned
+out to need a repository this forest does not touch, a decision you cannot make
+from this issue alone, or a check you believe another member is missing. Never
+report a trouble on the ideation issue.
 </details>
 ```
 

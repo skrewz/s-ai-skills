@@ -199,7 +199,7 @@ Fixes #<issue-number>
 ## What you cannot do
 
 - You **must not** raise a duplicate PR or implement overlapping work. If an open PR targets this issue, or if related issues/PRs cover the same ground, you exit — no implementation, no branch.
-- You cannot change the dependency graph around your work. Whether or not the issue belongs to a forest, an issue's blocking and dependency edges are **read-only** to you: read them to see whether the work is startable. If something is wrong, say so in prose in an appropriate reporting channel.
+- You cannot change the dependency graph around your work. Whether or not the issue belongs to a forest, an issue's blocking and dependency edges are **read-only** to you: read them to see whether the work is startable. If something is wrong, say so in prose where a stall belongs: the forest's tracker, if the issue has one.
 - You cannot merge your own PR. You provide the implementation; humans review and merge.
 - You cannot make subjective decisions about design preferences—follow the existing patterns, and decide the reversible ones with the reasoning in the commit message.
 - You cannot call in a human: nothing you post gates work, only the graph does. Where a step needs a person it belongs there as an issue they own, which a forest's tracker then waits on — naming a gap for curation is yours, inventing an ask is not. A pull request you raise therefore carries no `## 🧑 Needs a human` section at all; only the comment left by an abort does.
@@ -224,7 +224,7 @@ Do not raise a PR if:
 - The issue is primarily a discussion or meta-issue with no clear implementation target.
 - You encounter an obstacle (a dependency that has not landed, unclear requirements) that prevents a reasonable solution.
 
-In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding. Open that comment with `## 🧑 Needs a human` when what stopped you is a step only a person can take, and name the step, in the order they must happen.
+In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding. Open that comment with `## 🧑 Needs a human` when what stopped you is a step only a person can take, and name the step, in the order they must happen. A halt is a trouble, so where the issue carries a `## This issue is part of a forest` block, leave that halt on the tracker the block names too — one line pointing back here, since curation re-reads the tracker and not the member, and placing a member is curation's alone.
 
 ## Staleness gate
 

@@ -33,6 +33,8 @@ start with what matters most.
   can reach, a go/no-go no rollback would undo. A pass that pushed work at the
   branch leaves it out, heading included, and so does a description you reconcile
   over a branch that needs nothing; nothing they must act on may sit lower down.
+  Where the linked issue carries a `## This issue is part of a forest` block, that
+  halt is also a trouble, reported on the tracker the block names.
 - **Then the explanation**, ordered most-important-first, so an early stop costs
   the least.
 - **Budget: 150 words** for a summary comment, 250 for a PR body, excluding
@@ -179,8 +181,9 @@ what the PR does, why it does it, and how it relates to any linked issue.
 - **`## 🧑 Needs a human`:** reconcile the top section on every pass. Halts a
   rebase has made unnecessary and gates that have opened or closed come and go
   with it, so a section standing over a branch that needs nothing is a stale halt:
-  delete it. A decision a reviewer left you to make is yours to make, not to hand
-  upstairs — this section never widens, and never goes stale.
+  delete it, and withdraw it on the tracker where you raised it. A decision a
+  reviewer left you to make is yours to make, not to hand upstairs — this section
+  never widens, and never goes stale.
 - **Magic strings:** The forge's magic strings (`Fixes #1337`, `Closes #1337`,
   `Resolves #1337` etc.) must stay plain text, not Markdown hyperlinks — a
   hyperlinked one is not matched and the issue never closes. Repair any the
