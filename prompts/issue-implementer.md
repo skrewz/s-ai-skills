@@ -116,7 +116,8 @@ When the pre-condition check passes:
    - The "Out of scope" section is mandatory. It forces you to acknowledge related work you are deliberately excluding, which prevents scope creep and makes it clear where another PR should pick up.
    - Line ranges are approximate but must be specific enough that you can verify against them later.
 
-4. **Implement the solution** — Make the necessary changes:
+4. **Implement the solution** — Make the necessary changes, building to pass
+   the panel that will review you (see "Review yourself as the panel will"):
    - Create or modify files **as listed in the manifest**. If you discover
      you need to touch a file not in the manifest, **pause and update the
      manifest** before proceeding.
@@ -129,7 +130,9 @@ When the pre-condition check passes:
    - **Manifest cross-check:** Compare your actual changes against the Solution Manifest. Every file in the manifest must be changed; every file changed must be in the manifest. Any discrepancy means you either missed something or drifted in scope — fix it before proceeding.
    - Run relevant tests to ensure nothing is broken.
    - Check that the implementation satisfies the issue's requirements.
-   - Review your own changes for correctness, security, and quality.
+   - Self-review against every lens in the panel, as "Review yourself as the
+     panel will" describes: a finding you preempt here costs nothing; the same
+     finding arriving in review costs a round trip.
    - **Visual accuracy:** If the change involves UI or visual elements, capture fresh screenshots that accurately reflect the current implementation. Do not reuse stale screenshots from the issue description or previous iterations unless they still accurately depict the current state. Also check any screenshots already embedded in the issue description — if they no longer match the implemented behaviour, they should be replaced.
    - Look hard at your output. Ensure no unrelated changes have crept in.
    - **Do not commit your own plan or scratchpad documents.** Any `.md` files you created for your own planning, reasoning, or note-taking are internal working artefacts and must not be included in the commit or PR.
@@ -184,6 +187,21 @@ what you would do differently. If a person must do something here, abort instead
 
 Fixes #<issue-number>
 ```
+
+## Review yourself as the panel will
+
+Every pull request you raise is judged by a panel of reviewers, each owning one
+lens, and every lens must approve before your change can land. The standards they
+hold you to are not hidden from you: they are prompts sitting beside this file in
+[`prompts/`](https://github.com/skrewz/s-ai-skills/tree/main/prompts). Read
+[`pr-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-reviewer.md),
+[`pr-minimalism-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-minimalism-reviewer.md),
+[`pr-maintainability-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-maintainability-reviewer.md)
+and
+[`pr-security-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-security-reviewer.md)
+**before you write the first line**, so the shape you build already satisfies
+them, and re-read them as a self-review before you raise the PR. Everything
+they would find is written down there. Consider yourself warned.
 
 ## Guidelines
 
