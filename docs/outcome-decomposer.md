@@ -229,8 +229,10 @@ Not dispatched. Nothing here is read by a run.
 ## Human tasks
 
 - **Why they are rare.** A human task stops the branch that reaches it and everything
-  downstream of it, while the rest of the forest finishes early and then waits. So the cost
-  is the waiting rather than the work inside the issue, paid in wall-clock and in the
+  downstream of it, while the rest of the forest finishes early and then waits. That is
+  also why it hangs off the member whose blocked report raised it: the wait lands on a
+  branch already stuck, not on one that would otherwise have run. So the cost is the
+  waiting rather than the work inside the issue, paid in wall-clock and in the
   operator's attention. Asking often also trains them to skim, which makes the questions
   that genuinely need an answer harder to get read (the same reason dissent is raised once,
   §Pushing back). Which is why §The shape of a forest says *used sparingly*: a budget of
@@ -240,10 +242,14 @@ Not dispatched. Nothing here is read by a run.
   hands, a system outside every repository the forest touches — or the step stands at a
   **one-way door**. The body carries the reason under "Why this was judged to need a
   human" so a reader can check the call, the way the defect list lets a reader check a
-  defect (§Defects). A **halt** reported on the tracker (§The pointer block) is how that
-  fact reaches this role, halted runs being unable to place the member themselves — so it
-  is evidence for this justification rather than an instruction to obey it, the same check
-  the body's own reason is put to.
+  defect (§Defects). A report of being blocked, left on the tracker (§The pointer block),
+  is how that fact reaches this role — a pass that could not get past a step, or a
+  disagreement between agents no revision settles, neither able to place the member
+  itself — so it is evidence for this justification rather than an instruction to obey it,
+  the same check the body's own reason is put to. Settling one is this role's, and the
+  questions go in order: is a person needed at all, and what is the least they can be asked
+  to do. A decision taken in one line beats a task someone must carry out, so a forest
+  asks for hands last.
 - **One-way doors and two-way doors**, the Amazon distinction the rules borrow: a two-way
   door is a step or decision that can be reverted with little effort, a one-way door is one
   that cannot. Rollback covers the ordinary engineering decision, so the agent decides it,
@@ -347,10 +353,10 @@ Not dispatched. Nothing here is read by a run.
   a member, an edge, a re-phrasing. The link exists because whoever arrives at the
   member has no memory of the forest, and a comment is what makes them look. Text in
   one place; a copy in two drifts and the stale one wins. Trouble recorded only where
-  nobody looks is a stall wearing a better hat. A **halt** is the one trouble whose text
-  stays where it was written — an abort's comment, a reconciled pull request body, prose
-  its own later passes revise — and whose tracker entry is a pointer instead, a pointer
-  going stale in one line where two copies would go stale disagreeing.
+  nobody looks is a stall wearing a better hat. A **blocked report** is the one trouble
+  whose text stays where it was written — an abort's comment, a reconciled pull request
+  body, prose its own later passes revise — and whose tracker entry is a pointer instead,
+  a pointer going stale in one line where two copies would go stale disagreeing.
 - **The tracker carries no block.** It has no forest to point into — it *is* the
   forest's live object. It names the root in its own body: the same information
   without the second-person framing.

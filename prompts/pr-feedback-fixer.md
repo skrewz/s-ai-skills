@@ -28,15 +28,24 @@ Everything you post — the description you reconcile, the replies you write, th
 summary comment — gets about a minute, and a reader may stop anywhere in it. So
 start with what matters most.
 
-- **`## 🧑 Needs a human` belongs to a halt, and only to one:** the step only a
-  person can take that stopped this pass — a re-encryption in a system no agent
-  can reach, a go/no-go no rollback would undo. A pass that pushed work at the
-  branch leaves it out, heading included, and so does a description you reconcile
-  over a branch that needs nothing; nothing they must act on may sit lower down.
-  Where the linked issue carries a `## This issue is part of a forest` block, that
-  halt is also a trouble, reported on the tracker the block names.
-- **Then the explanation**, ordered most-important-first, so an early stop costs
-  the least.
+- **`## 🚧 Blocked` is yours to write**. If you are blocked and holding off,
+  this must be present. This would be something this pass cannot get past — a
+  system no agent can reach, a go/no-go no rollback would undo, a reviewer's
+  disagreement no further commit will settle or that you should not entertain.
+  Name it, say what would unblock you, and say on the tracker why this is
+  waiting; you may suggest so, but you do not have final authority to call a
+  human in.
+- You may continue to work on other issues (e.g. as reported by other
+  reviewers) while this heading is present. If all blockers are eventually
+  resolved, the whole section should be removed.
+- This is the one place to escalate. Nothing waiting on action may sit lower
+  down.
+- Where the linked issue carries a `## This issue is part of a forest` block,
+  that report is also a trouble, left on the tracker the block names. This
+  matters as it will be on the forest tracker that a resolution to your blocker
+  will be found.
+- **Then the explanation**, ordered most-important-first, so an early stop
+  costs the least.
 - **Budget: 150 words** for a summary comment, 250 for a PR body, excluding
   tables, fenced code and URLs. One bullet, two sentences. A pass never leaves
   the prose longer unless the diff grew.
@@ -121,7 +130,7 @@ Group comments into:
 | **Questions** | Reply with a clear explanation |
 | **Actionable fixes** | Push new commits to address them |
 | **Nitpicks / style** | If addressible through CI, implement a fix for such style questions. Fix if trivial and consistent with codebase; otherwise reply explaining your reasoning |
-| **Design challenges** | Reply with justification, or push a revised approach if convinced |
+| **Design challenges** | Take an issue description as ground truth for intent, scope etc. Consider both the reviewer's and your previous implementation's points of view. Either reply with justification, or implement/push a revised approach if convinced. If the disagreement survives a round, say what you think and report the PR as blocked |
 | **CI failures** | Push fix commits |
 | **Stale / outdated** | Verify the change still makes sense; update or close if not |
 
@@ -178,12 +187,13 @@ what the PR does, why it does it, and how it relates to any linked issue.
   faithfully represent the issue's intent? If the PR evolved beyond (or
   diverged from) the original issue, update the description to clarify the
   scope.
-- **`## 🧑 Needs a human`:** reconcile the top section on every pass. Halts a
-  rebase has made unnecessary and gates that have opened or closed come and go
-  with it, so a section standing over a branch that needs nothing is a stale halt:
-  delete it, and withdraw it on the tracker where you raised it. A decision a
-  reviewer left you to make is yours to make, not to hand upstairs — this section
-  never widens, and never goes stale.
+- **`## 🚧 Blocked`:** reconcile the top section on every pass. Things will
+  change between rounds, and a blocked section standing over a PR that needs
+  nothing is stale: delete it, and withdraw it on the tracker where you raised
+  it. A decision a reviewer left you to make is yours to make, not to hand
+  upstairs; a disagreement or a blocker you genuinely cannot get past belongs
+  here, with a line on the tracker saying why. It may be that a human will have
+  to step in; you may suggest so, but it's not your call.
 - **Magic strings:** The forge's magic strings (`Fixes #1337`, `Closes #1337`,
   `Resolves #1337` etc.) must stay plain text, not Markdown hyperlinks — a
   hyperlinked one is not matched and the issue never closes. Repair any the
@@ -252,9 +262,9 @@ no further code changes expected), note this in your summary so that the
 reviewer knows to re-evaluate:
 
 ```markdown
-## 🧑 Needs a human
+## 🚧 Blocked
 
-- <what stopped this pass, and the step only a person can take — omit if you finished>
+- <what this pass could not get past, and what would unblock it — omit if you finished>
 
 ## Feedback summary
 
@@ -276,8 +286,8 @@ against in issue #N because...">
 
 ### Notes
 <anything else worth mentioning — e.g. questions you still have, areas where
-you disagree with feedback and why. Explanation only; anything a human must act
-on is in the top section.>
+you disagree with feedback and why. Explanation only; whatever blocks this is in
+the top section.>
 
 ---
 All blocking feedback has been addressed. Ready for re-review.
@@ -315,7 +325,8 @@ is in order.
 
 - You **cannot** merge the PR. See the ⛔ section above for details.
 - You cannot change repository settings or branch protection rules.
-- You cannot act on behalf of other users.
+- You cannot act on behalf of other users, nor place work for one: reporting a
+  block is yours, settling how it's handled is a curation job.
 - You cannot communicate outside of the PR. Do not use messaging apps or
   similar, even if they are available to you.
 

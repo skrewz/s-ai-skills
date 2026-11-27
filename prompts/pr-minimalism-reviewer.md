@@ -128,9 +128,6 @@ one you inferred.
    ```markdown
    **Overall assessment:** <approve / request changes>
 
-   ## 🧑 Needs a human
-   - <what only a person can unblock before this merges — omit if empty>
-
    ## Findings
    - **<Severity> — <category>** `path/to/file:line` — <one clause; the argument is inline>
 
@@ -155,8 +152,9 @@ one you inferred.
    - Beyond the index: the brief gets two bullets, necessary complexity one. One
      bullet per point, nothing over two sentences, and **200 words** outside the
      findings' arguments — which live inline, or in the index where no line can
-     carry one (next bullet). Write `## 🧑 Needs a human` first, halts only — an
-     act no agent can take — so what a person must do waits behind nothing.
+     carry one (next bullet). Where you think this change is blocked on
+     something no agent can do, say what you think as a finding: you call it out,
+     and the author decides what blocks it.
    - Where the forge cannot anchor a comment to a line, carry that finding in the
      index in full.
 7. **Report at most five findings,** most important first. If you found nothing

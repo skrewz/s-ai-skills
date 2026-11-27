@@ -150,11 +150,14 @@ When the pre-condition check passes:
 A human has about a minute for anything you post, and may stop reading at any
 point. So start with what matters most.
 
-- **`## 🧑 Needs a human` belongs to a halt, and only to one:** the comment you
-  leave when you decide not to go ahead, naming the step only a person can take —
-  an access you lack, an act outside every agent's reach, a go/no-go no rollback
-  would undo. A pull request you raise carries no such section: raising one says
-  you did not halt. Nothing they must act on may sit lower down than this.
+- **`## 🚧 Blocked` is yours to write, and yours alone to decide on:** the section
+  heads what you post when you cannot take the next step yourself — an access you
+  lack, an act outside every agent's reach, a go/no-go no rollback would undo, a
+  disagreement no further commit will settle. Name what would unblock you, in the
+  order it must happen, and say why. You have no authority to call a person in:
+  reporting what stands in the way is yours, deciding who moves it is curation's.
+  A pass that got its work done leaves the section out, heading included. Nothing
+  waiting on action may sit lower down than this.
 - **Then the explanation**, ordered most-important-first, so an early stop costs
   the least.
 - **Budget: 250 words.** Excluded: tables, fenced code, URLs. One bullet, two
@@ -183,7 +186,7 @@ point. So start with what matters most.
 ## Notes
 
 <Explanation only — caveats, considerations, what you left out of scope, and
-what you would do differently. If a person must do something here, abort instead.>
+what you would do differently. If something you cannot do blocks it, abort instead.>
 
 Fixes #<issue-number>
 ```
@@ -219,7 +222,7 @@ they would find is written down there. Consider yourself warned.
 - You cannot change the dependency graph around your work. Whether or not the issue belongs to a forest, an issue's blocking and dependency edges are **read-only** to you: read them to see whether the work is startable. If something is wrong, say so in prose where a stall belongs: the forest's tracker, if the issue has one.
 - You cannot merge your own PR. You provide the implementation; humans review and merge.
 - You cannot make subjective decisions about design preferences—follow the existing patterns, and decide the reversible ones with the reasoning in the commit message.
-- You cannot call in a human: nothing you post gates work, only the graph does. Where a step needs a person it belongs there as an issue they own, which a forest's tracker then waits on — naming a gap for curation is yours, inventing an ask is not. A pull request you raise therefore carries no `## 🧑 Needs a human` section at all; only the comment left by an abort does.
+- You cannot call in a human: nothing you post gates work, only the graph does. Reporting what blocks you is yours — open the report with `## 🚧 Blocked`, name what would unblock you, and leave a line on the forest's tracker saying why. Whether that needs a person is curation's to settle; where a step does need one, it belongs there as an issue they own, which the tracker then waits on, so naming a gap is yours and inventing an ask is not.
 
 ## When you lack context
 
@@ -241,7 +244,7 @@ Do not raise a PR if:
 - The issue is primarily a discussion or meta-issue with no clear implementation target.
 - You encounter an obstacle (a dependency that has not landed, unclear requirements) that prevents a reasonable solution.
 
-In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding. Open that comment with `## 🧑 Needs a human` when what stopped you is a step only a person can take, and name the step, in the order they must happen. A halt is a trouble, so where the issue carries a `## This issue is part of a forest` block, leave that halt on the tracker the block names too — one line pointing back here, since curation re-reads the tracker and not the member, and placing a member is curation's alone.
+In these cases, report your findings and explain why (in a comment on the issue) you are not proceeding, opening with `## 🚧 Blocked` and naming what would unblock you, in the order it must happen. Being blocked is a trouble, so where the issue carries a `## This issue is part of a forest` block, leave that on the tracker the block names too — one line pointing back here, since curation re-reads the tracker and not the member, and settling who moves it is curation's alone.
 
 ## Staleness gate
 

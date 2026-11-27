@@ -212,10 +212,22 @@ blocks the tracker, and anything waiting on the set is blocked by the set issue.
 
 A `human-task` member is different in kind from a work item, and has one
 justification: **automation cannot take the next step.** Its usual trigger is a
-**trouble reporting a halt** (§Every member points back) — a run that stopped,
-naming the step only a person can take, which is evidence for that justification
-and never an order: a halted run cannot place this member itself, and a halt that
-fails the bar wants an edge or a re-phrasing instead.
+**report of being blocked** (§Every member points back) — a pass that could not get
+past a step, or a disagreement between agents no revision settles, naming what would
+unblock it. Settling that is this role's, and asks two questions in order:
+
+1. Whether a person is needed at all, and
+2. what is the least they can be asked to do.
+
+Generally, you should solve the problem without a human if it is safe and
+consistent with what the forest sets out to do. An implementer may have
+misunderstood the context of their work or an issue may have been mis-placed in
+the forest—these issues fall back to you to address.
+
+However, where there are good reasons why a person needs to get involved, the
+shape generally is a `human-task` **blocking the member whose report raised
+it**. That edge stops further attempts at that issue and makes the work wait
+for a human. The rest of the forest carries on around it.
 
 - **Out of reach** — it needs credentials, hands, or an external system no agent
   can use.
@@ -223,9 +235,12 @@ fails the bar wants an edge or a re-phrasing instead.
   rolling it back: data deleted, a key revoked, money spent, something said in
   public.
 
-A **two-way door** — anything reverted with little effort — is the agent's to decide
-on, say so in the record (§Phase 5), carry on. Being wrong costs a fix-forward;
-stopping to ask costs the forest its progress and the human their attention.
+On the other hand, a **two-way door** — anything reverted with little effort —
+is the agent's to decide on. Say so in the record (§Phase 5), carry on. Being
+wrong costs a fix-forward; stopping to ask costs the forest its progress and
+the human their attention. Shrink the ask the same way: cut the work back to
+the decision so what a person does is merely to decide, and ask for their hands
+only when you have to.
 
 **A person should almost never merge.** A one-way door *inside* an otherwise agentic
 member is split at the door — the reversible part one agentic member, then a
@@ -306,11 +321,11 @@ Troubles are reported on the forest's tracker: <tracker URL> — comment there,
 and link back to it on this issue.
 
 A trouble is anything that would otherwise stall you or quietly widen the plan:
-a halt (you stopped because only a person can take the next step), a blocker not
+a report that you are blocked, naming what would unblock you, a blocker not
 listed on this issue, a dependency you discover while working, a step that turned
-out to need a repository this forest does not touch, a decision you cannot make
-from this issue alone, or a check you believe another member is missing. Never
-report a trouble on the ideation issue.
+out to need a repository this forest does not touch, a decision or a disagreement
+you cannot settle from this issue alone, or a check you believe another member is
+missing. Never report a trouble on the ideation issue.
 </details>
 ```
 
@@ -715,8 +730,8 @@ equals the manifest:
 - the tracker is blocked by the ideation issue, blocked by every member, and blocks
   no member of this forest;
 - no member of a landing set also carries `agentic-auto-merge`;
-- no member is labelled `human-task` unless automation cannot take the next step
-  (§Human tasks);
+- no member is labelled `human-task` unless automation cannot take the next step,
+  and nothing smaller could have been asked (§Human tasks);
 - no member's body implies a dependency its blockers do not contain;
 - every work-item body states intent, acceptance criteria and scope, and does
   not unduly prescribe implementation (§Members state intent);
