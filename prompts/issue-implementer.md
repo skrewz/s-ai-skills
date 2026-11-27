@@ -194,7 +194,6 @@ Every pull request you raise is judged by a panel of reviewers, each owning one
 lens, and every lens must approve before your change can land. The standards they
 hold you to are not hidden from you: they are prompts sitting beside this file in
 [`prompts/`](https://github.com/skrewz/s-ai-skills/tree/main/prompts). Read
-[`pr-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-reviewer.md),
 [`pr-minimalism-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-minimalism-reviewer.md),
 [`pr-maintainability-reviewer.md`](https://github.com/skrewz/s-ai-skills/blob/main/prompts/pr-maintainability-reviewer.md)
 and

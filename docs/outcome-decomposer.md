@@ -279,14 +279,13 @@ Not dispatched. Nothing here is read by a run.
   work. This does not contradict "prose is not a dependency": the edge still decides when,
   the prose carries what the human said.
 - **Why the landing label is a manifest column.** A work item created without one stays
-  an agent's to implement and is merged by a person by default (`prompts/pr-reviewer.md`):
-  a wait on the landing axis, not a `human-task`, and silent because nothing fails. A
-  Phase 4 bullet said it and runs still missed it: the recipe above that bullet names one
-  label, the seeding label, and ends by removing a label, so a run that had done both
-  narrated its label work as finished. Hence the label is decided in the manifest, where a
-  run commits to what it is about to write, and Phase 4 carries out the row. Same argument
-  as §The pointer block: prose is where a rule is explained, the manifest is where it is
-  obeyed.
+  an agent's to implement and is merged by a person by default: a wait on the landing
+  axis, not a `human-task`, and silent because nothing fails. A Phase 4 bullet said it
+  and runs still missed it: the recipe above that bullet names one label, the seeding
+  label, and ends by removing a label, so a run that had done both narrated its label
+  work as finished. Hence the label is decided in the manifest, where a run commits to
+  what it is about to write, and Phase 4 carries out the row. Same argument as §The
+  pointer block: prose is where a rule is explained, the manifest is where it is obeyed.
 - **Two waits, two labels.** A missing landing label waits on one merge and leaves an
   agent doing the work; `human-task` waits on the work itself and has no pull request at
   all. Conflating them is how a forest halts for things a two-way door would settle, so

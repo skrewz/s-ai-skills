@@ -19,7 +19,9 @@ AI agent skills and prompt templates — self-contained instruction sets and per
 | **outcome-decomposer** | Curates the forest of implementation tickets hanging off one ideation issue — reads state from the tracker, reconciles the graph against the outcome as written, reports on the tracker |
 | **pr-revisitor** | Revisits a pull request — checks ownership, answers reviewer questions, pushes fix commits, addresses CI failures, reports back with a summary |
 | **issue-implementer** | Considers an issue and attempts to start a pull request for it. |
-| **pr-reviewer** | Critically reviews pull requests — evaluates PR descriptions, flags drive-by changes, finds bugs and quality concerns, checks that versions a PR introduces are at least current stable, outputs at most five issues |
+| **pr-minimalism-reviewer** | Reviews a pull request for minimalism — the smallest change that satisfies the brief |
+| **pr-maintainability-reviewer** | Reviews a pull request for maintainability — correctness, tests, and the cost of changing it later |
+| **pr-security-reviewer** | Reviews a pull request for security and information leakage |
 | **repo-ideation** | Analyses repositories for value-adding directions, surveys existing issues/PRs to avoid duplication, produces structured issues or comments |
 | **research** | Thorough internet research — multiple searches, challenges assumptions, cross-references sources, presents balanced conclusions with links |
 
@@ -28,8 +30,8 @@ Note how these connect (at least, are intended to connect):
 1. The `outcome-decomposer` turns a broad statement of an outcome into a forest of single-concern issues, and keeps that forest honest as the ideation progresses.
 2. The `repo-ideation` prompt template spins up (and ideally curates) issues in repos.
 3. The `issue-implementer` turns those into PRs.
-4. The `pr-reviewer` acts as a counter-force to such implementation.
-5. And in a cycle, `pr-revisitor` adjusts to the `pr-reviewer` outputs.
+4. A panel of lens reviewers — `pr-minimalism-reviewer`, `pr-maintainability-reviewer`, `pr-security-reviewer` — acts as a counter-force to such implementation.
+5. And in a cycle, `pr-revisitor` adjusts to the reviewers' outputs.
 
 ## Structure
 
