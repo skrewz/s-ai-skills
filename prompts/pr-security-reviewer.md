@@ -43,6 +43,11 @@ is **CRITICAL**:
 - Debug output, logging, metrics and error messages that would print credentials,
   tokens, session identifiers or full request bodies.
 
+**Ciphertext is not a leak:** material encrypted to a stated recipient set is no
+finding wherever it sits — the tree, a comment thread, a notification — and
+"harvest now, decrypt later" is not an argument for one; the plaintext, the
+recipient set and the scheme are yours, the blob is not.
+
 Name the **file and line**, the class of thing it is, and the replacement (an
 `example.com`-style placeholder, a secret reference, removal).
 
