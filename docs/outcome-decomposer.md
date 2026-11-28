@@ -342,6 +342,30 @@ Not dispatched. Nothing here is read by a run.
   before (§The pointer block) is a rule made checkable at the moment of decision
   and asserted against afterwards, not another paragraph of prose.
 
+## Every criterion names its observer
+
+- **The failure is an unreachable criterion, not a wrong one.** Correct,
+  checkable in principle, reachable by one principal the forest never granted.
+  Live forests halted on this repeatedly — report after report saying no agent
+  could make the observation the criteria demanded. The halt is the cheap ending;
+  the expensive one is a tracker closing on criteria nobody ever exercised.
+- **Validation happens from somewhere other than the deployment.** The environment
+  agents work in — often a development host — is where "does it actually work" is
+  answered as the work goes. Provision only the deployed side and nothing is
+  validated in the pass: each run rediscovers the same missing route.
+- **A route is work, so it belongs in the graph.** "Once access exists" is a
+  dependency with no edge, and prose waits on nothing (§The shape of a forest
+  makes the general case). As a member the route is ordered, counted against the
+  cap and closed when granted; as a sentence it stalls the members above it.
+- **Most access is a two-way door painted as one.** Widening who may call a service
+  is one line, reverted by the next change, and §Human tasks already prices that
+  trade. What this rule adds is that *not* deciding is not neutral: it leaves the
+  outcome's observation with the human too.
+- **Site-neutral by design.** Which environments and credential families exist is
+  site vocabulary (§Site-specific context). Writing them into the template gives a
+  prompt that works at one site and rots there, as mechanism-naming rots in member
+  bodies (§Members state intent).
+
 ## The pointer block
 
 - **Every member carries it.** An implementer arrives with one URL and no memory of

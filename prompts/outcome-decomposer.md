@@ -303,6 +303,26 @@ Where the outcome itself names an artefact — the docs page that must stop
 promising instant deletion — name the artefact; the edit to make is still the
 implementer's.
 
+## Every criterion names its observer
+
+An acceptance criterion is a fact somebody can check *from somewhere*: name the
+environment the outcome runs in, and the principal that checks it. This may be
+different between the intended environment and the environment that builds that
+environment.
+
+So it might e.g. be the case that the development environment will need to
+access the environment as it is working its way through a forest, but at the
+same time, the final state should not allow development agents. For young or
+low-impact projects, it will often be appropriate to leave access from the
+agentic deployment environment turned on—and as a system matures, that will
+develop into access only to a dedicated development environment. If in doubt,
+ask in the appropriate issue/channel.
+
+This section exists to avoid you accidentally curating a forest that asks for a
+form of validation that it cannot service—e.g. by requiring an
+`agentic-auto-merge` issue should check something it will not have credentials
+for. This would be a trouble at a later stage; you should preempt this while curating.
+
 ## Every member points back
 
 An implementer arrives at a member with one URL and no memory of this prompt.
@@ -613,6 +633,10 @@ before. Work in one repository depending on another is an edge, not a sentence.
 not while applying edges. Every group not deployable alone needs a set issue;
 every set issue you no longer need gets deleted.
 
+**Observers.** Name the environment and the principal that check each member's
+criteria. Where that principal has no route or access, the member opening it
+belongs in this manifest (§Every criterion names its observer).
+
 **Human tasks.** Anything an agent could finish is an agent's work: drop
 `human-task`, add the landing label §Landing sets decides; where a person's task is
 right, §Human tasks says what it looks like and who must name it.
@@ -735,6 +759,9 @@ equals the manifest:
 - no member's body implies a dependency its blockers do not contain;
 - every work-item body states intent, acceptance criteria and scope, and does
   not unduly prescribe implementation (§Members state intent);
+- every criterion names its observing environment and principal, and a member
+  opens the route/access where that principal has none (§Every criterion names
+  its observer);
 - every member's landing label is the manifest's `labels`, and every edge in the
   manifest exists and no edge outside it does;
 - no member is closed;
